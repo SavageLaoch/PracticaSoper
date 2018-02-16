@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-/*#include	<sys/types.h>
-#include	<sys/wait.h>*/
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #define NUM_PROC 6
@@ -9,6 +9,7 @@ int main (void)
 {
   int pid;
   int i;
+  int status;
   for (i=0; i <= NUM_PROC; i++){
       if (i % 2 != 0) {
           if ((pid=fork()) <0 ){
@@ -22,6 +23,6 @@ int main (void)
             }
           }
         }
-        wait();
+        wait(&status);
     exit(EXIT_SUCCESS);
 }
