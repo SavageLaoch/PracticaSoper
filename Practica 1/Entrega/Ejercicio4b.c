@@ -1,8 +1,23 @@
+/**
+ * @brief Ejercicio 4 Apartado b
+ *
+ * @file Ejercicio4b.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+/**
+ * @brief Main
+ *
+ * Se generan procesos hijos cuando i es congruente con 2 pero esta vez el padre esperara
+ * a que termine un hijo (cuando llegue al wait) para terminar
+ * @return EXIT_SUCCESS
+ */
 
 #define NUM_PROC 6
 int main (void)

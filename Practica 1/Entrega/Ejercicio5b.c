@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 5 Apartado b
+ *
+ * @file Ejercicio5b.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -5,6 +12,14 @@
 #include <unistd.h>
 
 #define NUM_PROC 6
+
+/**
+ * @breif Main
+ * En este apartado haremos que el proceso padre genere tres hijos y
+ * espere a que terminen los tres para terminar
+ * @return EXIT_SUCCESS
+ */
+
 int main (void)
 {
   int pid;

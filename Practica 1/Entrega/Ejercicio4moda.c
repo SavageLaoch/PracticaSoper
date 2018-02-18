@@ -1,8 +1,23 @@
+/**
+ * @brief Ejercicio 4 Apartado a modificado
+ *
+ * @file Ejercicio4moda.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include	<sys/types.h>
 #include	<sys/wait.h>
 #include <unistd.h>
+
+/**
+ * @brief Main
+ *
+ * Realizamos lo mismo que el apartado a pero enseñamos de quien es cada hijo y su id
+ * o el id del padre
+ * @return EXIT_SUCCES
+ */
 
 #define NUM_PROC 6
 int main (void)

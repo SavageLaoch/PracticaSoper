@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 5 Apartado a
+ *
+ * @file Ejercicio5a.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -5,6 +12,14 @@
 #include <unistd.h>
 
 #define NUM_PROC 6
+
+/**
+ * @brief Main
+ * En este apartado, haremos que cada proceso genere a su vez solo un proceso
+ * cuando i no sea congruente con 2
+ * @return EXIT_SUCCESS
+ */
+
 int main (void)
 {
   int pid;
