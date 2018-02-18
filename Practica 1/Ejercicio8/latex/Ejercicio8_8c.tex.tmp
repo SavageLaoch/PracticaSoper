@@ -1,0 +1,81 @@
+\hypertarget{Ejercicio8_8c}{}\section{Ejercicio8.\+c File Reference}
+\label{Ejercicio8_8c}\index{Ejercicio8.\+c@{Ejercicio8.\+c}}
+
+
+Ejercicio 8 de la practica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for Ejercicio8.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Ejercicio8_8c_a4b9ba84710846fee07889b2bb7c22202}{ejecutar} (char $\ast$exe, char $\ast$mode)
+\begin{DoxyCompactList}\small\item\em Funcion ejecutar. \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio8_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 8 de la practica. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{Ejercicio8_8c_a4b9ba84710846fee07889b2bb7c22202}\label{Ejercicio8_8c_a4b9ba84710846fee07889b2bb7c22202}} 
+\index{Ejercicio8.\+c@{Ejercicio8.\+c}!ejecutar@{ejecutar}}
+\index{ejecutar@{ejecutar}!Ejercicio8.\+c@{Ejercicio8.\+c}}
+\subsubsection{\texorpdfstring{ejecutar()}{ejecutar()}}
+{\footnotesize\ttfamily void ejecutar (\begin{DoxyParamCaption}\item[{char $\ast$}]{exe,  }\item[{char $\ast$}]{mode }\end{DoxyParamCaption})}
+
+
+
+Funcion ejecutar. 
+
+Esta funcion ejecuta el comando con la función que se han pasado por los parametros 
+\begin{DoxyParams}{Parameters}
+{\em exe} & Comando a ejecutar \\
+\hline
+{\em mode} & Modo de ejecucion \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+ES o E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE 
+\end{DoxyReturn}
+$<$ Vector con los parametros a pasar
+
+$<$ Path para ciertas funciones
+
+$<$ Path para las funciones restantes
+
+Dado que no sabemos que path vamos a necesitar hemos procedido de la siguiente manera\+: Tras leer la documentacion descubrimos que estas funciones, si no hacen nada, devuelven un parametro y si funciona correctamente acaba con la ejecucion del proceso que lo lleve a cabo. Por tanto, si falla el primero el segundo sera el correcto mientras que si el primero es el correcto acabara la funcion. Sucede lo mismo con execv
+
+Sin embargo, estas funciones buscan el path automaticamente y con una sola ejecucion es suficiente. Sucede lo mismo con execvp\mbox{\Hypertarget{Ejercicio8_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{Ejercicio8_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{Ejercicio8.\+c@{Ejercicio8.\+c}!main@{main}}
+\index{main@{main}!Ejercicio8.\+c@{Ejercicio8.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Main del programa. 
+
+Generamos un proceso padre que a la vez invoca tantos procesos hijos como comandos se pasen. Estos procesos hijos ejecutan cada uno de los comandos con la funcion indicada con el parametro de entrada. 
+\begin{DoxyParams}{Parameters}
+{\em argc} & Numero de parametros de entrada incluyendo el nombre del programa \\
+\hline
+{\em argv} & Paramtreos de entrada \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS o E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE 
+\end{DoxyReturn}
