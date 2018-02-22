@@ -76,10 +76,10 @@ int main (void)
             b[1]=atoi(c2);
 
             /*Operacion*/
-            d=pow(b[0],b[1]);
+            c=pow(b[0],b[1]);
 
             /*Escritura*/
-            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Potencia de %d elevado a %d: %d",getpid(),b[0],b[1],b[0],b[1],d);
+            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Potencia de %d elevado a %d: %f",getpid(),b[0],b[1],b[0],b[1],c);
             close(fd2[0]);
             write(fd2[1],string,strlen(string));
             break;
@@ -141,7 +141,7 @@ int main (void)
             c=n/(k*m);
 
             /*Escritura*/
-            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Potencia: %f",getpid(),b[0],b[1],c);
+            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. El numero combinatorio es %f",getpid(),b[0],b[1],c);
             close(fd6[0]);
             write(fd6[1],string,strlen(string));
             break;
@@ -156,12 +156,16 @@ int main (void)
 
             /*Operacion*/
             if (b[0]<0){
-              b[0]=-b[0];
+              m=-b[0];
+            }else{
+              m=b[0];
             }
             if (b[1]<0){
-              b[1]=-b[1];
+              n=-b[1];
+            }else{
+              n=b[1];
             }
-            d=b[0]+b[1];
+            d=m+n;
 
             /*Escritura*/
             sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Valor absoluto de %d mas valor absoluto de %d: %d",getpid(),b[0],b[1],b[0],b[1],d);
