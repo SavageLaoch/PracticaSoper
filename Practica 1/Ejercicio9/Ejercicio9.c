@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 9
+ *
+ * @file Ejercicio9.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -5,6 +12,16 @@
 #include <unistd.h>
 #include <math.h>
 #include <string.h>
+
+/**
+ * @brief Main
+ *
+ * Este main crea 4 procesos hijo que se encargan de hacer diferentes calculos.
+ * El padre obtiene los operandos por pantalla y se los pasa a los hijos utilizando tuberias.
+ * Los hijos devuelven el resultado al padre y este lo imprime.
+ *
+ * @retrun EXIT_SUCCESS o EXIT_FAILURE
+ */
 
 #define NUM_PROC 4
 #define MAX 256
@@ -45,17 +62,17 @@ int main (void)
   }
   pipe_status=pipe(fd6);
   if(pipe_status==-1){
-    printf("Error creando la tuberia 5");
+    printf("Error creando la tuberia 6");
     exit(EXIT_FAILURE);
   }
   pipe_status=pipe(fd7);
   if(pipe_status==-1){
-    printf("Error creando la tuberia 5");
+    printf("Error creando la tuberia 7");
     exit(EXIT_FAILURE);
   }
   pipe_status=pipe(fd8);
   if(pipe_status==-1){
-    printf("Error creando la tuberia 5");
+    printf("Error creando la tuberia 8");
     exit(EXIT_FAILURE);
   }
 
