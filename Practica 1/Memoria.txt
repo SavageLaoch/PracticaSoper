@@ -1,0 +1,17 @@
+﻿Memoria de la practica 1.
+(Luego lo pongo bonito que estoy en libreOffice y no se como va)
+
+4B: Un proceso se convierte en huérfano cuando su padre termina antes que él. En estos programas… (CONTINUAR hay que usar pstree no se como :O)
+
+5A: Los dos únicos cambios introducidos han sido la comprobación (Ahora se generarán procesos cuando i%2!=0 y no cuando i%2==0), y un break. Este break ha sido añadido debido a que cada proceso solo puede tener un hijo, luego en cada fork que se haga, el padre tiene que salir del bucle, para no hacer mas hijos.
+
+5B: Si de nuevo partimos del ejercicio 4b, los dos cambios realizados han sido de nuevo la comprobación (i%!2!=0 en lugar de 1%2==0), y un break. Pero este break ha sido puesto ahora donde el hijo. Esto es debido a que en este ejercicio el padre puede tener varios hijos pero estos hijos no pueden tener hijos, luego tienen que salir del bucle.
+
+6: El proceso padre no tiene acceso a ese valor. Al hacer un fork, el proceso hijo se lleva consigo la información y variables del proceso padre, pero una vez separados todo lo que hagan lo harán independientemente. Esto implica que si el proceso hijo guarda información en una variable local suya, el proceso padre no tendrá acceso a esta variable.
+Ambos procesos tendrán que liberar la memoria, pues a pesar de que la reservó unicamente el padre, al hacer el fork el hijo también reserva esa memoria. Por eso hemos hecho el free para los dos procesos.
+
+12: Es mas rápido el ejercicio12b, la opción en la que se usan hilos. Esto es claro debido a que el tiempo de creación y terminación de los hilos es mas corto que el de los procesos.
+
+13: Compartir información entre hilos es mucho mas sencillo que entre procesos. Esto es debido a que los hilos comparten la memoria y los recursos del proceso al que pertenecen, luego no es necesario el uso de pipes. Simplemente modificando el valor de una variable global del proceso pueden pasarse información.
+
+
