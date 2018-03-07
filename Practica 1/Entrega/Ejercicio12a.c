@@ -103,6 +103,7 @@ int main(int argc,char *argv[]){
       }
       if (!pid){
           comprueba_primos((void*)e);
+          free(e);
           exit(EXIT_SUCCESS);
       }
       /*waitpid(pid,&status,WUNTRACED | WCONTINUED);*/
