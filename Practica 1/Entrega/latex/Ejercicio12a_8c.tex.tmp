@@ -1,0 +1,116 @@
+\hypertarget{Ejercicio12a_8c}{}\section{Ejercicio12a.\+c File Reference}
+\label{Ejercicio12a_8c}\index{Ejercicio12a.\+c@{Ejercicio12a.\+c}}
+
+
+Ejercicio 12 Apartado a.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+Include dependency graph for Ejercicio12a.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__Estructura}{\+\_\+\+Estructura}
+\begin{DoxyCompactList}\small\item\em Estructura estructura. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct__Estructura}{\+\_\+\+Estructura} \hyperlink{Ejercicio12a_8c_a1784ecaa6952782e8d25940829f26f2a}{Estructura}
+\begin{DoxyCompactList}\small\item\em Estructura estructura. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Ejercicio12a_8c_ac02bef7a39b0ee8465f8661d9438e1dd}{es\+\_\+primo} (int num)
+\begin{DoxyCompactList}\small\item\em es\+\_\+primo \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio12a_8c_af611ad3eeca03b941c75b93cc43fb762}{comprueba\+\_\+primos} (void $\ast$estructura)
+\begin{DoxyCompactList}\small\item\em comprueba\+\_\+primos \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio12a_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 12 Apartado a. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{Ejercicio12a_8c_a1784ecaa6952782e8d25940829f26f2a}\label{Ejercicio12a_8c_a1784ecaa6952782e8d25940829f26f2a}} 
+\index{Ejercicio12a.\+c@{Ejercicio12a.\+c}!Estructura@{Estructura}}
+\index{Estructura@{Estructura}!Ejercicio12a.\+c@{Ejercicio12a.\+c}}
+\subsubsection{\texorpdfstring{Estructura}{Estructura}}
+{\footnotesize\ttfamily typedef struct \hyperlink{struct__Estructura}{\+\_\+\+Estructura} \hyperlink{Ejercicio12a_8c_a1784ecaa6952782e8d25940829f26f2a}{Estructura}}
+
+
+
+Estructura estructura. 
+
+Usaremos esta estructura para pasarsela a las funciones de los procesos 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{Ejercicio12a_8c_af611ad3eeca03b941c75b93cc43fb762}\label{Ejercicio12a_8c_af611ad3eeca03b941c75b93cc43fb762}} 
+\index{Ejercicio12a.\+c@{Ejercicio12a.\+c}!comprueba\+\_\+primos@{comprueba\+\_\+primos}}
+\index{comprueba\+\_\+primos@{comprueba\+\_\+primos}!Ejercicio12a.\+c@{Ejercicio12a.\+c}}
+\subsubsection{\texorpdfstring{comprueba\+\_\+primos()}{comprueba\_primos()}}
+{\footnotesize\ttfamily int comprueba\+\_\+primos (\begin{DoxyParamCaption}\item[{void $\ast$}]{estructura }\end{DoxyParamCaption})}
+
+
+
+comprueba\+\_\+primos 
+
+Esta funcion calcula los numeros primos hasta un numero de primos concreto 
+\begin{DoxyParams}{Parameters}
+{\em estructua} & Puntero a una estructura Estructura (pasado como void) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Ejercicio12a_8c_ac02bef7a39b0ee8465f8661d9438e1dd}\label{Ejercicio12a_8c_ac02bef7a39b0ee8465f8661d9438e1dd}} 
+\index{Ejercicio12a.\+c@{Ejercicio12a.\+c}!es\+\_\+primo@{es\+\_\+primo}}
+\index{es\+\_\+primo@{es\+\_\+primo}!Ejercicio12a.\+c@{Ejercicio12a.\+c}}
+\subsubsection{\texorpdfstring{es\+\_\+primo()}{es\_primo()}}
+{\footnotesize\ttfamily int es\+\_\+primo (\begin{DoxyParamCaption}\item[{int}]{num }\end{DoxyParamCaption})}
+
+
+
+es\+\_\+primo 
+
+Esta funcion comprueba si el numero pasado es un primo o no 
+\begin{DoxyParams}{Parameters}
+{\em num} & Numero a comprobar que es primo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 (No es) o 0 (Es) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Ejercicio12a_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{Ejercicio12a_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{Ejercicio12a.\+c@{Ejercicio12a.\+c}!main@{main}}
+\index{main@{main}!Ejercicio12a.\+c@{Ejercicio12a.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Main. 
+
+Este main comprueba el tiempo que tarda en ejecutar con 100 procesos la funcion comprueba\+\_\+primos hasta un numero n que se pasa como parametro. 
+\begin{DoxyParams}{Parameters}
+{\em argc} & Numero de parametros que se pasan \\
+\hline
+{\em argv} & Parametros que se pasan \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS o E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE 
+\end{DoxyReturn}

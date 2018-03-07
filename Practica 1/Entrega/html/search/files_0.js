@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['ejercicio12a_2ec',['Ejercicio12a.c',['../Ejercicio12a_8c.html',1,'']]],
+  ['ejercicio12b_2ec',['Ejercicio12b.c',['../Ejercicio12b_8c.html',1,'']]],
   ['ejercicio4a_2ec',['Ejercicio4a.c',['../Ejercicio4a_8c.html',1,'']]],
   ['ejercicio4b_2ec',['Ejercicio4b.c',['../Ejercicio4b_8c.html',1,'']]],
   ['ejercicio4moda_2ec',['Ejercicio4moda.c',['../Ejercicio4moda_8c.html',1,'']]],

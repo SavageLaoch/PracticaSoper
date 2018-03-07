@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main',['main',['../Ejercicio5a_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main(void):&#160;Ejercicio5a.c'],['../Ejercicio5b_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main(void):&#160;Ejercicio5b.c'],['../Ejercicio6_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main(void):&#160;Ejercicio6.c'],['../Ejercicio8_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;Ejercicio8.c']]]
+  ['ejecutar',['ejecutar',['../Ejercicio8_8c.html#a4b9ba84710846fee07889b2bb7c22202',1,'Ejercicio8.c']]],
+  ['es_5fprimo',['es_primo',['../Ejercicio12a_8c.html#ac02bef7a39b0ee8465f8661d9438e1dd',1,'es_primo(int num):&#160;Ejercicio12a.c'],['../Ejercicio12b_8c.html#ac02bef7a39b0ee8465f8661d9438e1dd',1,'es_primo(int num):&#160;Ejercicio12b.c']]]
 ];
