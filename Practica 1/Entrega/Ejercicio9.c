@@ -137,7 +137,7 @@ int main (void)
             b[1]=atoi(c2);
 
             /*Operacion*/
-            if (b[0]<b[1]){
+            if ((b[0]<b[1])||(b[0]<=0)||(b[1]<=0)){
               sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. El numero combinatorio no se puede calcular",getpid(),b[0],b[1]);
               close(fd6[0]);
               write(fd6[1],string,strlen(string)+1);
