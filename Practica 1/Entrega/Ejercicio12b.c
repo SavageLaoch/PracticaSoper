@@ -82,7 +82,6 @@ void * comprueba_primos(void* estructura){
 
 int main(int argc,char *argv[]){
     Estructura *e;
-    e = (Estructura*)malloc(sizeof(Estructura));
     int i;
     struct timeval ti, tf;
     double tiempo;
@@ -91,6 +90,7 @@ int main(int argc,char *argv[]){
       printf("No hay suficientes parametros de entrada\n");
       exit(EXIT_FAILURE);
     }
+    e = (Estructura*)malloc(sizeof(Estructura));
     e->numero = atoi(argv[1]);
     gettimeofday(&ti, NULL);
     for (i = 0; i < 100; i++){
