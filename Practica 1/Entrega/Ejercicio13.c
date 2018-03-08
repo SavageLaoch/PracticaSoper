@@ -14,6 +14,9 @@
 #include <time.h>
 #include <sys/time.h>
 
+#define MAX_CHAR 500
+#define MAX_MATRIZ 25
+
 /**
  * @brief Variable global tam
  * Usaremos esta variable para que podamos compartir el tamaño
@@ -34,7 +37,7 @@ int tam;
  */
 
 typedef struct _Matriz{
-  int matriz[25];
+  int matriz[MAX_MATRIZ];
   int multiplicador;
   int num;
 }Matriz;
@@ -50,7 +53,7 @@ typedef struct _Matriz{
 void * multiplica_matriz(void* matriz){
     Matriz *m;
     int i,fila,j;
-    char imprimir[500];
+    char imprimir[MAX_CHAR];
     /**
      * Cambiamos el puntero al tipo original
      */
@@ -81,7 +84,7 @@ void * multiplica_matriz(void* matriz){
         usleep(100000);
       }
     }
-    pthread_exit(NULL);
+    return NULL;
 }
 
 /**

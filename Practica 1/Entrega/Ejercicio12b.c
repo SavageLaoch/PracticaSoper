@@ -67,7 +67,7 @@ void * comprueba_primos(void* estructura){
     }
     i ++;
   }
-  pthread_exit(NULL);
+  return NULL;
 }
 
 /**

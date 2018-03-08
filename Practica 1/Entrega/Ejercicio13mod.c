@@ -14,6 +14,8 @@
 #include <time.h>
 #include <sys/time.h>
 
+#define MAX_CHAR 500
+#define MAX_MATRIZ 25
 /**
  * @brief Estructura Matriz
  * Guardaremos en esta estructura todos los datos referentes
@@ -26,7 +28,7 @@
  */
 
 typedef struct _Matriz{
-  int matriz[25];
+  int matriz[MAX_MATRIZ];
   int multiplicador;
   int num;
 }Matriz;
@@ -58,8 +60,8 @@ int fila2 = 0;
 void * multiplica_matriz(void* matriz){
     Matriz* m;
     int i,fila,j;
-    char imprimir[500];
-    char imprimir2[200];
+    char imprimir[MAX_CHAR];
+    char imprimir2[MAX_CHAR];
     /**
      * Cambiamos el puntero al tipo original
      */
@@ -101,7 +103,7 @@ void * multiplica_matriz(void* matriz){
       }
       usleep(100000);
     }
-    pthread_exit(NULL);
+    return NULL;
 }
 
 /**
