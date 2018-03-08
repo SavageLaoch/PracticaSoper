@@ -1,5 +1,5 @@
 
-all: Ejercicio4a Ejercicio4b Ejercicio4moda Ejercicio4modb Ejercicio5a Ejercicio5b Ejercicio6 Ejercicio8 Ejercicio12a Ejercicio12b Ejercicio13 Ejercicio13mod
+all: Ejercicio4a Ejercicio4b Ejercicio4moda Ejercicio4modb Ejercicio5a Ejercicio5b Ejercicio6 Ejercicio8 Ejercicio9 Ejercicio12a Ejercicio12b Ejercicio13 Ejercicio13mod
 
 
 Ejercicio4a: Ejercicio4a.c
@@ -18,6 +18,8 @@ Ejercicio6: Ejercicio6.c
 	gcc -Wall -g Ejercicio6.c -o Ejercicio6
 Ejercicio8: Ejercicio8.c
 	gcc -Wall -g Ejercicio8.c -o Ejercicio8
+Ejercicio9: Ejercicio9.c
+	gcc -Wall -g Ejercicio9.c -o Ejercicio9
 Ejercicio12a: Ejercicio12a.c
 	gcc -Wall -g Ejercicio12a.c -o Ejercicio12a -lpthread
 Ejercicio12b: Ejercicio12b.c
@@ -29,4 +31,4 @@ Ejercicio13mod: Ejercicio13mod.c
 
 
 clean:
-	rm  Ejercicio4a Ejercicio4b Ejercicio4moda Ejercicio4modb Ejercicio5a Ejercicio5b Ejercicio6 Ejercicio8 Ejercicio12a Ejercicio12b
+	rm  Ejercicio4a Ejercicio4b Ejercicio4moda Ejercicio4modb Ejercicio5a Ejercicio5b Ejercicio6 Ejercicio8 Ejercicio9 Ejercicio12a Ejercicio12b
