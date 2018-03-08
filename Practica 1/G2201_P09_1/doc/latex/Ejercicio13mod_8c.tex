@@ -1,0 +1,134 @@
+\hypertarget{Ejercicio13mod_8c}{}\section{Ejercicio13mod.\+c File Reference}
+\label{Ejercicio13mod_8c}\index{Ejercicio13mod.\+c@{Ejercicio13mod.\+c}}
+
+
+Ejercicio 13 mod.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+Include dependency graph for Ejercicio13mod.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__Matriz}{\+\_\+\+Matriz}
+\begin{DoxyCompactList}\small\item\em Estructura Matriz Guardaremos en esta estructura todos los datos referentes a la matriz. Nota\+: hemos decidido guardar la matriz en un array en vez de en una matriz como tal. Esto cambiara un poco la forma de proceder en la funcion de multiplica\+\_\+matriz. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Ejercicio13mod_8c_a82acb32225c05e9aa4c524c40bc5852a}\label{Ejercicio13mod_8c_a82acb32225c05e9aa4c524c40bc5852a}} 
+\#define {\bfseries M\+A\+X\+\_\+\+C\+H\+AR}~500
+\item 
+\mbox{\Hypertarget{Ejercicio13mod_8c_a2ffe45f94a0a4a038eee0a6e712a5525}\label{Ejercicio13mod_8c_a2ffe45f94a0a4a038eee0a6e712a5525}} 
+\#define {\bfseries M\+A\+X\+\_\+\+M\+A\+T\+R\+IZ}~25
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct__Matriz}{\+\_\+\+Matriz} \hyperlink{Ejercicio13mod_8c_a7109e4e5f39431dfb63fa24382c03b8f}{Matriz}
+\begin{DoxyCompactList}\small\item\em Estructura Matriz Guardaremos en esta estructura todos los datos referentes a la matriz. Nota\+: hemos decidido guardar la matriz en un array en vez de en una matriz como tal. Esto cambiara un poco la forma de proceder en la funcion de multiplica\+\_\+matriz. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{Ejercicio13mod_8c_ac57444db9eff7a39f2482c05b49c7351}{multiplica\+\_\+matriz} (void $\ast$matriz)
+\begin{DoxyCompactList}\small\item\em multiplica\+\_\+matriz Esta funcion multiplica la matriz que se le pasa por un numero entero \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio13mod_8c_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Ejercicio13mod_8c_a76145a5161e42fad3d104769414503c6}\label{Ejercicio13mod_8c_a76145a5161e42fad3d104769414503c6}} 
+int \hyperlink{Ejercicio13mod_8c_a76145a5161e42fad3d104769414503c6}{tam}
+\begin{DoxyCompactList}\small\item\em Variable global tam Usaremos esta variable para que podamos compartir el tamaño entre los hilos. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Ejercicio13mod_8c_ad3ec8d2dcc52369d17c27871bb1d9876}\label{Ejercicio13mod_8c_ad3ec8d2dcc52369d17c27871bb1d9876}} 
+int \hyperlink{Ejercicio13mod_8c_ad3ec8d2dcc52369d17c27871bb1d9876}{fila1} = 0
+\begin{DoxyCompactList}\small\item\em Variables fila1 y fila2 Usaremos estas dos variables para que cada hilo sepa por donde va el otro. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Ejercicio13mod_8c_ad5553f045e894fe8f94e2eedd4eeb58d}\label{Ejercicio13mod_8c_ad5553f045e894fe8f94e2eedd4eeb58d}} 
+int {\bfseries fila2} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 13 mod. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{Ejercicio13mod_8c_a7109e4e5f39431dfb63fa24382c03b8f}\label{Ejercicio13mod_8c_a7109e4e5f39431dfb63fa24382c03b8f}} 
+\index{Ejercicio13mod.\+c@{Ejercicio13mod.\+c}!Matriz@{Matriz}}
+\index{Matriz@{Matriz}!Ejercicio13mod.\+c@{Ejercicio13mod.\+c}}
+\subsubsection{\texorpdfstring{Matriz}{Matriz}}
+{\footnotesize\ttfamily typedef struct \hyperlink{struct__Matriz}{\+\_\+\+Matriz} \hyperlink{Ejercicio13_8c_a7109e4e5f39431dfb63fa24382c03b8f}{Matriz}}
+
+
+
+Estructura Matriz Guardaremos en esta estructura todos los datos referentes a la matriz. Nota\+: hemos decidido guardar la matriz en un array en vez de en una matriz como tal. Esto cambiara un poco la forma de proceder en la funcion de multiplica\+\_\+matriz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matriz} & Array de enteros que contienen la matriz \\
+\hline
+{\em multiplicador} & Numero por el que se multiplicara cada numero de la matriz \\
+\hline
+{\em num} & Numero de la matriz (1 o 2) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{Ejercicio13mod_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{Ejercicio13mod_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{Ejercicio13mod.\+c@{Ejercicio13mod.\+c}!main@{main}}
+\index{main@{main}!Ejercicio13mod.\+c@{Ejercicio13mod.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Main. 
+
+El main sera el encargado de crear las dos estructuras Matrices, pidiendo por pantalla los datos deseados\+: tamaño, multiplicador y la matriz Despues, genera los hilos donde se realizaran las operaciones.
+
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS o E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE 
+\end{DoxyReturn}
+Creamos las dos estructuras matriz
+
+Introducimos los datos del tamaño y vemos si concuerdan con los que nos pide el enunciado. Hemos admitido tambien una matriz de 1 x 1
+
+Introducimos ambos multiplicadores
+
+Introducimos ambas matrices Aclarar que se pueden meter como aparecen en el enunciado de la practica, pero si se ponen numeros de mas, no seran multiplicados y pueden dar errores de memoria. Si se introducen presionando intro despues de cada numero solo se dejara poner los numeros correctos. Tenemos que añadir otra vez m$\ast$m numeros En este caso asignaremos el numero de la matriz a su variable. Con esto, podremos saber a que fila tenemos que mirar para saber por donde va el otro hilo
+
+Por ultimo, creamos los threads pasandole sus matrices correspondientes\mbox{\Hypertarget{Ejercicio13mod_8c_ac57444db9eff7a39f2482c05b49c7351}\label{Ejercicio13mod_8c_ac57444db9eff7a39f2482c05b49c7351}} 
+\index{Ejercicio13mod.\+c@{Ejercicio13mod.\+c}!multiplica\+\_\+matriz@{multiplica\+\_\+matriz}}
+\index{multiplica\+\_\+matriz@{multiplica\+\_\+matriz}!Ejercicio13mod.\+c@{Ejercicio13mod.\+c}}
+\subsubsection{\texorpdfstring{multiplica\+\_\+matriz()}{multiplica\_matriz()}}
+{\footnotesize\ttfamily void$\ast$ multiplica\+\_\+matriz (\begin{DoxyParamCaption}\item[{void $\ast$}]{matriz }\end{DoxyParamCaption})}
+
+
+
+multiplica\+\_\+matriz Esta funcion multiplica la matriz que se le pasa por un numero entero 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matriz} & Puntero a void que contiene un puntero de tipo Matriz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ 
+\end{DoxyReturn}
+Cambiamos el puntero al tipo original
+
+Dado que es una matriz de tamaño m, tenemos que iterar el array hasta m$\ast$m. Lo guardamos en la misma matriz ya que no nos dicen nada de que haya que guardarla.
+
+Cuando alcanzamos el tamaño de fila deseado (que es la iteracion + 1), pasamos a imprimir la fila correspondiente iterando los nuevos valores de la matriz. Tenemos que poner fflush para que pueda imprimirse todo el buffer junto Por ultimo, aumentamos en uno la fila1 o fila2 en la que estamos dependiendo del hilo.
