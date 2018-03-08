@@ -19,7 +19,7 @@ Ejercicio6: Ejercicio6.c
 Ejercicio8: Ejercicio8.c
 	gcc -Wall -g Ejercicio8.c -o Ejercicio8
 Ejercicio9: Ejercicio9.c
-	gcc -Wall -g Ejercicio9.c -o Ejercicio9
+	gcc -Wall -g Ejercicio9.c -o Ejercicio9 -lm
 Ejercicio12a: Ejercicio12a.c
 	gcc -Wall -g Ejercicio12a.c -o Ejercicio12a -lpthread
 Ejercicio12b: Ejercicio12b.c

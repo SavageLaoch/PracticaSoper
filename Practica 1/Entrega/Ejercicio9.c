@@ -34,7 +34,7 @@ int main (void)
   int fd1[2], fd2[2], fd3[2], fd4[2], fd5[2], fd6[2], fd7[2], fd8[2], pipe_status;
   char string[MAX], buffer[MAX];
   char *c1, *c2;
-  
+
   pipe_status=pipe(fd1);
   if(pipe_status==-1){
     printf("Error creando la tuberia 1");
@@ -96,10 +96,10 @@ int main (void)
             c=pow(b[0],b[1]);
 
             /*Escritura*/
-            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Potencia de %d elevado a %d: %f",getpid(),b[0],b[1],b[0],b[1],c);
+            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Potencia de %d elevado a %d: %.5f",getpid(),b[0],b[1],b[0],b[1],c);
             close(fd2[0]);
-            write(fd2[1],string,strlen(string));
-            break;
+            write(fd2[1],string,strlen(string) + 1);
+            exit(EXIT_SUCCESS);
           }else if (i==1){
             /*Lectura*/
             close(fd3[1]);
@@ -113,8 +113,8 @@ int main (void)
             if ((b[1]==0)||(b[0]<1)){
               sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. El factorial de %d entre %d no se puede calcular",getpid(),b[0],b[1],b[0],b[1]);
               close(fd4[0]);
-              write(fd4[1],string,strlen(string));
-              break;
+              write(fd4[1],string,strlen(string)+1);
+              exit(EXIT_SUCCESS);
             }
             c=1;
             for (j=b[0]; j>1; j--){
@@ -123,10 +123,10 @@ int main (void)
             c=c/b[1];
 
             /*Escritura*/
-            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Factorial de %d entre %d: %f",getpid(),b[0],b[1],b[0],b[1],c);
+            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Factorial de %d entre %d: %.5f",getpid(),b[0],b[1],b[0],b[1],c);
             close(fd4[0]);
-            write(fd4[1],string,strlen(string));
-            break;
+            write(fd4[1],string,strlen(string)+1);
+            exit(EXIT_SUCCESS);
           }else if (i==2){
             /*Lectura*/
             close(fd5[1]);
@@ -140,8 +140,8 @@ int main (void)
             if (b[0]<b[1]){
               sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. El numero combinatorio no se puede calcular",getpid(),b[0],b[1]);
               close(fd6[0]);
-              write(fd6[1],string,strlen(string));
-              break;
+              write(fd6[1],string,strlen(string)+1);
+              exit(EXIT_SUCCESS);
             }
             n=1;
             for (j=b[0]; j>1; j--){
@@ -158,10 +158,10 @@ int main (void)
             c=n/(k*m);
 
             /*Escritura*/
-            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. El numero combinatorio es %f",getpid(),b[0],b[1],c);
+            sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. El numero combinatorio es %.5f",getpid(),b[0],b[1],c);
             close(fd6[0]);
-            write(fd6[1],string,strlen(string));
-            break;
+            write(fd6[1],string,strlen(string)+1);
+            exit(EXIT_SUCCESS);;
           }else{
             /*Lectura*/
             close(fd7[1]);
@@ -187,24 +187,24 @@ int main (void)
             /*Escritura*/
             sprintf(string, "Datos enviados a traves de la tuberia por el proceso %d. Operando 1: %d. Operando 2: %d. Valor absoluto de %d mas valor absoluto de %d: %d",getpid(),b[0],b[1],b[0],b[1],d);
             close(fd8[0]);
-            write(fd8[1],string,strlen(string));
-            break;
+            write(fd8[1],string,strlen(string) + 1);
+            exit(EXIT_SUCCESS);
           }
       /*Padre*/
       }else{
           if (i==0){
-            /*Leo de teclado los valores*/  
-            printf("El padre tiene el id %d\n",getpid());         
+            /*Leo de teclado los valores*/
+            printf("El padre tiene el id %d\n",getpid());
             printf("Introduzca los operandos: ");
             fscanf(stdin,"%d %d",&a[0],&a[1]);
-            
+
             /*Meto en la cadena los valores*/
             sprintf(string, "%d,%d",a[0],a[1]);
 
             /*Paso los datos al hijo*/
             close(fd1[0]);
-            write(fd1[1],string,strlen(string));
-            
+            write(fd1[1],string,strlen(string) + 1);
+
             /*Espero a que muera el hijo*/
             waitpid(pid,&status,0);
 
@@ -212,13 +212,13 @@ int main (void)
             close(fd2[1]);
             read(fd2[0],buffer,sizeof(buffer));
             printf("%s\n",buffer);
-            
+
           }else if (i==1){
             /*NO HACE FALTA VOLVER A PEDIR LOS NUMEROS*/
 
             /*Paso los datos al hijo*/
             close(fd3[0]);
-            write(fd3[1],string,strlen(string));
+            write(fd3[1],string,strlen(string) + 1);
 
             /*Espero a que muera el hijo*/
             waitpid(pid,&status,0);
@@ -233,7 +233,7 @@ int main (void)
 
             /*Paso los datos al hijo*/
             close(fd5[0]);
-            write(fd5[1],string,strlen(string));
+            write(fd5[1],string,strlen(string) + 1);
 
             /*Espero a que muera el hijo*/
             waitpid(pid,&status,0);
@@ -248,7 +248,7 @@ int main (void)
 
             /*Paso los datos al hijo*/
             close(fd7[0]);
-            write(fd7[1],string,strlen(string));
+            write(fd7[1],string,strlen(string) + 1);
 
             /*Espero a que muera el hijo*/
             waitpid(pid,&status,0);
@@ -261,6 +261,6 @@ int main (void)
 
       }
   }
-	
+
   exit(EXIT_SUCCESS);
 }
