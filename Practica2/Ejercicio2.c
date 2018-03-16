@@ -16,12 +16,11 @@ void main(){
 		if (pid<0){
 			printf("Error al hacer el fork");
 		}else if (pid==0){
-			printf("Soy el proceso hijo %d",getpid());
+			printf("Soy el proceso hijo %d \n",getpid());
 			usleep(30000000);
-			printf("Soy el proceso hijo %d y ya me toca terminar",getpid());
+			printf("Soy el proceso hijo %d y ya me toca terminar \n",getpid());
 			break;
 		}else{
-			printf("acabron");
 			usleep(5000000);
 			kill(pid,SIGTERM);
 		}
