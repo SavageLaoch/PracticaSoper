@@ -14,7 +14,7 @@ int Inicializar_Semaforo(int semid, unsigned short *array){
 	for (i=0;i<N_SEMAFOROS;i++){
 		arg.array [i] = array[i];
 	}
-	
+
 	if (semctl (semid, 0, SETALL, arg)==-1) return ERROR;
 	return OK;
 }
@@ -38,7 +38,6 @@ int Crear_Semaforo(key_t key, int size, int *semid){
 		if((*semid)==-1){
 		return ERROR;
 		}
-		if (Inicializar_Semaforo((*semid), array)==ERROR) return ERROR;
 		return 1;
 	}
 	if((*semid)==-1){
@@ -65,7 +64,7 @@ int DownMultiple_Semaforo(int id,int size,int undo,int *active){
 	int N_SEMAFOROS;
 	struct sembuf sem_oper;
 	int i;
-	N_SEMAFOROS=sizeof(active)/sizeof(short);
+	N_SEMAFOROS=sizeof(active)/sizeof(int);
 	for (i=0;i<N_SEMAFOROS;i++){
 		sem_oper.sem_num = active[i]; /* Actuamos sobre el semáforo num_sem de la lista */
 		sem_oper.sem_op =-1;  /* Decrementar en 1 el valor del semáforo */
@@ -73,7 +72,7 @@ int DownMultiple_Semaforo(int id,int size,int undo,int *active){
 		proceso acaba inesperadamente */
 		if (semop (id, &sem_oper, 1)==-1) return ERROR;
 		}
-	
+
 	return OK;
 }
 
@@ -92,7 +91,7 @@ int UpMultiple_Semaforo(int id,int size, int undo, int *active){
 	int N_SEMAFOROS;
 	struct sembuf sem_oper;
 	int i;
-	N_SEMAFOROS=sizeof(active)/sizeof(short);
+	N_SEMAFOROS=sizeof(active)/sizeof(int);
 	for (i=0;i<N_SEMAFOROS;i++){
 		sem_oper.sem_num = active[i]; /* Actuamos sobre el semáforo num_sem de la lista */
 		sem_oper.sem_op =1;  /* Decrementar en 1 el valor del semáforo */
@@ -100,6 +99,6 @@ int UpMultiple_Semaforo(int id,int size, int undo, int *active){
 		proceso acaba inesperadamente */
 		if (semop (id, &sem_oper, 1)==-1) return ERROR;
 		}
-	
+
 	return OK;
 }

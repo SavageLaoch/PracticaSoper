@@ -21,7 +21,7 @@ int main ( ){
 * Creamos una lista o conjunto con dos semáforos
 */
 	if (Crear_Semaforo(SEMKEY, N_SEMAFOROS, &sem_id)==ERROR){
-		printf("Error al crear el semaforo");
+		printf("Error al crear el semaforo\n");
 	}
 
 /*
@@ -36,11 +36,11 @@ int main ( ){
 
 
 	if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
-		printf("Error al bajar el semaforo 0");
+		printf("Error al bajar el semaforo 0\n");
 	}
 
 	if (Up_Semaforo(sem_id, 1, SEM_UNDO)==ERROR){
-		printf("Error al subir el semaforo 1");
+		printf("Error al subir el semaforo 1\n");
 	}
 
 /*
@@ -52,10 +52,10 @@ int main ( ){
 * Operamos sobre los semáforos
 */
 
-	active[0]=1;
+	active[0]=0;
 	active[1]=1;
 	if (UpMultiple_Semaforo(sem_id,N_SEMAFOROS, SEM_UNDO, active)==ERROR){
-		printf("Error en el up multiple");
+		printf("Error en el up multiple\n");
 	}
 
 /*
@@ -69,10 +69,10 @@ int main ( ){
 * Operamos sobre los semáforos
 */
 
-	if (UpMultiple_Semaforo(sem_id,N_SEMAFOROS, SEM_UNDO, active)==ERROR){
-		printf("Error en el up multiple");
+	if (DownMultiple_Semaforo(sem_id,N_SEMAFOROS, SEM_UNDO, active)==ERROR){
+		printf("Error en el down multiple\n");
 	}
-	
+
 /*
 * Veamos los valores de los semáforos
 */
@@ -84,7 +84,7 @@ int main ( ){
 /* Eliminar la lista de semáforos */
 
 	if (Borrar_Semaforo(sem_id)==ERROR) {
-		printf("Error al borrar los semaforos");
+		printf("Error al borrar los semaforos\n");
 	}
 
 	return 0;
