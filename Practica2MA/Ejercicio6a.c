@@ -19,12 +19,15 @@ int main (void)
 		/*Alarma en 40 segundos*/
 		if (alarm(SECS)){
 			printf("Existe una alarma previa establecida\n");
-		}
+		}		
+		sigaddset(&set1, SIGUSR1);
+		sigaddset(&set1, SIGUSR2);
+		sigaddset(&set1, SIGALRM);
+
+		sigaddset(&set2, SIGUSR1);
+		sigaddset(&set2, SIGALRM);
 		while(1){
-			/*Bloquear sigusr1, sigusr2 y sigalarm*/
-			sigaddset(&set1, SIGUSR1);
-			sigaddset(&set1, SIGUSR2);
-			sigaddset(&set1, SIGALRM);
+			/*Bloquear sigusr1, sigusr2 y sigalarm*/			
 			error = sigprocmask(SIG_BLOCK, &set1,&oset);
 			if (error){
 				printf("Error al bloquear las senales");
@@ -34,9 +37,7 @@ int main (void)
 				printf("%d\n", counter);
 				sleep(1);
 			}
-			/*Desbloquear sigalarm y sigusr1*/
-			sigaddset(&set2, SIGUSR1);
-			sigaddset(&set2, SIGALRM);
+			/*Desbloquear sigalarm y sigusr1*/			
 			error = sigprocmask(SIG_UNBLOCK, &set2,&oset);
 			sleep(3);
 			if (error){

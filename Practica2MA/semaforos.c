@@ -6,14 +6,10 @@ union semun {
 		unsigned short *array;
 	} arg;
 
+int n_sems;
+
 int Inicializar_Semaforo(int semid, unsigned short *array){
-	int i;
-	int N_SEMAFOROS;
-	N_SEMAFOROS=sizeof(array)/sizeof(short);
-	arg.array = (unsigned short *)malloc(sizeof(short)*N_SEMAFOROS);
-	for (i=0;i<N_SEMAFOROS;i++){
-		arg.array [i] = array[i];
-	}
+	arg.array = array;
 	
 	if (semctl (semid, 0, SETALL, arg)==-1) return ERROR;
 	return OK;
