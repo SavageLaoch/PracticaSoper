@@ -31,6 +31,7 @@ int main (void)
 		}
 	}
 	else{
+		/*El padre envia la senal SIGTERM al hijo 40 segs despues de crearlo*/
 		sleep(40);
 		kill(pid,SIGTERM);
 	}

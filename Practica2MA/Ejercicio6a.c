@@ -38,11 +38,11 @@ int main (void)
 				sleep(1);
 			}
 			/*Desbloquear sigalarm y sigusr1*/			
-			error = sigprocmask(SIG_UNBLOCK, &set2,&oset);
-			sleep(3);
+			error = sigprocmask(SIG_UNBLOCK, &set2,&oset);			
 			if (error){
 				printf("Error al desbloquear las senales");
 			}
+			sleep(3);
 		}
 	}
 	while(wait(NULL)>0);
