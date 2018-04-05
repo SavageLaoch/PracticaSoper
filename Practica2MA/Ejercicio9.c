@@ -11,7 +11,7 @@
 #include "semaforos.h"
 
 #define SEMKEY 75798
-#define NUMCAJAS 5
+#define NUMCAJAS 3
 #define NUMCLIENTES 30
 int sem_id, acabados=0;
 
@@ -149,7 +149,7 @@ int main (int argc, char *argv[]){
 	if (Crear_Semaforo(SEMKEY, NUMCAJAS+1, &sem_id)==ERROR){
 		printf("Error al crear el semaforo\n");
 	}
-	array = (unsigned short *)malloc(sizeof(unsigned short)*NUMCAJAS+1);
+	array = (unsigned short *)malloc(sizeof(unsigned short)*(NUMCAJAS+1));
 	for (i=0; i<=NUMCAJAS; i++){
 		array [i] = 1;
 	}	
@@ -171,11 +171,6 @@ int main (int argc, char *argv[]){
 	/*Creamos el fichero de la cuenta global*/
 	fp1=fopen("cuentaglobal.txt","w");
 	fprintf(fp1, "%d",c);
-	fclose(fp1);
-
-	/*Creamos el fichero de turnos*/
-	fp1=fopen("turnos.txt","w");
-	fprintf(fp1, "%d",m);
 	fclose(fp1);
 
 	/*Creamos los procesos hijos (cajeros) y los ficheros con el dinero
