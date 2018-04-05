@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 9
+ *
+ * @file Ejercicio9.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -15,6 +22,15 @@
 #define NUMCLIENTES 30
 int sem_id, acabados=0;
 
+/**
+ * @brief ImprimirTurno
+ *
+ * Imprime el turno que se le pasa en el archivo de turnos
+ * 
+ * @param uturno a imprimir
+ * @return void
+ */
+
 void ImprimirTurno(int i){
 	FILE *fp;
 
@@ -27,6 +43,14 @@ void ImprimirTurno(int i){
 	fclose(fp);
 	return;
 }
+
+/**
+ * @brief LeerTurno
+ *
+ * Lee el turno del archivo de turnos y lo devuelve
+ * 
+ * @return t Turno
+ */
 
 int LeerTurno(){
 	FILE *fp;
@@ -41,6 +65,24 @@ int LeerTurno(){
 	}
 	return t;
 }
+
+/**
+ * @brief ModificarCaja
+ *
+ * Modifica la caja i segun el parametro m. Si m=0 significa que tiene
+ * que sumar simplemente cl a lo que hay en la caja e imprimirlo. Si m=1 significa
+ * que lo ha llamado la funcion masde1000 y tiene que retirar 900 euros de la caja.
+ * (Hemos puesto una comprobacion aqui dentro de que lo que hay en la caja sea mayor
+ * que 1000 para evitar que se quite 900 dos veces seguidas). Por ultimo si m=2
+ * significa que se han acabado los clientes y hay que sacar todo el dinero de la caja.
+ *  
+ * @param i Caja a modificar
+ * @param cl Lo que hay que sumar a la caja (cuando hay que quitar todo simplemente
+ * se pasa 0)
+ * @param m Modo en el que se llama a esta funcion.
+ * @return caj (lo que hemos leido de la caja) o sum (lo que vamos a meter en la
+ * caja) segun quien lo llame.
+ */
 
 int ModificarCaja(int i, int cl, int m){
 	FILE *fp;
@@ -80,6 +122,15 @@ int ModificarCaja(int i, int cl, int m){
 	return caj;
 }
 
+/**
+ * @brief MasDe1000
+ *
+ * Manejador de la senal SIGUSR1. Saca 900 de la caja correspondiente y los
+ * suma a la cuenta global
+ * 
+ * @return void
+ */
+
 void MasDe1000(int sig){
 	int tot;
 	int t;
@@ -102,6 +153,16 @@ void MasDe1000(int sig){
 	printf("HE TERMINADO DE HACER LA SENAL DE MASDE1000 en %d\n",t);
 	return;
 }
+
+/**
+ * @brief ClientesAcabados
+ *
+ * Manejador de la senal SIGUSR2. Saca todo el dinero de la caja correspondiente 
+ * y lo suma a la cuenta global.
+ * 
+ * @return t Turno
+ */
+
 void ClientesAcabados(int sig){
     int tot,caj;
 	int t;
@@ -125,6 +186,19 @@ void ClientesAcabados(int sig){
 	acabados++;
 	return;
 }
+
+/**
+ * @brief Main
+ *
+ * En el main se crean semaforos, los ficheros de los clientes, el fichero de cuenta
+ * global, y se crean los procesos hijos o cajeros. Estos cajeros crean los ficheros
+ * de sus respectivas cajas y van leyendo de los ficheros de los clientes y sumando
+ * dinero a las cajas. Mandaran senales al proceso padre bien si sus cajas superan
+ * los 1000 euros o bien si se quedan sin clientes (terminan de leer el archivo
+ * de clientes)
+ * 
+ * @return EXIT_SUCCES o EXIT_FAILURE
+ */
 
 int main (int argc, char *argv[]){
 	int i,j,al,al2,pid,cl,sum,c=0,tot,caj;
@@ -258,5 +332,5 @@ int main (int argc, char *argv[]){
 
 	printf("\nTodo ha ido correctamente\n\n");
 
-	return 0;
+	return EXIT_SUCCESS;
 }

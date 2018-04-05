@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 2
+ *
+ * @file Ejercicio2.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -8,6 +15,13 @@
 #include <signal.h>
 #include <unistd.h>
 
+/**
+ * @brief Main
+ *
+ * El main crea los 4 procesos hijos y los elimina mandandoles la senal SIGTERM
+ *
+ * @return 0
+ */
 int main(){
 	int pid,i;
 

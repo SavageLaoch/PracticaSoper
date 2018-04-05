@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 6b
+ *
+ * @file Ejercicio6b.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -6,10 +13,28 @@
 #include <time.h>
 #define NUM_PROC 5
 
+/**
+ * @brief manejador_SIGTERM
+ *
+ * Es el manejador de la senal SIGTERM, que la asocia a una impresion por pantalla y 
+ * un exit(0).
+ *
+ * @return 
+ */
+
 void manejador_SIGTERM(int sig){
 	printf("Soy %d y he recibido la senal SIGTERM\n",getpid());
 	exit(0);
 }
+
+/**
+ * @brief Main
+ *
+ * El main crea un proceso hijo que pone a trabajar y hace que el padre espere 40 segs.
+ * Cuando han pasado estos segundos, el padre manda una senal al hijo para que termine.
+ *
+ * @return 
+ */
 
 int main (void)
 {

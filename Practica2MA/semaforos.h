@@ -1,3 +1,10 @@
+/**
+ * @brief semaforos.h
+ *
+ * @file semaforos.h
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #ifndef SEMAFOROS_H
 #define SEMAFOROS_H
 

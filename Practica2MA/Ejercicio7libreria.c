@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 7 con nuestra libreria
+ *
+ * @file Ejercicio7libreria.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -8,6 +15,16 @@
 #include "semaforos.h"
 #define SEMKEY 75798
 #define N_SEMAFOROS 2
+
+/**
+ * @brief Main
+ *
+ * Este main crea semaforos y opera con ellos con el objetivo de comprobar el correcto
+ * funcionamiento de nuestra libreria semaforos.c
+ * 
+ * @return 0 o -1
+ */
+
 int main ( ){
 /*
 * Declaración de variables

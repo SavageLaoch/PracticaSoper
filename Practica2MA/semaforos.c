@@ -1,3 +1,9 @@
+/**
+ * @brief semaforos.c nuestra propia libreria de semaforos
+ *
+ * @file semaforos.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
 #include "semaforos.h"
 
 union semun {

@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 4
+ *
+ * @file Ejercicio4.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -10,12 +17,38 @@
 
 #define NUM_PROC 4
 
+/**
+ * @brief manejador_SIGUSR1
+ *
+ * Hace un return en el proceso que efectua este manejador
+ *
+ * @return void
+ */
+
 void manejador_SIGUSR1(int sig){
     return;
 }
+
+/**
+ * @brief manejador_SIGUSR2
+ *
+ * Termina el proceso que efectua este manejador
+ *
+ * @return void
+ */
+
 void manejador_SIGUSR2(int sig){
     exit (EXIT_SUCCESS);
 }
+
+/**
+ * @brief Main
+ *
+ * El main crea los hijos, que imprimen por pantalla "estoy trabajando", y son estos
+ * hijos los que mandan las senales SIGUSR1 y SIGUSR2
+ *
+ * @return EXIT_SUCCESS o EXIT_FAILURE
+ */
 
 int main(){
   int pid[NUM_PROC];

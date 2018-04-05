@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 7
+ *
+ * @file Ejercicio7.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -7,6 +14,15 @@
 #include <stdlib.h>
 #define SEMKEY 75798
 #define N_SEMAFOROS 2
+
+/**
+ * @brief Main
+ *
+ * Este main crea semaforos y opera con ellos.
+ * 
+ * @return 
+ */
+
 int main ( )
 {
 /*

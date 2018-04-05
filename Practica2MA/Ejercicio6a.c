@@ -1,3 +1,10 @@
+/**
+ * @brief Ejercicio 6a
+ *
+ * @file Ejercicio6a.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -6,6 +13,17 @@
 #include <time.h>
 #define NUM_PROC 5
 #define SECS 40
+
+/**
+ * @brief Main
+ *
+ * En este main se crea un proceso hijo y este hijo establece una alarma. Cuando
+ * se recibe la senal de esa alarma el proceso hijo termina y con ello el padre,
+ * que le estaba esperando.
+ *
+ * @return 
+ */
+
 int main (void)
 {
 	int pid, counter, error;
