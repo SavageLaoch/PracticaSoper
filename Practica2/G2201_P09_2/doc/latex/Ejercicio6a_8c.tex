@@ -1,0 +1,56 @@
+\hypertarget{Ejercicio6a_8c}{}\section{Ejercicio6a.\+c File Reference}
+\label{Ejercicio6a_8c}\index{Ejercicio6a.\+c@{Ejercicio6a.\+c}}
+
+
+Ejercicio 6a.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$signal.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+Include dependency graph for Ejercicio6a.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries N\+U\+M\+\_\+\+P\+R\+OC}~5\hypertarget{Ejercicio6a_8c_acee2369f62e4a096d243dec3cd7d0b00}{}\label{Ejercicio6a_8c_acee2369f62e4a096d243dec3cd7d0b00}
+
+\item 
+\#define {\bfseries S\+E\+CS}~40\hypertarget{Ejercicio6a_8c_a512a9ef84990cc5b81d736cb2520a063}{}\label{Ejercicio6a_8c_a512a9ef84990cc5b81d736cb2520a063}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Ejercicio6a_8c_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 6a. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{Ejercicio6a.\+c@{Ejercicio6a.\+c}!main@{main}}
+\index{main@{main}!Ejercicio6a.\+c@{Ejercicio6a.\+c}}
+\subsubsection[{\texorpdfstring{main(void)}{main(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio6a_8c_a840291bc02cba5474a4cb46a9b9566fe}{}\label{Ejercicio6a_8c_a840291bc02cba5474a4cb46a9b9566fe}
+
+
+Main. 
+
+En este main se crea un proceso hijo y este hijo establece una alarma. Cuando se recibe la senal de esa alarma el proceso hijo termina y con ello el padre, que le estaba esperando.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}

@@ -1,0 +1,92 @@
+\hypertarget{Ejercicio4_8c}{}\section{Ejercicio4.\+c File Reference}
+\label{Ejercicio4_8c}\index{Ejercicio4.\+c@{Ejercicio4.\+c}}
+
+
+Ejercicio 4.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\\*
+{\ttfamily \#include $<$sys/sem.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/shm.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$signal.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+Include dependency graph for Ejercicio4.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries N\+U\+M\+\_\+\+P\+R\+OC}~4\hypertarget{Ejercicio4_8c_acee2369f62e4a096d243dec3cd7d0b00}{}\label{Ejercicio4_8c_acee2369f62e4a096d243dec3cd7d0b00}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Ejercicio4_8c_af67f7ad6bdff3c40a6b1d97ae573fa4c}{manejador\+\_\+\+S\+I\+G\+U\+S\+R1} (int sig)
+\begin{DoxyCompactList}\small\item\em manejador\+\_\+\+S\+I\+G\+U\+S\+R1 \end{DoxyCompactList}\item 
+void \hyperlink{Ejercicio4_8c_a17e6a33c4f37ba645ad2b8067f75228b}{manejador\+\_\+\+S\+I\+G\+U\+S\+R2} (int sig)
+\begin{DoxyCompactList}\small\item\em manejador\+\_\+\+S\+I\+G\+U\+S\+R2 \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio4_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 4. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{Ejercicio4.\+c@{Ejercicio4.\+c}!main@{main}}
+\index{main@{main}!Ejercicio4.\+c@{Ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio4_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{Ejercicio4_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Main. 
+
+El main crea los hijos, que imprimen por pantalla \char`\"{}estoy trabajando\char`\"{}, y son estos hijos los que mandan las senales S\+I\+G\+U\+S\+R1 y S\+I\+G\+U\+S\+R2
+
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS o E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE 
+\end{DoxyReturn}
+\index{Ejercicio4.\+c@{Ejercicio4.\+c}!manejador\+\_\+\+S\+I\+G\+U\+S\+R1@{manejador\+\_\+\+S\+I\+G\+U\+S\+R1}}
+\index{manejador\+\_\+\+S\+I\+G\+U\+S\+R1@{manejador\+\_\+\+S\+I\+G\+U\+S\+R1}!Ejercicio4.\+c@{Ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+U\+S\+R1(int sig)}{manejador_SIGUSR1(int sig)}}]{\setlength{\rightskip}{0pt plus 5cm}void manejador\+\_\+\+S\+I\+G\+U\+S\+R1 (
+\begin{DoxyParamCaption}
+\item[{int}]{sig}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio4_8c_af67f7ad6bdff3c40a6b1d97ae573fa4c}{}\label{Ejercicio4_8c_af67f7ad6bdff3c40a6b1d97ae573fa4c}
+
+
+manejador\+\_\+\+S\+I\+G\+U\+S\+R1 
+
+Hace un return en el proceso que efectua este manejador
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\index{Ejercicio4.\+c@{Ejercicio4.\+c}!manejador\+\_\+\+S\+I\+G\+U\+S\+R2@{manejador\+\_\+\+S\+I\+G\+U\+S\+R2}}
+\index{manejador\+\_\+\+S\+I\+G\+U\+S\+R2@{manejador\+\_\+\+S\+I\+G\+U\+S\+R2}!Ejercicio4.\+c@{Ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+U\+S\+R2(int sig)}{manejador_SIGUSR2(int sig)}}]{\setlength{\rightskip}{0pt plus 5cm}void manejador\+\_\+\+S\+I\+G\+U\+S\+R2 (
+\begin{DoxyParamCaption}
+\item[{int}]{sig}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio4_8c_a17e6a33c4f37ba645ad2b8067f75228b}{}\label{Ejercicio4_8c_a17e6a33c4f37ba645ad2b8067f75228b}
+
+
+manejador\+\_\+\+S\+I\+G\+U\+S\+R2 
+
+Termina el proceso que efectua este manejador
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

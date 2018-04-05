@@ -1,0 +1,71 @@
+\hypertarget{Ejercicio6b_8c}{}\section{Ejercicio6b.\+c File Reference}
+\label{Ejercicio6b_8c}\index{Ejercicio6b.\+c@{Ejercicio6b.\+c}}
+
+
+Ejercicio 6b.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$signal.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+Include dependency graph for Ejercicio6b.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries N\+U\+M\+\_\+\+P\+R\+OC}~5\hypertarget{Ejercicio6b_8c_acee2369f62e4a096d243dec3cd7d0b00}{}\label{Ejercicio6b_8c_acee2369f62e4a096d243dec3cd7d0b00}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Ejercicio6b_8c_afc491f44f9a3771e97dc0256075f0f52}{manejador\+\_\+\+S\+I\+G\+T\+E\+RM} (int sig)
+\begin{DoxyCompactList}\small\item\em manejador\+\_\+\+S\+I\+G\+T\+E\+RM \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio6b_8c_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 6b. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{Ejercicio6b.\+c@{Ejercicio6b.\+c}!main@{main}}
+\index{main@{main}!Ejercicio6b.\+c@{Ejercicio6b.\+c}}
+\subsubsection[{\texorpdfstring{main(void)}{main(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio6b_8c_a840291bc02cba5474a4cb46a9b9566fe}{}\label{Ejercicio6b_8c_a840291bc02cba5474a4cb46a9b9566fe}
+
+
+Main. 
+
+El main crea un proceso hijo que pone a trabajar y hace que el padre espere 40 segs. Cuando han pasado estos segundos, el padre manda una senal al hijo para que termine.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Ejercicio6b.\+c@{Ejercicio6b.\+c}!manejador\+\_\+\+S\+I\+G\+T\+E\+RM@{manejador\+\_\+\+S\+I\+G\+T\+E\+RM}}
+\index{manejador\+\_\+\+S\+I\+G\+T\+E\+RM@{manejador\+\_\+\+S\+I\+G\+T\+E\+RM}!Ejercicio6b.\+c@{Ejercicio6b.\+c}}
+\subsubsection[{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+T\+E\+R\+M(int sig)}{manejador_SIGTERM(int sig)}}]{\setlength{\rightskip}{0pt plus 5cm}void manejador\+\_\+\+S\+I\+G\+T\+E\+RM (
+\begin{DoxyParamCaption}
+\item[{int}]{sig}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio6b_8c_afc491f44f9a3771e97dc0256075f0f52}{}\label{Ejercicio6b_8c_afc491f44f9a3771e97dc0256075f0f52}
+
+
+manejador\+\_\+\+S\+I\+G\+T\+E\+RM 
+
+Es el manejador de la senal S\+I\+G\+T\+E\+RM, que la asocia a una impresion por pantalla y un exit(0).
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}

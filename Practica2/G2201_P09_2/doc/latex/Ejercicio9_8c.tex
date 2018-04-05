@@ -1,0 +1,204 @@
+\hypertarget{Ejercicio9_8c}{}\section{Ejercicio9.\+c File Reference}
+\label{Ejercicio9_8c}\index{Ejercicio9.\+c@{Ejercicio9.\+c}}
+
+
+Ejercicio 9.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\\*
+{\ttfamily \#include $<$sys/sem.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/shm.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$signal.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+Include dependency graph for Ejercicio9.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries S\+E\+M\+K\+EY}~75798\hypertarget{Ejercicio9_8c_ada831b9e37399bf906c8184a888e28cd}{}\label{Ejercicio9_8c_ada831b9e37399bf906c8184a888e28cd}
+
+\item 
+\#define {\bfseries N\+U\+M\+C\+A\+J\+AS}~4\hypertarget{Ejercicio9_8c_aaef8e59f48812385108da305a77eb3f0}{}\label{Ejercicio9_8c_aaef8e59f48812385108da305a77eb3f0}
+
+\item 
+\#define {\bfseries N\+U\+M\+C\+L\+I\+E\+N\+T\+ES}~30\hypertarget{Ejercicio9_8c_a968582d5d970ba0ebdf8629b2e042d6b}{}\label{Ejercicio9_8c_a968582d5d970ba0ebdf8629b2e042d6b}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Ejercicio9_8c_a423be02d237888f767b6d107096c10f4}{aleat\+\_\+num} (int inf, int sup)
+\begin{DoxyCompactList}\small\item\em aleat\+\_\+num \end{DoxyCompactList}\item 
+void \hyperlink{Ejercicio9_8c_a5a860dc0f1d869decfcc3cba78d43913}{Imprimir\+Turno} (int i)
+\begin{DoxyCompactList}\small\item\em Imprimir\+Turno. \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio9_8c_a42f959d3fed290177039527b23acdd1a}{Leer\+Turno} ()
+\begin{DoxyCompactList}\small\item\em Leer\+Turno. \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio9_8c_a93a02e404e4cfe9303c145534747cc85}{Modificar\+Caja} (int i, int cl, int m)
+\begin{DoxyCompactList}\small\item\em Modificar\+Caja. \end{DoxyCompactList}\item 
+void \hyperlink{Ejercicio9_8c_ae80b90131406bc76334dcc32f01129e6}{Mas\+De1000} ()
+\begin{DoxyCompactList}\small\item\em Mas\+De1000. \end{DoxyCompactList}\item 
+void \hyperlink{Ejercicio9_8c_a3c6fcd8b18ac7cf19ea0e28fe21ff80a}{Clientes\+Acabados} ()
+\begin{DoxyCompactList}\small\item\em Clientes\+Acabados. \end{DoxyCompactList}\item 
+int \hyperlink{Ejercicio9_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries sem\+\_\+id}\hypertarget{Ejercicio9_8c_a9825b926ad2a4aa0e6688dc15b2d9a23}{}\label{Ejercicio9_8c_a9825b926ad2a4aa0e6688dc15b2d9a23}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 9. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!aleat\+\_\+num@{aleat\+\_\+num}}
+\index{aleat\+\_\+num@{aleat\+\_\+num}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{aleat\+\_\+num(int inf, int sup)}{aleat_num(int inf, int sup)}}]{\setlength{\rightskip}{0pt plus 5cm}int aleat\+\_\+num (
+\begin{DoxyParamCaption}
+\item[{int}]{inf, }
+\item[{int}]{sup}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_a423be02d237888f767b6d107096c10f4}{}\label{Ejercicio9_8c_a423be02d237888f767b6d107096c10f4}
+
+
+aleat\+\_\+num 
+
+Genera un numero aleatorio entre inf y sup
+
+
+\begin{DoxyParams}{Parameters}
+{\em inf} & Cota inferior \\
+\hline
+{\em sup} & Cota superior \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Entero generado 
+\end{DoxyReturn}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!Clientes\+Acabados@{Clientes\+Acabados}}
+\index{Clientes\+Acabados@{Clientes\+Acabados}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{Clientes\+Acabados()}{ClientesAcabados()}}]{\setlength{\rightskip}{0pt plus 5cm}void Clientes\+Acabados (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_a3c6fcd8b18ac7cf19ea0e28fe21ff80a}{}\label{Ejercicio9_8c_a3c6fcd8b18ac7cf19ea0e28fe21ff80a}
+
+
+Clientes\+Acabados. 
+
+Manejador de la senal S\+I\+G\+U\+S\+R2. Saca todo el dinero de la caja correspondiente y lo suma a la cuenta global.
+
+\begin{DoxyReturn}{Returns}
+t Turno 
+\end{DoxyReturn}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!Imprimir\+Turno@{Imprimir\+Turno}}
+\index{Imprimir\+Turno@{Imprimir\+Turno}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{Imprimir\+Turno(int i)}{ImprimirTurno(int i)}}]{\setlength{\rightskip}{0pt plus 5cm}void Imprimir\+Turno (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_a5a860dc0f1d869decfcc3cba78d43913}{}\label{Ejercicio9_8c_a5a860dc0f1d869decfcc3cba78d43913}
+
+
+Imprimir\+Turno. 
+
+Imprime el turno que se le pasa en el archivo de turnos
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & turno a imprimir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!Leer\+Turno@{Leer\+Turno}}
+\index{Leer\+Turno@{Leer\+Turno}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{Leer\+Turno()}{LeerTurno()}}]{\setlength{\rightskip}{0pt plus 5cm}int Leer\+Turno (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_a42f959d3fed290177039527b23acdd1a}{}\label{Ejercicio9_8c_a42f959d3fed290177039527b23acdd1a}
+
+
+Leer\+Turno. 
+
+Lee el turno del archivo de turnos y lo devuelve
+
+\begin{DoxyReturn}{Returns}
+t Turno 
+\end{DoxyReturn}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!main@{main}}
+\index{main@{main}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_a0ddf1224851353fc92bfbff6f499fa97}{}\label{Ejercicio9_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Main. 
+
+En el main se crean semaforos, los ficheros de los clientes, el fichero de cuenta global, y se crean los procesos hijos o cajeros. Estos cajeros crean los ficheros de sus respectivas cajas y van leyendo de los ficheros de los clientes y sumando dinero a las cajas. Mandaran senales al proceso padre bien si sus cajas superan los 1000 euros o bien si se quedan sin clientes (terminan de leer el archivo de clientes)
+
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+ES o E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE 
+\end{DoxyReturn}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!Mas\+De1000@{Mas\+De1000}}
+\index{Mas\+De1000@{Mas\+De1000}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{Mas\+De1000()}{MasDe1000()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mas\+De1000 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_ae80b90131406bc76334dcc32f01129e6}{}\label{Ejercicio9_8c_ae80b90131406bc76334dcc32f01129e6}
+
+
+Mas\+De1000. 
+
+Manejador de la senal S\+I\+G\+U\+S\+R1. Saca 900 de la caja correspondiente y los suma a la cuenta global
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\index{Ejercicio9.\+c@{Ejercicio9.\+c}!Modificar\+Caja@{Modificar\+Caja}}
+\index{Modificar\+Caja@{Modificar\+Caja}!Ejercicio9.\+c@{Ejercicio9.\+c}}
+\subsubsection[{\texorpdfstring{Modificar\+Caja(int i, int cl, int m)}{ModificarCaja(int i, int cl, int m)}}]{\setlength{\rightskip}{0pt plus 5cm}int Modificar\+Caja (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{cl, }
+\item[{int}]{m}
+\end{DoxyParamCaption}
+)}\hypertarget{Ejercicio9_8c_a93a02e404e4cfe9303c145534747cc85}{}\label{Ejercicio9_8c_a93a02e404e4cfe9303c145534747cc85}
+
+
+Modificar\+Caja. 
+
+Modifica la caja i segun el parametro m. Si m=0 significa que tiene que sumar simplemente cl a lo que hay en la caja e imprimirlo. Si m=1 significa que lo ha llamado la funcion masde1000 y tiene que retirar 900 euros de la caja. (Hemos puesto una comprobacion aqui dentro de que lo que hay en la caja sea mayor que 1000 para evitar que se quite 900 dos veces seguidas). Por ultimo si m=2 significa que se han acabado los clientes y hay que sacar todo el dinero de la caja.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Caja a modificar \\
+\hline
+{\em cl} & Lo que hay que sumar a la caja (cuando hay que quitar todo simplemente se pasa 0) \\
+\hline
+{\em m} & Modo en el que se llama a esta funcion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+caj (lo que hemos leido de la caja) o sum (lo que vamos a meter en la caja) segun quien lo llame. 
+\end{DoxyReturn}
