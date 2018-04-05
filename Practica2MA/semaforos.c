@@ -23,21 +23,29 @@ int Borrar_Semaforo(int semid){
 int Crear_Semaforo(key_t key, int size, int *semid){
 	int i;
 	unsigned short *array;
-	array=(unsigned short*)malloc(size*sizeof(short));
+	array=(unsigned short*)malloc(size*sizeof(unsigned short));
 	for (i=0;i<size;i++){
 		array[i]=0;
 	}
 
-	(*semid) = semget(key, size, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
-	if(((*semid) == -1) && (errno == EEXIST)){
-		(*semid)=semget(key,size,SHM_R|SHM_W);
-		if((*semid)==-1){
-		return ERROR;
+	*semid = semget(key, size, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
+
+	if((*semid == -1) && (errno == EEXIST)){
+		printf("Semaforo ya creado\n");
+		*semid=semget(key,size,SHM_R|SHM_W);
+		if(*semid==-1){
+			printf("Error al coger el id del semaforo creado\n");
+			return ERROR;
 		}
-		if (Inicializar_Semaforo((*semid), array)==ERROR) return ERROR;
+		
+		if (Inicializar_Semaforo((*semid), array)==ERROR) {
+			printf("Error al inicializar el semaforo en el create\n");
+			return ERROR;
+		}
 		return 1;
 	}
 	if((*semid)==-1){
+		printf("Error en el semget");
 		return ERROR;
 	}
 

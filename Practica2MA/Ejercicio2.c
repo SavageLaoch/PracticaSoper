@@ -8,7 +8,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-void main(){
+int main(){
 	int pid,i;
 
 	for (i=0;i<4;i++){
@@ -26,5 +26,5 @@ void main(){
 		}
 	}
 	exit(EXIT_SUCCESS);
-	return;
+	return 0;
 }

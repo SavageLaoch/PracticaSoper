@@ -1,0 +1,7 @@
+Memoria practica 2 (tengo que pasarla a word que no me va el libreoffice)
+
+Ejercicio2
+Cada hijo  imprime unicamente el mensaje "soy el proceso hijo x". Como después de imprimir este mensaje tienen que dormir 30 segundos, no les da tiempo a imprimir el mensaje de "soy el proceso hijo x y ya me toca terminar" porque el padre los termina mandandoles la señal sigterm únicamente 5 segundos después de crearlos.
+
+
+

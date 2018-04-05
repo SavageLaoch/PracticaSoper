@@ -11,7 +11,7 @@
 #include "semaforos.h"
 
 #define SEMKEY 75798
-#define NUMCAJAS 3
+#define NUMCAJAS 5
 #define NUMCLIENTES 30
 int sem_id, acabados=0;
 
@@ -127,7 +127,7 @@ void ClientesAcabados(int sig){
 }
 
 int main (int argc, char *argv[]){
-	int i,j,al,al2,pid,cl,sum,c=0,m=-1,tot,caj;
+	int i,j,al,al2,pid,cl,sum,c=0,tot,caj;
 	unsigned short *array;
 	FILE *fp1, *fp2, *fp;
 	char s[50];

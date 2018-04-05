@@ -8,7 +8,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#define NUM_PROC 10
+#define NUM_PROC 4
 
 void manejador_SIGUSR1(int sig){
     return;
@@ -28,7 +28,7 @@ int main(){
     perror("signal");
     exit (EXIT_FAILURE);
   }
-  for (i = 0; i < 10; i++){
+  for (i = 0; i < NUM_PROC; i++){
     pid[i] = fork();
     if (pid[i] < 0){
       return EXIT_FAILURE;
