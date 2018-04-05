@@ -4,7 +4,7 @@ Ejercicio2
 Cada hijo  imprime unicamente el mensaje "soy el proceso hijo x". Como después de imprimir este mensaje tienen que dormir 30 segundos, no les da tiempo a imprimir el mensaje de "soy el proceso hijo x y ya me toca terminar" porque el padre los termina mandandoles la señal sigterm únicamente 5 segundos después de crearlos.
 
 Ejercicio4
-Revisar y ver por que no acaba
+Para este ejercicio hemos utilizado 2 señales: SIGUSR1 es la que le mandan los hijos al padre para que salga del pause y cree un nuevo hijo. Y SIGUSR2 es la señal que mandará este nuevo hijo al hijo anterior, que hará que ese hijo termine.
 
 Ejercicio6
 a

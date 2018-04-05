@@ -33,6 +33,7 @@ int main(){
     if (pid[i] < 0){
       return EXIT_FAILURE;
     }
+    /*Esto es lo que hace el primer hijo*/
     if (pid[i] == 0 && i == 0){
       for (j = 0; j < 10; j++){
         printf("Soy %d y estoy trabajando\n",getpid());
@@ -43,8 +44,8 @@ int main(){
         printf("Soy %d y estoy trabajando\n",getpid());
         sleep(1);
       }
-
-    }else if(pid[i] == 0 && i != 0){
+    /*A partir de el segundo hijo matan al hijo anterior*/
+    }else if(pid[i] == 0 && i != 0 && i != NUM_PROC-1){
       kill(pid[i-1],SIGUSR2);
       for (j = 0; j < 10; j++){
         printf("Soy %d y estoy trabajando\n",getpid());
@@ -55,7 +56,17 @@ int main(){
         printf("Soy %d y estoy trabajando\n",getpid());
         sleep(1);
       }
-    }else{
+    /*El ultimo hijo no se queda esperando*/
+    }else if(pid[i]==0 && i == NUM_PROC-1){
+      kill(pid[i-1],SIGUSR2);
+      for (j = 0; j < 10; j++){
+        printf("Soy %d y estoy trabajando\n",getpid());
+        sleep(1);
+      }
+      kill(getppid(),SIGUSR1);
+      exit(EXIT_SUCCESS);
+    }
+    else{
       pause();
     }
   }
