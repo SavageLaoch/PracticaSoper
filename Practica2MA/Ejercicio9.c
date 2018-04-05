@@ -26,7 +26,11 @@ int sem_id, acabados=0;
  * @brief ImprimirTurno
  *
  * Imprime el turno que se le pasa en el archivo de turnos
+<<<<<<< HEAD
+ *
+=======
  * 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
  * @param uturno a imprimir
  * @return void
  */
@@ -37,7 +41,11 @@ void ImprimirTurno(int i){
 	if (Down_Semaforo(sem_id, NUMCAJAS, SEM_UNDO)==ERROR){
 		printf("Error al bajar el semaforo de turnos \n");
 	}
+<<<<<<< HEAD
+	fp=fopen("turnos.txt","w");
+=======
 	fp=fopen("turnos.txt","w");					
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 	fprintf(fp, "%d",i);
 	printf("He impreso el turno %d\n",i);
 	fclose(fp);
@@ -48,7 +56,11 @@ void ImprimirTurno(int i){
  * @brief LeerTurno
  *
  * Lee el turno del archivo de turnos y lo devuelve
+<<<<<<< HEAD
+ *
+=======
  * 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
  * @return t Turno
  */
 
@@ -75,7 +87,11 @@ int LeerTurno(){
  * (Hemos puesto una comprobacion aqui dentro de que lo que hay en la caja sea mayor
  * que 1000 para evitar que se quite 900 dos veces seguidas). Por ultimo si m=2
  * significa que se han acabado los clientes y hay que sacar todo el dinero de la caja.
+<<<<<<< HEAD
+ *
+=======
  *  
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
  * @param i Caja a modificar
  * @param cl Lo que hay que sumar a la caja (cuando hay que quitar todo simplemente
  * se pasa 0)
@@ -100,6 +116,16 @@ int ModificarCaja(int i, int cl, int m){
 	fscanf(fp,"%d",&caj);
 	fclose(fp);
 
+<<<<<<< HEAD
+	if (m==1 && caj<=1000){
+		printf("Ya tengo menos de 1000 en la caja %d\n",i);
+		if (Up_Semaforo(sem_id, i, SEM_UNDO)==ERROR){
+		printf("Error al subir el semaforo %d\n",i);
+		}
+		return 0;
+	}
+	if (m==2) cl=-caj;
+=======
 	if (m==1 && caj<1000){
 		printf("Ya tengo menos de 1000 en la caja %d\n",i);
 		if (Up_Semaforo(sem_id, i, SEM_UNDO)==ERROR){
@@ -108,6 +134,7 @@ int ModificarCaja(int i, int cl, int m){
 		return 0;
 	}
 	if (m==2) cl=-caj; 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 
 	sum = cl + caj;
 	fp=fopen(s,"w");
@@ -117,7 +144,11 @@ int ModificarCaja(int i, int cl, int m){
 
 	if (Up_Semaforo(sem_id, i, SEM_UNDO)==ERROR){
 		printf("Error al subir el semaforo %d\n",i);
+<<<<<<< HEAD
+	}
+=======
 	}	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 
 	if (m==0) return sum;
 	return caj;
@@ -128,7 +159,11 @@ int ModificarCaja(int i, int cl, int m){
  *
  * Manejador de la senal SIGUSR1. Saca 900 de la caja correspondiente y los
  * suma a la cuenta global
+<<<<<<< HEAD
+ *
+=======
  * 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
  * @return void
  */
 
@@ -139,7 +174,12 @@ void MasDe1000(int sig){
 
 	t=LeerTurno();
 	printf("ESTOY HACIENDO LA SENAL DE MASDE1000 en %d\n",t);
+<<<<<<< HEAD
+	fflush(stdout);
+
+=======
 	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 	ModificarCaja(t, -900, 1);
 	printf("YA HEMOS SACADO 900 EN %d\n",t);
 
@@ -149,7 +189,11 @@ void MasDe1000(int sig){
 	fclose(fp);
 	fp=fopen("cuentaglobal.txt","w");
 	fprintf(fp, "%d",tot+900);
+<<<<<<< HEAD
+	fclose(fp);
+=======
 	fclose(fp);	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 
 	printf("HE TERMINADO DE HACER LA SENAL DE MASDE1000 en %d\n",t);
 	return;
@@ -158,16 +202,26 @@ void MasDe1000(int sig){
 /**
  * @brief ClientesAcabados
  *
+<<<<<<< HEAD
+ * Manejador de la senal SIGUSR2. Saca todo el dinero de la caja correspondiente
+ * y lo suma a la cuenta global.
+ *
+=======
  * Manejador de la senal SIGUSR2. Saca todo el dinero de la caja correspondiente 
  * y lo suma a la cuenta global.
  * 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
  * @return t Turno
  */
 
 void ClientesAcabados(int sig){
     int tot,caj;
 	int t;
+<<<<<<< HEAD
+	FILE *fp;
+=======
 	FILE *fp;	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 	printf("Entrada clientes acabados\n");
 	t=LeerTurno();
 	printf("ESTOY HACIENDO LA SENAL DE CLIENTESACABADOS en %d\n",t);
@@ -181,7 +235,11 @@ void ClientesAcabados(int sig){
 	fclose(fp);
 	fp=fopen("cuentaglobal.txt","w");
 	fprintf(fp, "%d",tot+caj);
+<<<<<<< HEAD
+	fclose(fp);
+=======
 	fclose(fp);	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 
 	printf("HE TERMINADO DE HACER LA SENAL DE CLIENTESACABADOS en %d ---------------------\n",t);
 	acabados++;
@@ -197,7 +255,11 @@ void ClientesAcabados(int sig){
  * dinero a las cajas. Mandaran senales al proceso padre bien si sus cajas superan
  * los 1000 euros o bien si se quedan sin clientes (terminan de leer el archivo
  * de clientes)
+<<<<<<< HEAD
+ *
+=======
  * 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
  * @return EXIT_SUCCES o EXIT_FAILURE
  */
 
@@ -227,7 +289,11 @@ int main (int argc, char *argv[]){
 	array = (unsigned short *)malloc(sizeof(unsigned short)*(NUMCAJAS+1));
 	for (i=0; i<=NUMCAJAS; i++){
 		array [i] = 1;
+<<<<<<< HEAD
+	}
+=======
 	}	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 	if (Inicializar_Semaforo(sem_id, array)==ERROR){
 		printf("Error al inicializar el semaforo\n");
 	}
@@ -256,7 +322,11 @@ int main (int argc, char *argv[]){
 			printf("Error al hacer el fork\n");
 		}else if (pid==0){
 		/*Aqui va lo que hace cada hijo*/
+<<<<<<< HEAD
+
+=======
 			
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 			/*Creamos los ficheros de las cajas con 0*/
 			sprintf(s,"dinerocaja%d.txt",i);
 			fp2=fopen(s,"w");
@@ -270,6 +340,15 @@ int main (int argc, char *argv[]){
 			while(fscanf(fp1,"%d\n",&cl) == 1){
 
 				/*Leo el importe que paga el cliente y espero para la gestion*/
+<<<<<<< HEAD
+
+				/*printf("El importe que paga el cliente %d es %d\n",i,cl);
+				*/
+				al2=rand()%2;
+				sleep(al2);
+
+				sum = ModificarCaja(i, cl, 0);
+=======
 				
 				/*printf("El importe que paga el cliente %d es %d\n",i,cl);
 				*/
@@ -277,15 +356,24 @@ int main (int argc, char *argv[]){
 				sleep(al2);		
 
 				sum = ModificarCaja(i, cl, 0);	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 
 				/*Compruebo si en la caja hay mas de 1000 y aviso al padre*/
 				if (sum>1000){
 					printf("NOS HEMOS PASADO DE 1000 en la caja %d\n",i);
+<<<<<<< HEAD
+
+					ImprimirTurno(i);
+
+					printf("MANDO SENAL DE NOS HEMOS PASADO DE 1000 en la caja %d\n",i);
+
+=======
 					
 					ImprimirTurno(i);
 
 					printf("MANDO SENAL DE NOS HEMOS PASADO DE 1000 en la caja %d\n",i);
 					
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 					if (kill(getppid(),SIGUSR1)==-1){
 						printf("Error al mandar la senal de masde1000 en la caja %d\n",i);
 					}
@@ -302,15 +390,27 @@ int main (int argc, char *argv[]){
 			printf("Numacabdos: %d\n",acabados );
 			if (kill(getppid(),SIGUSR2)==-1){
 				printf("Error al mandar la senal de clientesacabados en la caja %d\n",i);
+<<<<<<< HEAD
+			}
+
+			exit(EXIT_SUCCESS);
+		}
+	}
+=======
 			}			
 			
 			return EXIT_SUCCESS;
 		}
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 	/*Esperamos a los procesos hijos*/
 	while (wait(NULL) > 0);
 
 	/*Esto lo hacemos porque nos ha ocurrido que algunas veces veces los procesos hijos
+<<<<<<< HEAD
+	 han acabado pero al padre aun le ha quedado hacerse cargo de alguna senal de
+=======
 	 han acabado pero al padre aun le ha quedado hacerse cargo de alguna senal de 
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 	 ClientesAcabados*/
 	/*if (acabados!=NUMCAJAS){
 		printf("\nVAMOS A HACER UNA ULTIMA RONDA\n");
@@ -324,7 +424,11 @@ int main (int argc, char *argv[]){
 			fclose(fp);
 		}
 	}*/
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
 
 	/*Borramos los semaforos*/
 	if (Borrar_Semaforo(sem_id)==ERROR) {
@@ -332,7 +436,14 @@ int main (int argc, char *argv[]){
 	}
 
 	printf("\nTodo ha ido correctamente\n\n");
+<<<<<<< HEAD
+
+
+	return EXIT_SUCCESS;
+}
+=======
 	}
 
 	return EXIT_SUCCESS;
 }
+>>>>>>> 06c66660c3eea852500336ce5b66cdb22bae7a26
