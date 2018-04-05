@@ -33,7 +33,7 @@ int sem_id, acabados=0;
 
 void ImprimirTurno(int i){
 	FILE *fp;
-
+	printf("Me he quedado en imprimir turno\n");
 	if (Down_Semaforo(sem_id, NUMCAJAS, SEM_UNDO)==ERROR){
 		printf("Error al bajar el semaforo de turnos \n");
 	}
@@ -90,6 +90,7 @@ int ModificarCaja(int i, int cl, int m){
 	int sum,caj;
 
 	printf("Voy a bajar el semaforo de la caja %d\n",i);
+	printf("Me he quedado en modificar caja\n");
 	if (Down_Semaforo(sem_id, i, SEM_UNDO)==ERROR){
 		printf("Error al bajar el semaforo %d\n",i);
 	}
@@ -167,7 +168,7 @@ void ClientesAcabados(int sig){
     int tot,caj;
 	int t;
 	FILE *fp;	
-
+	printf("Entrada clientes acabados\n");
 	t=LeerTurno();
 	printf("ESTOY HACIENDO LA SENAL DE CLIENTESACABADOS en %d\n",t);
 
@@ -266,10 +267,10 @@ int main (int argc, char *argv[]){
 			sprintf(s,"clientescaja%d.txt",i);
 			fp1=fopen(s,"r");
 
-			while(!feof(fp1)){
+			while(fscanf(fp1,"%d\n",&cl) == 1){
 
 				/*Leo el importe que paga el cliente y espero para la gestion*/
-				fscanf(fp1,"%d\n",&cl);
+				
 				/*printf("El importe que paga el cliente %d es %d\n",i,cl);
 				*/
 				al2=rand()%2;
@@ -298,21 +299,20 @@ int main (int argc, char *argv[]){
 			ImprimirTurno(i);
 
 			printf("MANDO SENAL DE CLIENTES ACABADOS en la caja %d\n",i);
-
+			printf("Numacabdos: %d\n",acabados );
 			if (kill(getppid(),SIGUSR2)==-1){
 				printf("Error al mandar la senal de clientesacabados en la caja %d\n",i);
 			}			
 			
-			exit(EXIT_SUCCESS);
+			return EXIT_SUCCESS;
 		}
-	}
 	/*Esperamos a los procesos hijos*/
 	while (wait(NULL) > 0);
 
 	/*Esto lo hacemos porque nos ha ocurrido que algunas veces veces los procesos hijos
 	 han acabado pero al padre aun le ha quedado hacerse cargo de alguna senal de 
 	 ClientesAcabados*/
-	if (acabados!=NUMCAJAS){
+	/*if (acabados!=NUMCAJAS){
 		printf("\nVAMOS A HACER UNA ULTIMA RONDA\n");
 		for (i=0;i<NUMCAJAS;i++){
 			caj = ModificarCaja(i, 0, 2);
@@ -323,7 +323,8 @@ int main (int argc, char *argv[]){
 			fprintf(fp, "%d",tot+caj);
 			fclose(fp);
 		}
-	}
+	}*/
+	
 
 	/*Borramos los semaforos*/
 	if (Borrar_Semaforo(sem_id)==ERROR) {
@@ -331,6 +332,7 @@ int main (int argc, char *argv[]){
 	}
 
 	printf("\nTodo ha ido correctamente\n\n");
+	}
 
 	return EXIT_SUCCESS;
 }

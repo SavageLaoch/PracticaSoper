@@ -16,4 +16,4 @@ Ejercicio9: Ejercicio9.c
 
 
 clean:
-	rm  Ejercicio2 Ejercicio4 Ejercicio6a Ejercicio6b Ejercicio7libreria Ejercicio9 
+	rm  Ejercicio2 Ejercicio4 Ejercicio6a Ejercicio6b Ejercicio7libreria Ejercicio9 *.txt
