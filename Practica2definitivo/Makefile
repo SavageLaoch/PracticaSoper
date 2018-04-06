@@ -1,4 +1,4 @@
-all: Ejercicio2 Ejercicio4 Ejercicio6a Ejercicio6b Ejercicio7libreria Ejercicio9 
+all: Ejercicio2 Ejercicio4 Ejercicio6a Ejercicio6b Ejercicio7libreria Ejercicio9 Ejercicio9b
 
 
 Ejercicio2: Ejercicio2.c
@@ -13,7 +13,9 @@ Ejercicio7libreria: Ejercicio7libreria.c
 	gcc -Wall -g semaforos.h semaforos.c Ejercicio7libreria.c -o Ejercicio7libreria
 Ejercicio9: Ejercicio9.c
 	gcc -Wall -g semaforos.h semaforos.c Ejercicio9.c -o Ejercicio9
+Ejercicio9b: Ejercicio9.c
+	gcc -Wall -g semaforos.h semaforos.c Ejercicio9b.c -o Ejercicio9b
 
 
 clean:
-	rm  Ejercicio2 Ejercicio4 Ejercicio6a Ejercicio6b Ejercicio7libreria Ejercicio9 *.txt
+	rm  Ejercicio2 Ejercicio4 Ejercicio6a Ejercicio6b Ejercicio7libreria Ejercicio9 Ejercicio9b *.txt
