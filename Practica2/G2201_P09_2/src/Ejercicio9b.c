@@ -306,6 +306,7 @@ int main (int argc, char *argv[]){
     	acabados ++;
     	printf("Acabados: %d\n",acabados);
   	}
+  	
   	for (i=0;i<NUMCAJAS;i++){
   		caj = ModificarCaja(i, 0, 2);
   		fp1=fopen("cuentaglobal.txt","r");
