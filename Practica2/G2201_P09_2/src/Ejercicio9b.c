@@ -293,7 +293,7 @@ int main (int argc, char *argv[]){
 			/*Cierro el archivo de los clientes*/
 			fclose(fp1);
 			printf("CLIENTES ACABADOS en la caja %d\n",i);
-      if (kill(getppid(),SIGUSR2)==-1){
+      		if (kill(getppid(),SIGUSR2)==-1){
 				printf("Error al mandar la senal de clientesacabados en la caja %d\n",i);
 			}
 			free(array);
@@ -302,19 +302,19 @@ int main (int argc, char *argv[]){
 	}
 	/*Esperamos a los procesos hijos*/
 	while (wait(NULL) > 0);
-  while(acabados < NUMCAJAS){
-    acabados ++;
-    printf("Acabados: %d\n",acabados);
-  }
-  for (i=0;i<NUMCAJAS;i++){
-			caj = ModificarCaja(i, 0, 2);
-			fp1=fopen("cuentaglobal.txt","r");
-			fscanf(fp1,"%d",&tot);
-			fclose(fp1);
-			fp1=fopen("cuentaglobal.txt","w");
-			fprintf(fp1, "%d",tot+caj);
-			fclose(fp1);
-		}
+ 	while(acabados < NUMCAJAS){
+    	acabados ++;
+    	printf("Acabados: %d\n",acabados);
+  	}
+  	for (i=0;i<NUMCAJAS;i++){
+  		caj = ModificarCaja(i, 0, 2);
+  		fp1=fopen("cuentaglobal.txt","r");
+  		fscanf(fp1,"%d",&tot);
+  		fclose(fp1);
+  		fp1=fopen("cuentaglobal.txt","w");
+  		fprintf(fp1, "%d",tot+caj);
+  		fclose(fp1);
+  	}
 	/*Borramos los semaforos*/
 	if (Borrar_Semaforo(sem_id)==ERROR) {
 		printf("Error al borrar los semaforos\n");
