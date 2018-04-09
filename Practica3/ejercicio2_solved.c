@@ -89,7 +89,7 @@ int main(int argc, char *argv[]){
  		exit(EXIT_FAILURE);
 	 }
 	buffer[0] = 0;
-	
+
 	array[0] = 1;
 	array[1] = 1;
 	if(Crear_Semaforo(SEMKEY,2,&sem_id) == ERROR){
@@ -133,7 +133,7 @@ int main(int argc, char *argv[]){
  				fprintf (stderr, "Error reserve shared memory \n");
  				exit(EXIT_FAILURE);
 	 		}
-	 		
+
 	 		if(Down_Semaforo(sem_id,1,SEM_UNDO) == ERROR){
 				printf("Error al bajar el semaforo 0\n");
 				exit(EXIT_FAILURE);
@@ -154,6 +154,7 @@ int main(int argc, char *argv[]){
 	printf("Valor de la memoria compartida: %d\n",buffer[0]);
 	shmdt ((char *)buffer);
 	shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
+  Borrar_Semaforo(sem_id);
 
 	exit(EXIT_SUCCESS);
 }
