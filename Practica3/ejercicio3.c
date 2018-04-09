@@ -50,7 +50,7 @@ int main(){
  	}
 
   array[0] = 1;
-	array[1] = MAXBUF + 10;
+	array[1] = MAXBUF;
   array[2] = 0;
 	if(Crear_Semaforo(SEMKEY,3,&sem_id) == ERROR){
 		shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
@@ -78,8 +78,8 @@ int main(){
     }
     for(i = 0;i < MAXBUF;i++){
       c = producir_item(i);
-      printf("Generado item: %c\n",c);
-      fflush(stdout);
+      /*printf("Generado item: %c\n",c);
+      fflush(stdout);*/
       if (Down_Semaforo(sem_id,1,SEM_UNDO) == ERROR){
         printf("Fallo al bajar el semaforo vacio\n");
         exit(EXIT_FAILURE);
@@ -97,6 +97,8 @@ int main(){
         printf("Fallo al subir el semaforo lleno\n");
         exit(EXIT_FAILURE);
       }
+      printf("Generado item: %c\n",c);
+      fflush(stdout);
     }
   }else{
     /*CPnsumidor*/
@@ -127,9 +129,10 @@ int main(){
       consumir_item(c);
     }
   }
-  shmdt ((char *)buffer);
-	shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
-  if (pid != 0){
+  wait(NULL);
+  if (pid != 0) {
+    shmdt ((char *)buffer);
+	  shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
     Borrar_Semaforo(sem_id);
   }
   exit(EXIT_SUCCESS);
