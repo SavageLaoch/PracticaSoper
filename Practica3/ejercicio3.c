@@ -78,8 +78,6 @@ int main(){
     }
     for(i = 0;i < MAXBUF;i++){
       c = producir_item(i);
-      /*printf("Generado item: %c\n",c);
-      fflush(stdout);*/
       if (Down_Semaforo(sem_id,1,SEM_UNDO) == ERROR){
         printf("Fallo al bajar el semaforo vacio\n");
         exit(EXIT_FAILURE);
