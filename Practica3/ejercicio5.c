@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 
 	/*Comprobamos los parametros*/
 	if (argc < 3){
-		printf("No se han introducido suficientes parámetros\n");
+		printf("No se han introducido suficientes parámetros:\nEl primer archivo tiene que ser entrada.txt \n");
 		exit(EXIT_FAILURE);
 	}
 
