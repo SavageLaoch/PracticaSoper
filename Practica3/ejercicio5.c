@@ -67,14 +67,14 @@ int main(int argc, char *argv[]){
 			msg.id=1; /*1 significa que aun no esta traducido, se lo manda al proceso B*/
 			strcpy(msg.contenido,buffer);
 			msg.ultimo=0;			
-			msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long),IPC_NOWAIT);
+			msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long) - sizeof(int),IPC_NOWAIT);
 			printf("Enviado mensaje tipo %ld = %s \n", msg.id,msg.contenido);
 		}
 		fclose(f);
 		/*Aviso al proceso B de que he acabado mandando un mensaje con el valor de ultimo a 1*/
 		msg.id=1; 
 		msg.ultimo=1;
-		msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long),IPC_NOWAIT);
+		msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long) - sizeof(int),IPC_NOWAIT);
 		printf("Enviado mensaje de fin A\n");
 		exit(EXIT_SUCCESS);
 	}
@@ -88,23 +88,31 @@ int main(int argc, char *argv[]){
 	/*Aqui va lo que hace el proceso B*/
 		while (1){ /* Mientras que el proceso A no ha acabado */
 			/* Recibimos un mensaje */
-			msgrcv (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long), 1, 0); /* Leemos solo los mensajes tipo 1 */
+			msgrcv (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long) - sizeof(int), 1, 0); /* Leemos solo los mensajes tipo 1 */
 			if (msg.ultimo==1){
 				/*Aviso al proceso C de que he acabado*/
 				msg.id=2; 
 				msg.ultimo=1;
-				msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long),IPC_NOWAIT);
+				msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long) - sizeof(int),IPC_NOWAIT);
 				printf("Enviado mensaje de fin B\n");
 				exit(EXIT_SUCCESS);
 			}
 			printf("Recibido mensaje tipo %ld = %s \n", msg.id,msg.contenido);
 			/* Modificamos el mensaje */
 			for(i=0;i<sizeof(msg.contenido);i++){
-				msg.contenido[i]=msg.contenido[i]+1;
+				if (msg.contenido[i]==' '){
+					continue;
+				}else if (msg.contenido[i]=='Z'){
+					msg.contenido[i]='A';
+				}else if (msg.contenido[i]=='z'){
+					msg.contenido[i]='a';
+				}else {
+					msg.contenido[i]=msg.contenido[i]+1;
+				}
 			}
 			/* Mandamos el mensaje */
 			msg.id=2; /*2 significa que ya esta traducido, se lo manda al proceso C*/
-			msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long),IPC_NOWAIT);
+			msgsnd (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long) - sizeof(int),IPC_NOWAIT);
 			printf("Enviado mensaje tipo %ld = %s \n", msg.id,msg.contenido);
 		}
 		exit(EXIT_SUCCESS);
@@ -114,7 +122,7 @@ int main(int argc, char *argv[]){
 	f=fopen(argv[2],"w");
 	while(1){/* Mientras que el procesoBA no ha acabado */
 		/* Recibimos un mensaje */
-		msgrcv (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long), 2, 0); /* Leemos solo los mensajes tipo 2 */
+		msgrcv (msqid, (struct msgbuf *) &msg, sizeof(mensaje) - sizeof(long) - sizeof(int), 2, 0); /* Leemos solo los mensajes tipo 2 */
 		if (msg.ultimo==1){
 			printf("YA HA TERMINADO TODO\n");
 			fclose(f);
