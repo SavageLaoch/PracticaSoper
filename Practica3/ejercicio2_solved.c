@@ -8,14 +8,18 @@
 #include <time.h>
 #include <errno.h>
 #include <sys/shm.h> /* shm* */
+#include <signal.h>
 #include "semaforos.h"
 #define FILEKEY "/bin/cat"
 #define SEMKEY 75788
 #define KEY 1300
 
-
 int sem_id;
 
+typedef struct info{
+ char nombre[80];
+ int id;
+}Info;
 
 /**
  * @brief aleat_num
@@ -38,123 +42,121 @@ int aleat_num(int inf, int sup){
   }while(randm>=limite);
   return (randm/grupo)+inf;
 }
-
 void manejador(int sig){
-	if(Down_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
-				printf("Error al bajar el semaforo 0\n");
-				exit(EXIT_FAILURE);
-			}
-	printf("Hijo terminado\n");
-	if(Up_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
-				printf("Error al subir el semaforo 0\n");
-				exit(EXIT_FAILURE);
-			}
-	return;
+  int key,id_zone;
+  Info *buffer;
+  key = ftok(FILEKEY, KEY);
+  if (key == -1) {
+    fprintf (stderr, "Error with key \n");
+    return;
+  }
+  id_zone = shmget (key, sizeof(Info),  IPC_CREAT | SHM_R | SHM_W);
+  if (id_zone == -1) {
+    fprintf (stderr, "Error with id_zone manejador\n");
+    return;
+  }
+  buffer = shmat (id_zone, (char *)0, 0);
+  if (buffer == NULL) {
+    fprintf (stderr, "Error reserve shared memory \n");
+    return;
+  }
+  printf("Usuario: %s. Id: %d\n",buffer->nombre,buffer->id);
+  return;
 }
 
-struct info{
- char nombre[80];
- int id;
-}info;
+int main(int argc, char const *argv[]) {
+  int i,pid;
+  int key,id_zone;
+  Info *buffer;
+  int sem_id;
+  unsigned short array[1];
 
-int main(int argc, char *argv[]){
-	int i,pid;
-	int *buffer; /* shared buffer */
-	int key, id_zone;
-	unsigned short array[2];
+  /* Manejador de la señal*/
+  if(signal(SIGUSR1,manejador) == SIG_ERR){
+    printf("Error al capturar la señal\n");
+    exit(EXIT_FAILURE);
+  }
 
-	if (signal(SIGUSR1,manejador) == SIG_ERR){
-		perror("signal error");
-		exit (EXIT_FAILURE);
-	}
+  srand(time(NULL));
+  /* Comprobacion de argumentos*/
+  if(argc < 2){
+    printf("Introduzca un numero de argumentos correcto\n");
+    exit(EXIT_FAILURE);
+  }
 
-	srand(time(NULL));
-	if (argc < 2){
-		printf("No se han introducido suficientes parámetros\n");
-		exit(EXIT_FAILURE);
-	}
-	key = ftok(FILEKEY, KEY);
- 	if (key == -1) {
- 		fprintf (stderr, "Error with key \n");
- 		exit(EXIT_FAILURE);
- 	}
- 	id_zone = shmget (key, sizeof(int), IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
- 	if (id_zone == -1) {
- 		fprintf (stderr, "Error with id_zone \n");
- 		exit(EXIT_FAILURE);
- 	}
- 	buffer = shmat (id_zone, (char *)0, 0);
- 	if (buffer == NULL) {
- 		fprintf (stderr, "Error reserve shared memory \n");
- 		exit(EXIT_FAILURE);
-	 }
-	buffer[0] = 0;
-
-	array[0] = 1;
-	array[1] = 1;
-	if(Crear_Semaforo(SEMKEY,2,&sem_id) == ERROR){
-		shmdt ((char *)buffer);
-		shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
+  array[0] = 1;
+  if(Crear_Semaforo(SEMKEY,1,&sem_id) == ERROR){
 		printf("Error al crear los semaforos\n");
 		exit(EXIT_FAILURE);
 	}
 	if(Inicializar_Semaforo(sem_id,array) == ERROR){
-		shmdt ((char *)buffer);
-		shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
 		printf("Error al inicializar los semaforos\n");
 		exit(EXIT_FAILURE);
 	}
-	/* 0 para entrada salida 1 para memoria compartida*/
-	for (i = 0;i < atoi(argv[1]);i++){
-		pid = fork();
-		if(pid < 0){
-			printf("Error al crear el hijo %d\n",i);
-			exit(EXIT_FAILURE);
-		}
-		if(pid == 0){
-			sleep(aleat_num(1,5));
-			if(Down_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
+  /* Creacion de la memoria dinamica*/
+  key = ftok(FILEKEY, KEY);
+  if (key == -1) {
+    fprintf (stderr, "Error with key \n");
+    Borrar_Semaforo(sem_id);
+    return -1;
+  }
+  id_zone = shmget (key, sizeof(Info), IPC_CREAT | IPC_EXCL |SHM_R | SHM_W);
+  if (id_zone == -1) {
+    fprintf (stderr, "Error with id_zone \n");
+    Borrar_Semaforo(sem_id);
+    return -1;
+  }
+  buffer = shmat (id_zone, (char *)0, 0);
+  if (buffer == NULL) {
+    fprintf (stderr, "Error reserve shared memory \n");
+    Borrar_Semaforo(sem_id);
+    return -1;
+  }
+  if(Down_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
 				printf("Error al bajar el semaforo 0\n");
 				exit(EXIT_FAILURE);
-			}
-			printf("Hijo %d: Introduzca el nombre del cliente:\n",i);
-			fscanf(stdin,"%s",info.nombre);
-			if(Up_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
-				printf("Error al subir el semaforo 0\n");
-				exit(EXIT_FAILURE);
-			}
-			id_zone = shmget (key, sizeof(int), SHM_R | SHM_W);
- 			if (id_zone == -1) {
- 				fprintf (stderr, "Error with id_zone \n");
- 				exit(EXIT_FAILURE);
- 			}
- 			buffer = shmat (id_zone, (char *)0, 0);
- 			if (buffer == NULL) {
- 				fprintf (stderr, "Error reserve shared memory \n");
- 				exit(EXIT_FAILURE);
-	 		}
-
-	 		if(Down_Semaforo(sem_id,1,SEM_UNDO) == ERROR){
-				printf("Error al bajar el semaforo 0\n");
-				exit(EXIT_FAILURE);
-			}
-	 		buffer[0] ++;
-	 		if(Up_Semaforo(sem_id,1,SEM_UNDO) == ERROR){
-				printf("Error al subir el semaforo 0\n");
-				exit(EXIT_FAILURE);
-			}
-
-	 		shmdt ((char *)buffer);
- 			shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
- 			kill(getppid(),SIGUSR1);
-			exit(EXIT_SUCCESS);
-		}
 	}
-	while(wait(NULL) > 0);
-	printf("Valor de la memoria compartida: %d\n",buffer[0]);
-	shmdt ((char *)buffer);
-	shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
+  buffer->id = 0;
+  if(Up_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
+				printf("Error al bajar el semaforo 0\n");
+				exit(EXIT_FAILURE);
+			}
+  for (i = 0;i < atoi(argv[1]);i++){
+    pid = fork();
+    if (pid == -1){
+      printf("Error al crear el hijo %d\n",i);
+      exit(EXIT_FAILURE);
+    }
+    if (pid == 0){
+      sleep(aleat_num(1,1));
+      id_zone = shmget (key, sizeof(Info),   IPC_CREAT | SHM_R | SHM_W);
+      if (id_zone == -1) {
+        fprintf (stderr, "Error with id_zone hijo\n");
+        exit(EXIT_FAILURE);
+      }
+      buffer = shmat (id_zone, (char *)0, 0);
+      if (buffer == NULL) {
+        fprintf (stderr, "Error reserve shared memory \n");
+        exit(EXIT_FAILURE);
+      }
+      if(Down_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
+				printf("Error al bajar el semaforo 0\n");
+				exit(EXIT_FAILURE);
+			}
+      printf("Introduzca un nombre: \n");
+      fscanf(stdin,"%s",buffer->nombre);
+      buffer->id ++;
+      kill(getppid(),SIGUSR1);
+      if(Up_Semaforo(sem_id,0,SEM_UNDO) == ERROR){
+				printf("Error al bajar el semaforo 0\n");
+				exit(EXIT_FAILURE);
+			}
+      exit(EXIT_SUCCESS);
+    }
+  }
+  while(wait(NULL) > 0);
+  shmdt ((char *)buffer);
+  shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
   Borrar_Semaforo(sem_id);
-
-	exit(EXIT_SUCCESS);
+  exit(EXIT_SUCCESS);
 }
