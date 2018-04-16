@@ -1,0 +1,119 @@
+\hypertarget{ejercicio3_8c}{}\section{ejercicio3.\+c File Reference}
+\label{ejercicio3_8c}\index{ejercicio3.\+c@{ejercicio3.\+c}}
+
+
+Ejercicio 3.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/shm.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\\*
+Include dependency graph for ejercicio3.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries F\+I\+L\+E\+K\+EY}~\char`\"{}/bin/cat\char`\"{}\hypertarget{ejercicio3_8c_a68c15c5fb7f7c6f707903e6a46ab0557}{}\label{ejercicio3_8c_a68c15c5fb7f7c6f707903e6a46ab0557}
+
+\item 
+\#define {\bfseries S\+E\+M\+K\+EY}~75788\hypertarget{ejercicio3_8c_ada831b9e37399bf906c8184a888e28cd}{}\label{ejercicio3_8c_ada831b9e37399bf906c8184a888e28cd}
+
+\item 
+\#define {\bfseries K\+EY}~1300\hypertarget{ejercicio3_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{}\label{ejercicio3_8c_a8ae9d53f33f46cfcfcb9736e6351452a}
+
+\item 
+\#define {\bfseries M\+A\+X\+B\+UF}~37\hypertarget{ejercicio3_8c_ad7871643c05865c80f5d8050aead2b57}{}\label{ejercicio3_8c_ad7871643c05865c80f5d8050aead2b57}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{ejercicio3_8c_afeaf06b1b0bec188bc6e29a09662b85b}{producir\+\_\+item} (int num\+\_\+item)
+\begin{DoxyCompactList}\small\item\em producir\+\_\+item \end{DoxyCompactList}\item 
+void \hyperlink{ejercicio3_8c_a9072448f8691277551026658b1eecd14}{consumir\+\_\+item} (char item)
+\begin{DoxyCompactList}\small\item\em consumir\+\_\+item \end{DoxyCompactList}\item 
+int \hyperlink{ejercicio3_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries sem\+\_\+id}\hypertarget{ejercicio3_8c_a9825b926ad2a4aa0e6688dc15b2d9a23}{}\label{ejercicio3_8c_a9825b926ad2a4aa0e6688dc15b2d9a23}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 3. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{ejercicio3.\+c@{ejercicio3.\+c}!consumir\+\_\+item@{consumir\+\_\+item}}
+\index{consumir\+\_\+item@{consumir\+\_\+item}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection[{\texorpdfstring{consumir\+\_\+item(char item)}{consumir_item(char item)}}]{\setlength{\rightskip}{0pt plus 5cm}void consumir\+\_\+item (
+\begin{DoxyParamCaption}
+\item[{char}]{item}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio3_8c_a9072448f8691277551026658b1eecd14}{}\label{ejercicio3_8c_a9072448f8691277551026658b1eecd14}
+
+
+consumir\+\_\+item 
+
+Esta funcion consume un item
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & Indica el item a consumir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\index{ejercicio3.\+c@{ejercicio3.\+c}!main@{main}}
+\index{main@{main}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio3_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{ejercicio3_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+Main. 
+
+En este main se implementa el ejercicio del productor-\/consumidor. Para ello se emplea el uso de memoria compartida y semaforos para protegerla.
+
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE o E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS segun si ha salido todo bien o no. 
+\end{DoxyReturn}
+\index{ejercicio3.\+c@{ejercicio3.\+c}!producir\+\_\+item@{producir\+\_\+item}}
+\index{producir\+\_\+item@{producir\+\_\+item}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection[{\texorpdfstring{producir\+\_\+item(int num\+\_\+item)}{producir_item(int num_item)}}]{\setlength{\rightskip}{0pt plus 5cm}char producir\+\_\+item (
+\begin{DoxyParamCaption}
+\item[{int}]{num\+\_\+item}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio3_8c_afeaf06b1b0bec188bc6e29a09662b85b}{}\label{ejercicio3_8c_afeaf06b1b0bec188bc6e29a09662b85b}
+
+
+producir\+\_\+item 
+
+Esta funcion produce un item
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+item} & Indica que numero de item es \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+letra o numero producido 
+\end{DoxyReturn}

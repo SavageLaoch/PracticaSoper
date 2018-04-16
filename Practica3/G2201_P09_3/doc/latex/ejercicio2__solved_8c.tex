@@ -1,0 +1,127 @@
+\hypertarget{ejercicio2__solved_8c}{}\section{ejercicio2\+\_\+solved.\+c File Reference}
+\label{ejercicio2__solved_8c}\index{ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}}
+
+
+Ejercicio 2 solved.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/shm.\+h$>$}\\*
+{\ttfamily \#include $<$signal.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\\*
+Include dependency graph for ejercicio2\+\_\+solved.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structinfo}{info}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries F\+I\+L\+E\+K\+EY}~\char`\"{}/bin/cat\char`\"{}\hypertarget{ejercicio2__solved_8c_a68c15c5fb7f7c6f707903e6a46ab0557}{}\label{ejercicio2__solved_8c_a68c15c5fb7f7c6f707903e6a46ab0557}
+
+\item 
+\#define {\bfseries S\+E\+M\+K\+EY}~75788\hypertarget{ejercicio2__solved_8c_ada831b9e37399bf906c8184a888e28cd}{}\label{ejercicio2__solved_8c_ada831b9e37399bf906c8184a888e28cd}
+
+\item 
+\#define {\bfseries K\+EY}~1300\hypertarget{ejercicio2__solved_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{}\label{ejercicio2__solved_8c_a8ae9d53f33f46cfcfcb9736e6351452a}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structinfo}{info} {\bfseries Info}\hypertarget{ejercicio2__solved_8c_a163511f3dadd6f89b69b2c2b6d40dcf7}{}\label{ejercicio2__solved_8c_a163511f3dadd6f89b69b2c2b6d40dcf7}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{ejercicio2__solved_8c_a423be02d237888f767b6d107096c10f4}{aleat\+\_\+num} (int inf, int sup)
+\begin{DoxyCompactList}\small\item\em aleat\+\_\+num \end{DoxyCompactList}\item 
+void \hyperlink{ejercicio2__solved_8c_a41f66b426edc83163dca59e49431a9d3}{manejador} (int sig)
+\begin{DoxyCompactList}\small\item\em manejador \end{DoxyCompactList}\item 
+int \hyperlink{ejercicio2__solved_8c_abf9e6b7e6f15df4b525a2e7705ba3089}{main} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries sem\+\_\+id}\hypertarget{ejercicio2__solved_8c_a9825b926ad2a4aa0e6688dc15b2d9a23}{}\label{ejercicio2__solved_8c_a9825b926ad2a4aa0e6688dc15b2d9a23}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 2 solved. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}!aleat\+\_\+num@{aleat\+\_\+num}}
+\index{aleat\+\_\+num@{aleat\+\_\+num}!ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}}
+\subsubsection[{\texorpdfstring{aleat\+\_\+num(int inf, int sup)}{aleat_num(int inf, int sup)}}]{\setlength{\rightskip}{0pt plus 5cm}int aleat\+\_\+num (
+\begin{DoxyParamCaption}
+\item[{int}]{inf, }
+\item[{int}]{sup}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio2__solved_8c_a423be02d237888f767b6d107096c10f4}{}\label{ejercicio2__solved_8c_a423be02d237888f767b6d107096c10f4}
+
+
+aleat\+\_\+num 
+
+Genera un numero aleatorio entre inf y sup
+
+
+\begin{DoxyParams}{Parameters}
+{\em inf} & Cota inferior \\
+\hline
+{\em sup} & Cota superior \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Entero generado 
+\end{DoxyReturn}
+\index{ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}!main@{main}}
+\index{main@{main}!ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}}
+\subsubsection[{\texorpdfstring{main(int argc, char const $\ast$argv[])}{main(int argc, char const *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio2__solved_8c_abf9e6b7e6f15df4b525a2e7705ba3089}{}\label{ejercicio2__solved_8c_abf9e6b7e6f15df4b525a2e7705ba3089}
+
+
+Main. 
+
+En este main se crean tantos procesos hijos como se pasen por parametro y entre esos procesos y el padre van accediendo a una zona de memoria compartida A diferencia del ejercicio 2, ahora la memoria se protege con un semaforo
+
+\begin{DoxyReturn}{Returns}
+E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE o E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS segun si ha salido todo bien o no. 
+\end{DoxyReturn}
+\index{ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}!manejador@{manejador}}
+\index{manejador@{manejador}!ejercicio2\+\_\+solved.\+c@{ejercicio2\+\_\+solved.\+c}}
+\subsubsection[{\texorpdfstring{manejador(int sig)}{manejador(int sig)}}]{\setlength{\rightskip}{0pt plus 5cm}void manejador (
+\begin{DoxyParamCaption}
+\item[{int}]{sig}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio2__solved_8c_a41f66b426edc83163dca59e49431a9d3}{}\label{ejercicio2__solved_8c_a41f66b426edc83163dca59e49431a9d3}
+
+
+manejador 
+
+Este es el manejador de la senal S\+I\+G\+U\+S\+R1, cuando un proceso recibe esta senal, lee de la zona de memoria compartida e imprime su contenido
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

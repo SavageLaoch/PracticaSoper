@@ -1,0 +1,128 @@
+\hypertarget{ejercicio4_8c}{}\section{ejercicio4.\+c File Reference}
+\label{ejercicio4_8c}\index{ejercicio4.\+c@{ejercicio4.\+c}}
+
+
+Ejercicio 4.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/shm.\+h$>$}\\*
+{\ttfamily \#include $<$sys/mman.\+h$>$}\\*
+{\ttfamily \#include $<$sys/stat.\+h$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include $<$pthread.\+h$>$}\\*
+Include dependency graph for ejercicio4.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{ejercicio4_8c_a423be02d237888f767b6d107096c10f4}{aleat\+\_\+num} (int inf, int sup)
+\begin{DoxyCompactList}\small\item\em aleat\+\_\+num \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{ejercicio4_8c_ac715c03938b31f96f34f672c496a473d}{crear\+\_\+fichero} (void $\ast$fichero)
+\begin{DoxyCompactList}\small\item\em crear\+\_\+fichero \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{ejercicio4_8c_a77dea457a35331c16034e30ae8773487}{leer\+\_\+fichero} (void $\ast$fichero)
+\begin{DoxyCompactList}\small\item\em leer\+\_\+fichero \end{DoxyCompactList}\item 
+int \hyperlink{ejercicio4_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 4. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{ejercicio4.\+c@{ejercicio4.\+c}!aleat\+\_\+num@{aleat\+\_\+num}}
+\index{aleat\+\_\+num@{aleat\+\_\+num}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{aleat\+\_\+num(int inf, int sup)}{aleat_num(int inf, int sup)}}]{\setlength{\rightskip}{0pt plus 5cm}int aleat\+\_\+num (
+\begin{DoxyParamCaption}
+\item[{int}]{inf, }
+\item[{int}]{sup}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio4_8c_a423be02d237888f767b6d107096c10f4}{}\label{ejercicio4_8c_a423be02d237888f767b6d107096c10f4}
+
+
+aleat\+\_\+num 
+
+Genera un numero aleatorio entre inf y sup
+
+
+\begin{DoxyParams}{Parameters}
+{\em inf} & Cota inferior \\
+\hline
+{\em sup} & Cota superior \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Entero generado 
+\end{DoxyReturn}
+\index{ejercicio4.\+c@{ejercicio4.\+c}!crear\+\_\+fichero@{crear\+\_\+fichero}}
+\index{crear\+\_\+fichero@{crear\+\_\+fichero}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{crear\+\_\+fichero(void $\ast$fichero)}{crear_fichero(void *fichero)}}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ crear\+\_\+fichero (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{fichero}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio4_8c_ac715c03938b31f96f34f672c496a473d}{}\label{ejercicio4_8c_ac715c03938b31f96f34f672c496a473d}
+
+
+crear\+\_\+fichero 
+
+Esta funcion crea el fichero requerido
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & Indica el item a consumir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ 
+\end{DoxyReturn}
+\index{ejercicio4.\+c@{ejercicio4.\+c}!leer\+\_\+fichero@{leer\+\_\+fichero}}
+\index{leer\+\_\+fichero@{leer\+\_\+fichero}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{leer\+\_\+fichero(void $\ast$fichero)}{leer_fichero(void *fichero)}}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ leer\+\_\+fichero (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{fichero}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio4_8c_a77dea457a35331c16034e30ae8773487}{}\label{ejercicio4_8c_a77dea457a35331c16034e30ae8773487}
+
+
+leer\+\_\+fichero 
+
+Esta funcion lee del fichero pasado por parametro
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichero} & Fichero desde el que hay que leer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ 
+\end{DoxyReturn}
+\index{ejercicio4.\+c@{ejercicio4.\+c}!main@{main}}
+\index{main@{main}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$argv[])}{main(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{ejercicio4_8c_a0ddf1224851353fc92bfbff6f499fa97}{}\label{ejercicio4_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Main. 
+
+En este main se crean 2 hilos que crean y leen de un fichero.
+
+\begin{DoxyReturn}{Returns}
+0 
+\end{DoxyReturn}
