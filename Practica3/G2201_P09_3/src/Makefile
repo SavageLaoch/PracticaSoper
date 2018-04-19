@@ -14,4 +14,4 @@ Ejercicio5: ejercicio5.c
 
 
 clean:
-	rm Ejercicio2 Ejercicio2_solved Ejercicio3 Ejercicio4 Ejercicio5 salida.txt fichero.txt
+	rm Ejercicio2 Ejercicio2_solved Ejercicio3 Ejercicio4 Ejercicio5 fichero.txt
