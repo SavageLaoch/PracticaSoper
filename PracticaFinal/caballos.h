@@ -7,6 +7,10 @@
 #include <errno.h>
 #include <sys/shm.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/msg.h>
+
 
 #define NORMAL 0
 #define REMONTADORA 1
@@ -21,6 +25,6 @@ int dado(int modo);
 
 int avanzar_caballo(int posicion);
 
-void caballo(int pipe[2]);
+void caballo(int pipe[2],int pid);
 
 #endif

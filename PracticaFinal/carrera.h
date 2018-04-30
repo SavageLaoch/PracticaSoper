@@ -1,5 +1,5 @@
-#ifndef CABALLOS_H
-#define CABALLOS_H
+#ifndef CARRERA_H
+#define CARRERA_H
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -7,6 +7,11 @@
 #include <errno.h>
 #include <sys/shm.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/msg.h>
+#include "caballos.h"
+#include <string.h>
 
 #define NORMAL 0
 #define REMONTADORA 1
@@ -17,4 +22,6 @@
 #define KEY 1300
 #define FILEKEY "/bin/cat"
 
-void carrera(int numcaballos);
+void carrera(int num_caballos,int max_distancia);
+
+#endif
