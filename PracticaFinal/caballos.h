@@ -25,6 +25,6 @@ int dado(int modo);
 
 int avanzar_caballo(int posicion);
 
-void caballo(int pipe[2],int pid);
+void caballo(int pipe[2]);
 
 #endif
