@@ -1,5 +1,9 @@
 #include "carrera.h"
 #include "caballos.h"
+#include "monitor.h"
+
+#define KEY2 1400
+#define FILEKEY2 "/bin/cat"
 
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
@@ -21,7 +25,9 @@ void carrera(int num_caballos,int max_distancia){
 	int *siguiente_tirada;
 	int max,min;
 
-	int cont=0;
+	int cont=0,monitor_id;
+	int key, id_zone;
+	char *buffer;
 
 	Mensaje mensaje;
 
@@ -76,6 +82,39 @@ void carrera(int num_caballos,int max_distancia){
 		exit(EXIT_FAILURE);
 	}
 
+	/* Creamos la memoria compartida */
+	key = ftok(FILEKEY2, KEY2);
+ 	if (key == -1) {
+ 		fprintf (stderr, "Error with key \n");
+ 		exit(EXIT_FAILURE);
+ 	}
+ 	id_zone = shmget (key, sizeof(char)*MAXBUFFER, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
+ 	if (id_zone == -1) {
+ 		fprintf (stderr, "Error with id_zone \n");
+ 		exit(EXIT_FAILURE);
+ 	}
+ 	buffer = shmat (id_zone, (char *)0, 0);
+
+	/*Creamos al proceso monitor*/
+	monitor_id=fork();
+	if(monitor_id<0){
+		printf("Error al crear el fork\n");
+		exit(EXIT_SUCCESS);
+	}else if(monitor_id == 0){
+		monitor(num_caballos,max_distancia);
+		exit(EXIT_SUCCESS);
+	}
+
+	/*Cuenta atras para que empiece*/
+	for (i=3;i>0;i--){
+		printf("%d\n",i);
+		sleep(1);
+	}
+	printf("\n");
+
+	/*Avisamos al monitor de que empieza la carrera*/
+	kill(monitor_id,SIGUSR1);
+
 	/* Hacemos la carrera */
 	for(i = 0;i < num_caballos; i++){
 		f = fork();
@@ -89,9 +128,9 @@ void carrera(int num_caballos,int max_distancia){
 		}else{
 			pid[i]=f;
 			printf("Soy el padre y guardo el id %d\n",f);
-			sleep(1);
 		}
 	}
+	sleep(1);
 	for(i=0;i<num_caballos;i++){
 		printf("%d ",pid[i]);
 	}
@@ -153,9 +192,16 @@ void carrera(int num_caballos,int max_distancia){
 	for (i = 0; i < num_caballos;i ++){
 		kill(pid[i],SIGUSR2);
 	}
+
+	/*Avisamos al monitor de que ha acabado la carrera*/
+	kill(monitor_id,SIGUSR1);
  	
  	/* Eliminamos la cola de mensajes */
 	msgctl (msqid, IPC_RMID, (struct msqid_ds *)NULL);
+
+	/*Eliminamos la memoria compartida*/
+	shmdt ((char *)buffer);
+	 shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
 
 	printf("Estos son los resultados:\n");
 	for(i = 0;i < num_caballos;i++){

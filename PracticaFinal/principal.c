@@ -5,9 +5,12 @@
 #include <errno.h>
 #include <sys/shm.h>
 #include <stdlib.h>
+#include <time.h>
+
 #include "carrera.h"
 #include "caballos.h"
-#include <time.h>
+#include "monitor.h"
+
 
 int main(int argc, char *argv[]) {
 	int num_caballos, max_distancia;
@@ -20,7 +23,7 @@ int main(int argc, char *argv[]) {
 		printf("Escribe ./Proyecto <num_caballos> <max_distancia> \n");
 		exit(EXIT_SUCCESS);
 	}
-	
+
 	num_caballos = atoi(argv[1]);
 	max_distancia = atoi(argv[2]);
 	carrera(num_caballos,max_distancia);

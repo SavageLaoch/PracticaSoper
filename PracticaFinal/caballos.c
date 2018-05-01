@@ -1,4 +1,6 @@
+#include "carrera.h"
 #include "caballos.h"
+#include "monitor.h"
 
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
