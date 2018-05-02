@@ -31,6 +31,8 @@ void carrera(int num_caballos,int max_distancia){
 
 	Mensaje mensaje;
 
+		/* Establecemos la semilla */
+	srand(time(NULL));
   	/* Creamos las pipes */
 	pipes = (int**) malloc(sizeof(int*)*num_caballos);
 	if(pipes==NULL){
@@ -59,7 +61,7 @@ void carrera(int num_caballos,int max_distancia){
 	for(i = 0; i < num_caballos;i++){
 		caballos[i] = 0;
 	}
-  	
+
   	/* Inicializamos la siguiente tirada de los caballos */
 	siguiente_tirada = (int*)malloc(sizeof(int) * num_caballos);
 	if (siguiente_tirada == NULL){
@@ -187,7 +189,7 @@ void carrera(int num_caballos,int max_distancia){
 			}
 		}
 	}
- 	
+
  	/* Mandamos la señal de acabado a los caballos */
 	for (i = 0; i < num_caballos;i ++){
 		kill(pid[i],SIGUSR2);
@@ -195,7 +197,7 @@ void carrera(int num_caballos,int max_distancia){
 
 	/*Avisamos al monitor de que ha acabado la carrera*/
 	kill(monitor_id,SIGUSR1);
- 	
+
  	/* Eliminamos la cola de mensajes */
 	msgctl (msqid, IPC_RMID, (struct msqid_ds *)NULL);
 

@@ -1,5 +1,5 @@
-#ifndef CARRERA_H
-#define CARRERA_H
+#ifndef APOSTADOR_H
+#define APOSTADOR_H
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -10,19 +10,13 @@
 #include <signal.h>
 #include <unistd.h>
 #include <sys/msg.h>
-#include "caballos.h"
 #include <string.h>
 #include <time.h>
 
-#define NORMAL 0
-#define REMONTADORA 1
-#define GANADORA 2
-#define PRIMERO 3
-#define ULTIMO 4
-#define MAXBUFFER 100
-#define KEY 1300
+#define KEY 1400
 #define FILEKEY "/bin/cat"
+#define MAXCHAR 20
 
-void carrera(int num_caballos,int max_distancia);
+void apostador(int num_apostadores,int num_caballos);
 
 #endif
