@@ -1,4 +1,4 @@
-#include "apuestas.h"
+#include "gestor_apuestas.h"
 
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
@@ -9,10 +9,10 @@ typedef struct _Mensaje{
 
 
 
-void getsor_apuestas(int num_ventanillas,int num_caballos){
-  int *cotizacion;
-  int *dinero;
+void gestor_apuestas(int num_ventanillas,int num_caballos){
+	int *cotizacion;
+	int *dinero;
 
   /* Inicializamos la cotizacion de los caballos */
-  
+
 }

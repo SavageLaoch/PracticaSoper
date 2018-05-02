@@ -27,7 +27,7 @@ void apostador(int num_apostadores,int num_caballos){
   int clave,msqid;
   Mensaje mensaje;
   char nombre_apostador[MAXCHAR];
-	int num_caballo;
+  int num_caballo;
   double cuantia;
   int i;
 
@@ -42,13 +42,13 @@ void apostador(int num_apostadores,int num_caballos){
 
   /* Creamos la cola de mensajes */
   clave = ftok (FILEKEY, KEY);
-	if (clave==(key_t) -1){
-		printf("Error al coger el key de la cola de mensajes");
-	}
-	msqid = msgget(clave,0600 | IPC_CREAT);
-	if (msqid == -1){
-		printf("Error al coger el key de la cola de mensajes");
-	}
+  if (clave==(key_t) -1){
+    printf("Error al coger el key de la cola de mensajes");
+  }
+  msqid = msgget(clave,0600 | IPC_CREAT);
+  if (msqid == -1){
+    printf("Error al coger el key de la cola de mensajes");
+  }
 
   /* Establecemos la alarma de 30 segundos antes de la carrera */
   alarm(30);

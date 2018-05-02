@@ -21,12 +21,12 @@
 #define KEY 1300
 #define FILEKEY "/bin/cat"
 
-void monitor_antes(int num_caballos,int max_distancia);
+void monitor_antes(int num_caballos,int max_distancia,int sem_id);
 
-void monitor_durante(int num_caballos,int max_distancia);
+void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone);
 
-void monitor_despues(int num_caballos,int max_distancia);
+void monitor_despues(int num_caballos,int max_distancia,int sem_id,int id_zone);
 
-void monitor(int num_caballos,int max_distancia);
+void monitor(int num_caballos,int max_distancia,int sem_id,int id_zone);
 
 #endif

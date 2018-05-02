@@ -48,7 +48,7 @@ void caballo(int pipe[2]){
 	char buffer[MAXBUFFER];
 	int posicion, tirada, clave, msqid;
 	Mensaje mensaje;
-	printf("Funcion de caballo para el caballo %d\n",getpid());
+	/*printf("Funcion de caballo para el caballo %d\n",getpid());*/
 	
 	/* Creamos los manejadores de funciones */
 	if(signal(SIGUSR1,manejador) == SIG_ERR){

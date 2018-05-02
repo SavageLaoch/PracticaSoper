@@ -18,6 +18,6 @@
 #define FILEKEY "/bin/cat"
 #define MAXCHAR 20
 
-void getsor_apuestas(int num_ventanillas,int num_caballos);
+void gestor_apuestas(int num_ventanillas,int num_caballos);
 
 #endif
