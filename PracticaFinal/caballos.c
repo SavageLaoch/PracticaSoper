@@ -1,23 +1,9 @@
-#include "carrera.h"
-#include "caballos.h"
-#include "monitor.h"
+#include "utils.h"
 
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
 	int tirada; /*Informacion a transmitir en el mensaje*/
 }Mensaje;
-
-int aleat_num(int inf, int sup){
-	if (inf>sup) return -1;
-	int randm,rango,grupo,limite;
-	rango=sup-inf+1;
-	grupo=RAND_MAX/rango;
-	limite=grupo*rango;
-	do{
-		randm=rand();
-	}while(randm>=limite);
-	return (randm/grupo)+inf;
-}
 
 int dado(int modo){
 	if (modo == GANADORA){
@@ -37,13 +23,6 @@ int avanzar_caballo(int posicion){
 	return dado(NORMAL);
 }
 
-void manejador(int sig){
-	return;
-}
-void terminar(int sig){
-	exit(EXIT_SUCCESS);
-}
-
 void caballo(int pipe[2]){
 	char buffer[MAXBUFFER];
 	int posicion, tirada, clave, msqid;
@@ -51,7 +30,7 @@ void caballo(int pipe[2]){
 	/*printf("Funcion de caballo para el caballo %d\n",getpid());*/
 	
 	/* Creamos los manejadores de funciones */
-	if(signal(SIGUSR1,manejador) == SIG_ERR){
+	if(signal(SIGUSR1,retorno) == SIG_ERR){
 		printf("Error en la señal\n");
 	}
 	if (signal(SIGUSR2,terminar) == SIG_ERR){

@@ -1,10 +1,4 @@
-#include "carrera.h"
-#include "caballos.h"
-#include "monitor.h"
-#include "semaforos.h"
-
-#define KEY2 1400
-#define FILEKEY2 "/bin/cat"
+#include "utils.h"
 
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
@@ -27,7 +21,7 @@ void monitor_antes(int num_caballos,int max_distancia,int sem_id){
 
 void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	int i,flag=0;	
-	char *buffer;
+	char *posicion;
 	char *antes;
 
 	/*Inicializamos el array antes*/
@@ -37,17 +31,17 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	}
 
 	/* Obtenemos la memoria compartida */
-	buffer = shmat (id_zone, (char *)0, 0);
+	posicion = shmat (id_zone, (char *)0, 0);
 
 	while (1){
 		if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 			printf("Error al bajar el semaforo");
 		}
 		for (i=0; i<num_caballos; i++){
-			if (buffer[i]!=antes[i]){
-				antes[i]=buffer[i];
-				printf("El caballo %d avanza a la posicion %d con una tirada de %d\n",i,antes[i],buffer[num_caballos+i]);
-				if (buffer[i]>=max_distancia) flag=1;
+			if (posicion[i]!=antes[i]){
+				antes[i]=posicion[i];
+				printf("El caballo %d avanza a la posicion %d con una tirada de %d\n",i,antes[i],posicion[num_caballos+i]);
+				if (posicion[i]>=max_distancia) flag=1;
 			}			
 		}	
 		if (flag==1){
@@ -64,11 +58,11 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 
 void monitor_despues(int num_caballos,int max_distancia,int sem_id, int id_zone){
 	/*Falta implementar el resultado de las apuestas*/
-	char *buffer;
+	char *posicion;
 	int i, max=0;
 
 	/* Obtenemos la memoria compartida */
-	buffer = shmat (id_zone, (char *)0, 0);
+	posicion = shmat (id_zone, (char *)0, 0);
 
 
 	printf("\n-----FINAL DE LA CARRERA-----\n");
@@ -76,8 +70,8 @@ void monitor_despues(int num_caballos,int max_distancia,int sem_id, int id_zone)
 			printf("Error al bajar el semaforo");
 	}
 	for (i=0; i<num_caballos; i++){
-		if (buffer[i]>buffer[max]) max=i;
-		printf("Posicion final del caballo %d = %d\n",i,buffer[i]);
+		if (posicion[i]>posicion[max]) max=i;
+		printf("Posicion final del caballo %d = %d\n",i,posicion[i]);
 	}
 	if (Up_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 			printf("Error al subir el semaforo");

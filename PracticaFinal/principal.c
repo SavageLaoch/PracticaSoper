@@ -1,16 +1,4 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
-#include <errno.h>
-#include <sys/shm.h>
-#include <stdlib.h>
-#include <time.h>
-
-#include "carrera.h"
-#include "caballos.h"
-#include "monitor.h"
-
+#include "utils.h"
 
 int main(int argc, char *argv[]) {
 	int num_caballos, max_distancia, num_apostadores, num_ventanillas, max_dinero;
@@ -30,6 +18,6 @@ int main(int argc, char *argv[]) {
 	num_ventanillas = atoi(argv[4]);
 	max_dinero = atoi(argv[5]);
 	/* ,num_apostadores,num_ventanillas,max_dinero*/
-	carrera(num_caballos,max_distancia);
+	carrera(num_caballos,max_distancia,num_apostadores,num_ventanillas,max_dinero);
 	exit(EXIT_SUCCESS);
 }
