@@ -17,7 +17,7 @@ void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
   /* Establecemos la semilla */
   srand(time(NULL));
 
-  /* Establecemos el manejador de la alarma */
+  /* Establecemos el manejador de la senal */
   if (signal(SIGUSR1, terminar) == SIG_ERR){
     puts("Error en la captura");
     exit (EXIT_FAILURE);
@@ -36,6 +36,7 @@ void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
     strcpy(mensaje.nombre_apostador,nombre_apostador);
     mensaje.num_caballo = num_caballo;
     mensaje.cuantia = cuantia;
+    printf("El %s apuesta %f\n",mensaje.nombre_apostador,mensaje.cuantia);
     msgsnd(msqid,(struct msgbuf *) &mensaje,sizeof(Mensaje) - sizeof(long), IPC_NOWAIT);
     sleep(1);
 

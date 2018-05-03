@@ -27,7 +27,7 @@ void* ventanilla(void* estructura){
 
 	while(1){
   		msgrcv(e->msqid,(struct msgbuf *) &mensaje,sizeof(Mensaje) - sizeof(long),1,0);
-  		printf("---------%d-------\n",mensaje.num_caballo);
+  		printf("Recibo mensaje con cuantia %f\n",mensaje.cuantia);
   	}
 
 	return 0;
@@ -40,7 +40,7 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	pthread_t *hilos;
 
 	/* Establecemos el manejador de la alarma */
-	if (signal(SIGUSR1, terminaryliberar) == SIG_ERR){
+	if (signal(SIGUSR1, retorno) == SIG_ERR){
 		puts("Error en la captura");
 		exit (EXIT_FAILURE);
 	}
@@ -109,9 +109,17 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	e->eleccion=eleccion;
 	e->caballo=caballo;
 	e->msqid=msqid;
-	for (i=0;i<num_ventanillas;i++){
+	
+	/*for (i=0;i<num_ventanillas;i++){
 		pthread_create(&hilos[i], NULL, ventanilla,(void *) e);
-	}
+	}*/
+
+	printf("He creado %d ventanillas\n",num_ventanillas);
+	/*printf("Gestor esperando a ser finalizado\n");*/
+
+	/*for (i = 0; i < num_ventanillas; i++){
+      pthread_join(hilos[i],NULL);
+    }*/
 
 	return;
 }

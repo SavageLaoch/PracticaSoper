@@ -105,7 +105,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 
 	 /* Inicializamos la posicion de los caballos */
 	if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
-		printf("Error al bajar el semaforo");
+		printf("Error al bajar el semaforo al principio");
 	}
 	for(i = 0; i < 2*num_caballos;i++){
 		posicion[i] = 0;
@@ -134,16 +134,6 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		exit(EXIT_SUCCESS);
 	}
 
-	/*Creamos al proceso gestor de apuestas*/
-	gestor_id=fork();
-	if(gestor_id<0){
-		printf("Error al crear el fork\n");
-		exit(EXIT_SUCCESS);
-	}else if(gestor_id == 0){
-		gestor_apuestas(num_ventanillas,num_caballos,num_apostadores,msqid2);
-		exit(EXIT_SUCCESS);
-	}
-
 	/*Creamos al proceso apostador*/
 	apostador_id=fork();
 	if(apostador_id<0){
@@ -154,12 +144,22 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		exit(EXIT_SUCCESS);
 	}
 
+	/*Creamos al proceso gestor de apuestas*/
+	/*gestor_id=fork();
+	if(gestor_id<0){
+		printf("Error al crear el fork\n");
+		exit(EXIT_SUCCESS);
+	}else if(gestor_id == 0){
+		gestor_apuestas(num_ventanillas,num_caballos,num_apostadores,msqid2);
+		exit(EXIT_SUCCESS);
+	}*/
+
 	/*Esperamos a que empiece la carrera (la cuenta la lleva el monitor)*/
 	pause();
 
 	/*Matamos al proceso apostador y al gestor porque ya no puede haber mas apuestas*/
 	kill(apostador_id,SIGUSR1);
-	kill(gestor_id,SIGUSR1);
+	/*kill(gestor_id,SIGUSR1);*/
 
 	/* Hacemos la carrera */
 	for(i = 0;i < num_caballos; i++){
@@ -192,7 +192,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		min = 0;
 		max = 0;
 		if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
-			printf("Error al bajar el semaforo");
+			printf("Error al bajar el semaforo dentro bucle");
 		}
 		for(i = 0; i < num_caballos; i++){
 			msgrcv(msqid,(struct msgbuf *) &mensaje,sizeof(Mensaje) - sizeof(long),pid[i],0);
@@ -215,9 +215,11 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		}
 
    		/* Calculamos como tiene que ser la siguiente tirada */
+   		
    		if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
-			printf("Error al bajar el semaforo");
+			printf("Error al bajar el semaforo dentro bucle 2");
 			}
+		
 		for(i = 0; i < num_caballos;i++){
 			
 			if(posicion[i] >= max_distancia){
@@ -237,13 +239,14 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		}
 	}
 
- 	/* Mandamos la señal de acabado a los caballos */
+ 	/*Esta es la espera al proceso monitor*/
+	pause();
+
+	/* Mandamos la señal de acabado a los caballos */
 	for (i = 0; i < num_caballos;i ++){
 		kill(pid[i],SIGUSR2);
+		wait(NULL);
 	}
-
-	/*Esta es la espera al proceso monitor*/
-	wait(NULL);	
 
 	/* Eliminamos la cola de mensajes entre carrera y caballo*/
 	msgctl (msqid, IPC_RMID, (struct msqid_ds *)NULL);
@@ -260,5 +263,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		printf("Error al borrar los semaforos\n");
 	}
 	
+	printf("Proceso carrera termina y borra semaforo\n");
+
 	exit(EXIT_SUCCESS);
 }

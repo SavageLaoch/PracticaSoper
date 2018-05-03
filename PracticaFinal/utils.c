@@ -13,6 +13,7 @@ int aleat_num(int inf, int sup){
 }
 
 void terminar(int sig){
+	printf("TERMINO PROCESO\n");
 	exit(EXIT_SUCCESS);
 }
 

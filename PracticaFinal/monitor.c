@@ -35,12 +35,12 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 
 	while (1){
 		if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
-			printf("Error al bajar el semaforo");
+			printf("Error al bajar el semaforo monitor durante");
 		}
 		for (i=0; i<num_caballos; i++){
 			if (posicion[i]!=antes[i]){
 				antes[i]=posicion[i];
-				printf("El caballo %d avanza a la posicion %d con una tirada de %d\n",i,antes[i],posicion[num_caballos+i]);
+				printf("El caballo %d avanza a la posicion %d con una tirada de %d\n",i,posicion[i],posicion[num_caballos+i]);
 				if (posicion[i]>=max_distancia) flag=1;
 			}			
 		}	
@@ -67,7 +67,7 @@ void monitor_despues(int num_caballos,int max_distancia,int sem_id, int id_zone)
 
 	printf("\n-----FINAL DE LA CARRERA-----\n");
 	if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
-			printf("Error al bajar el semaforo");
+			printf("Error al bajar el semaforo monitor despues");
 	}
 	for (i=0; i<num_caballos; i++){
 		if (posicion[i]>posicion[max]) max=i;
@@ -85,5 +85,7 @@ void monitor(int num_caballos, int max_distancia, int sem_id,int id_zone){
 	monitor_antes(num_caballos,max_distancia,sem_id);
 	monitor_durante(num_caballos,max_distancia,sem_id,id_zone);
 	monitor_despues(num_caballos,max_distancia,sem_id,id_zone);
+	printf("Monitor termina\n");
+	kill(getppid(),SIGUSR1);
 
 }
