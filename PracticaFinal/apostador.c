@@ -28,7 +28,7 @@ void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
 
     /* Preparamos el mensaje */
     sprintf(nombre_apostador,"Apostador %d",i);
-    num_caballo = aleat_num(0,num_caballo - 1);
+    num_caballo = aleat_num(0,num_caballos - 1);
     cuantia = aleat_num(10,10*max_dinero)/10.0;
 
     /* Enviamos el mensaje */
@@ -36,7 +36,6 @@ void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
     strcpy(mensaje.nombre_apostador,nombre_apostador);
     mensaje.num_caballo = num_caballo;
     mensaje.cuantia = cuantia;
-    printf("El %s apuesta %f\n",mensaje.nombre_apostador,mensaje.cuantia);
     msgsnd(msqid,(struct msgbuf *) &mensaje,sizeof(Mensaje) - sizeof(long), IPC_NOWAIT);
     sleep(1);
 

@@ -17,7 +17,10 @@ int main(int argc, char *argv[]) {
 	num_apostadores = atoi(argv[3]);
 	num_ventanillas = atoi(argv[4]);
 	max_dinero = atoi(argv[5]);
-	/* ,num_apostadores,num_ventanillas,max_dinero*/
+
+
 	carrera(num_caballos,max_distancia,num_apostadores,num_ventanillas,max_dinero);
+
+	
 	exit(EXIT_SUCCESS);
 }

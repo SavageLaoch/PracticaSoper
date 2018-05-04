@@ -84,10 +84,12 @@ void monitor_despues(int num_caballos,int max_distancia,int sem_id, int id_zone)
 
 void monitor(int num_caballos, int max_distancia, int sem_id,int id_zone){
 
+	/* Establecemos la semilla */
+	srand(time(NULL));
+
 	monitor_antes(num_caballos,max_distancia,sem_id);
 	monitor_durante(num_caballos,max_distancia,sem_id,id_zone);
 	monitor_despues(num_caballos,max_distancia,sem_id,id_zone);
 	printf("Monitor termina\n");
-	kill(getppid(),SIGUSR1);
-
+	return;
 }

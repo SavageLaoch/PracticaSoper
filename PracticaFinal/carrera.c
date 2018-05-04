@@ -145,21 +145,21 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 	}
 
 	/*Creamos al proceso gestor de apuestas*/
-	/*gestor_id=fork();
+	gestor_id=fork();
 	if(gestor_id<0){
 		printf("Error al crear el fork\n");
 		exit(EXIT_SUCCESS);
 	}else if(gestor_id == 0){
 		gestor_apuestas(num_ventanillas,num_caballos,num_apostadores,msqid2);
 		exit(EXIT_SUCCESS);
-	}*/
+	}
 
 	/*Esperamos a que empiece la carrera (la cuenta la lleva el monitor)*/
 	pause();
 
 	/*Matamos al proceso apostador y al gestor porque ya no puede haber mas apuestas*/
 	kill(apostador_id,SIGUSR1);
-	/*kill(gestor_id,SIGUSR1);*/
+	kill(gestor_id,SIGUSR1);
 
 	/* Hacemos la carrera */
 	for(i = 0;i < num_caballos; i++){
@@ -240,7 +240,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 	}
 
  	/*Esta es la espera al proceso monitor*/
-	pause();
+	wait(NULL);
 
 	/* Mandamos la señal de acabado a los caballos */
 	for (i = 0; i < num_caballos;i ++){
