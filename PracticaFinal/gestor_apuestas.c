@@ -15,6 +15,8 @@ typedef struct _Estructura{
 	double *ganancias;
 	int msqid;
 	int num_apostadores;
+	int id_zone;
+	int sem_id;
 }Estructura;
 
 void terminaryliberar(int sig){
@@ -26,6 +28,9 @@ void* ventanilla(void* estructura){
 	Mensaje mensaje;
 	e = (Estructura*)estructura;
 	int i=0,j,tot;
+	double *cotizacion;
+
+	cotizacion = shmat (e->id_zone, (char *)0, 0);
 
 	while(1){
 		/*Asumimos un mensaje*/
@@ -34,31 +39,39 @@ void* ventanilla(void* estructura){
   		/*Comrobamos el caballo*/
   		printf("Recibo apuesta %f de %s por el caballo %d \n",mensaje.cuantia, mensaje.nombre_apuesta,  mensaje.num_caballo);
   		
+  		if (Down_Semaforo(e->sem_id, 1, SEM_UNDO)==ERROR){
+			printf("Error al bajar el semaforo");
+		}
   		/*Asignamos ganancias*/
-  		e->ganancias[i]=mensaje.cuantia * e->cotizacion[mensaje.num_caballo];
+  		e->ganancias[i]=mensaje.cuantia * cotizacion[mensaje.num_caballo];
   		printf("GANANCIAS %f\n",e->ganancias[i]);
   		e->apuesta[i] += mensaje.cuantia;
 
-  		/*Actualizamos cotizacion*/
+  		/*Actualizamos cotizacion*/  		
   		tot=0;
   		for (j=0;j<e->num_apostadores;j++){
   			tot += e->apuesta[j];
   		}
-  		e->cotizacion[mensaje.num_caballo] = tot / e->caballo[mensaje.num_caballo];
-  		printf("COTIZACION %f\n", e->cotizacion[mensaje.num_caballo]);
-
+  		e->caballo[mensaje.num_caballo] += mensaje.cuantia;
+  		cotizacion[mensaje.num_caballo] = tot / e->caballo[mensaje.num_caballo];
+  		printf("COTIZACION %f\n", cotizacion[mensaje.num_caballo]);
+  		if (Up_Semaforo(e->sem_id, 1, SEM_UNDO)==ERROR){
+			printf("Error al subir el semaforo");
+		}
   		i++;
   	}
 
 	return 0;
 }
 
-void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,int msqid){
+void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,int msqid,int id_zone,int sem_id){
 	int *apuesta, *eleccion, *caballo;
 	double *ganancias, *cotizacion;
 	int i;
 	Estructura *e;
 	pthread_t *hilos;
+
+	cotizacion = shmat (id_zone, (char *)0, 0);
 
 	/* Establecemos el manejador de la alarma */
 	if (signal(SIGUSR1, retorno) == SIG_ERR){
@@ -72,14 +85,15 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	e = (Estructura*)malloc(sizeof(Estructura));
 	hilos = (pthread_t*)malloc(sizeof(pthread_t) * num_ventanillas);
 
-	/* Inicializamos la cotizacion de los caballos */
-	cotizacion = (double*)malloc(sizeof(double) * num_caballos);
-	if (cotizacion == NULL){
-		printf("Error al inicializar la posicion de los caballos\n");
-		exit(EXIT_FAILURE);
+	/*Inicializamos la cotizacion de los caballos*/
+	if (Down_Semaforo(sem_id, 1, SEM_UNDO)==ERROR){
+		printf("Error al bajar el semaforo");
 	}
 	for(i = 0; i < num_caballos;i++){
 		cotizacion[i] = num_caballos;
+	}
+	if (Up_Semaforo(sem_id, 1, SEM_UNDO)==ERROR){
+		printf("Error al subir el semaforo");
 	}
 
 	/* Inicializamos el dinero apostado en cada caballo */
@@ -131,6 +145,8 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	e->caballo=caballo;
 	e->msqid=msqid;
 	e->num_apostadores=num_apostadores;
+	e->id_zone=id_zone;
+	e->sem_id=sem_id;
 	
 	for (i=0;i<num_ventanillas;i++){
 		pthread_create(&hilos[i], NULL, ventanilla,(void *) e);
@@ -143,7 +159,7 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
       pthread_join(hilos[i],NULL);
     }*/
     pause();
-    printf("Gestor termina\n");
+    printf("Gestor terminado\n");
 
 	return;
 }

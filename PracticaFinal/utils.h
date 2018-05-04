@@ -35,6 +35,7 @@
 #define KEY 1300
 #define KEY2 1400
 #define KEY3 1500
+#define KEY4 1600
 #define SEMKEY 75798
 #define FILEKEY "/bin/cat"
 

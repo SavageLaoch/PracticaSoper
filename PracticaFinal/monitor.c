@@ -6,14 +6,28 @@ typedef struct _Mensaje{
 }Mensaje;
 
 
-void monitor_antes(int num_caballos,int max_distancia,int sem_id){
+void monitor_antes(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	/*Falta implementar el estado de las apuestas*/
-	int i;
+	int i,j;
+	double *cotizacion;
+
+	cotizacion = shmat (id_zone, (char *)0, 0);
 
 	printf("-----CUENTA ATRAS-----\n");
 	for (i=5;i>0;i--){
 		printf("La carrera empieza en %d\n",i);
 		sleep(1);
+
+		if (Down_Semaforo(sem_id, 1, SEM_UNDO)==ERROR){
+			printf("Error al bajar el semaforo");
+		}
+		for(j=0;j<num_caballos;j++){
+			printf("Cotizacion del caballo %d = %f\n",j,cotizacion[j]);
+		}
+		if (Up_Semaforo(sem_id, 1, SEM_UNDO)==ERROR){
+			printf("Error al bajar el semaforo");
+		}
+
 	}
 	printf("\n----------GO----------\n");
 	kill(getppid(),SIGUSR1);
@@ -82,12 +96,12 @@ void monitor_despues(int num_caballos,int max_distancia,int sem_id, int id_zone)
 
 }
 
-void monitor(int num_caballos, int max_distancia, int sem_id,int id_zone){
+void monitor(int num_caballos, int max_distancia, int sem_id,int id_zone, int id_zone2){
 
 	/* Establecemos la semilla */
 	srand(time(NULL));
 
-	monitor_antes(num_caballos,max_distancia,sem_id);
+	monitor_antes(num_caballos,max_distancia,sem_id,id_zone2);
 	monitor_durante(num_caballos,max_distancia,sem_id,id_zone);
 	monitor_despues(num_caballos,max_distancia,sem_id,id_zone);
 	printf("Monitor termina\n");

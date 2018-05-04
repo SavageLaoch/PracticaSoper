@@ -37,7 +37,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 		f = fork();
 		if(f < 0){
 			printf("Error al crear el fork\n");
-			exit(EXIT_SUCCESS);
+			exit(EXIT_FAILURE);
 		}else if(f == 0){   /* Creamos los procesos caballo */
 			caballo(pipes[i],msqid);
 			exit(EXIT_SUCCESS);
@@ -89,7 +89,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
    		
    		if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 			printf("Error al bajar el semaforo dentro bucle 2");
-			}
+		}
 		
 		for(i = 0; i < num_caballos;i++){
 			
