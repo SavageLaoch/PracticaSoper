@@ -23,9 +23,9 @@ int avanzar_caballo(int posicion){
 	return dado(NORMAL);
 }
 
-void caballo(int pipe[2]){
+void caballo(int pipe[2],int msqid){
 	char buffer[MAXBUFFER];
-	int posicion, tirada, clave, msqid;
+	int posicion, tirada;
 	Mensaje mensaje;
 	/*printf("Funcion de caballo para el caballo %d\n",getpid());*/
 
@@ -39,16 +39,6 @@ void caballo(int pipe[2]){
 
 	/* Establecemos la semilla */
 	srand(time(NULL));
-
-	/* Recogemos la cola de mensajes*/
-	clave = ftok (FILEKEY, KEY);
-	if (clave==(key_t) -1){
-		printf("Error al coger el key de la cola de mensajes");
-	}
-	msqid = msgget(clave,0600);
-	if (msqid == -1){
-		printf("Error al coger el key de la cola de mensajes");
-	}
 
 	/* Hacemos el bucle del proceso caballo*/
 	while(1){
