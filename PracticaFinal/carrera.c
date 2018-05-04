@@ -56,7 +56,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 			sprintf(tirada,"%d",siguiente_tirada[i]);
 			close(pipes[i][0]);
 			write(pipes[i][1],tirada,strlen(tirada)+1);
-			kill(pid[i],SIGUSR1);
+			/*kill(pid[i],SIGUSR1);*/
 		}
 
    		/* Leemos los mensajes */

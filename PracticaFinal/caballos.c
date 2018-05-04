@@ -42,7 +42,7 @@ void caballo(int pipe[2],int msqid){
 
 	/* Hacemos el bucle del proceso caballo*/
 	while(1){
-		pause();
+		/*pause();*/
 
 		/* Leemos la tirada del proceso principal */
 		close(pipe[1]);
