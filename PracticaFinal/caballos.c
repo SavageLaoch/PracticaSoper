@@ -28,7 +28,7 @@ void caballo(int pipe[2]){
 	int posicion, tirada, clave, msqid;
 	Mensaje mensaje;
 	/*printf("Funcion de caballo para el caballo %d\n",getpid());*/
-	
+
 	/* Creamos los manejadores de funciones */
 	if(signal(SIGUSR1,retorno) == SIG_ERR){
 		printf("Error en la señal\n");
@@ -36,7 +36,10 @@ void caballo(int pipe[2]){
 	if (signal(SIGUSR2,terminar) == SIG_ERR){
 		printf("Error segundo manejador\n");
 	}
-	
+
+	/* Establecemos la semilla */
+	srand(time(NULL));
+
 	/* Recogemos la cola de mensajes*/
 	clave = ftok (FILEKEY, KEY);
 	if (clave==(key_t) -1){
@@ -46,7 +49,7 @@ void caballo(int pipe[2]){
 	if (msqid == -1){
 		printf("Error al coger el key de la cola de mensajes");
 	}
-	
+
 	/* Hacemos el bucle del proceso caballo*/
 	while(1){
 		pause();

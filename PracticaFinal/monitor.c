@@ -20,7 +20,7 @@ void monitor_antes(int num_caballos,int max_distancia,int sem_id){
 }
 
 void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
-	int i,flag=0;	
+	int i,flag=0;
 	char *posicion;
 	char *antes;
 
@@ -40,10 +40,12 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 		for (i=0; i<num_caballos; i++){
 			if (posicion[i]!=antes[i]){
 				antes[i]=posicion[i];
-				printf("El caballo %d avanza a la posicion %d con una tirada de %d\n",i,posicion[i],posicion[num_caballos+i]);
+				fflush(stdout);
+				printf("El caballo %d avanza a la posicion %d con una tirada de %d\n\n",i,posicion[i],posicion[num_caballos+i]);
+				fflush(stdout);
 				if (posicion[i]>=max_distancia) flag=1;
-			}			
-		}	
+			}
+		}
 		if (flag==1){
 			if (Up_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 				printf("Error al subir el semaforo");
