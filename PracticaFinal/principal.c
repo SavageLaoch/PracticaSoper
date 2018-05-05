@@ -1,5 +1,13 @@
 #include "utils.h"
 
+typedef struct _MemComp{
+	double cotizacion[MAX];
+	double apuesta[MAX];
+	int eleccion[MAX];
+	int caballo[MAX];
+	double ganancias[MAX];
+}MemComp;
+
 int main(int argc, char *argv[]) {
 	int num_caballos, max_distancia, num_apostadores, num_ventanillas, max_dinero;
 	int monitor_id, apostador_id, gestor_id;
@@ -9,7 +17,7 @@ int main(int argc, char *argv[]) {
 	int key, id_zone, key2, id_zone2;
 	int sem_id,i;
 	unsigned short *array;
-	char *posicion, *cotizacion;
+	char *posicion;
 
 	/*Semilla para los numeros aleatorios*/
 	srand(time(NULL));
@@ -78,7 +86,7 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	/* Creamos la memoria compartida de la posicion de los caballos*/
+	/* Creamos la memoria compartida entre carrera y monitor*/
 	key = ftok(FILEKEY, KEY3);
  	if (key == -1) {
  		fprintf (stderr, "Error with key \n");
@@ -91,24 +99,24 @@ int main(int argc, char *argv[]) {
  	}
  	posicion = shmat (id_zone, (char *)0, 0);
 
- 	/* Creamos la memoria compartida de la cotizacion de cada caballo*/
+ 	/* Creamos la memoria compartida entre gestor y monitor*/
 	key2 = ftok(FILEKEY, KEY4);
  	if (key == -1) {
  		fprintf (stderr, "Error with key \n");
  		exit(EXIT_FAILURE);
  	}
- 	id_zone2 = shmget (key2, sizeof(char)*MAXBUFFER, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
+ 	id_zone2 = shmget (key2, sizeof(MemComp), IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
  	if (id_zone == -1) {
  		fprintf (stderr, "Error with id_zone \n");
  		exit(EXIT_FAILURE);
  	}
- 	cotizacion = shmat (id_zone2, (char *)0, 0);
 
  	/*Creamos e inicializamos los semaforos*/
- 	array = (unsigned short *)malloc(sizeof(unsigned short));
+ 	array = (unsigned short *)malloc(sizeof(unsigned short)*3);
  	array[0]=1;
  	array[1]=1;
- 	if (Crear_Semaforo(SEMKEY, 2, &sem_id)==ERROR){
+ 	array[2]=1;
+ 	if (Crear_Semaforo(SEMKEY, 3, &sem_id)==ERROR){
 		printf("Error al crear el semaforo\n");
 		exit(EXIT_FAILURE);
 	}	
@@ -128,13 +136,17 @@ int main(int argc, char *argv[]) {
 		printf("Error al subir el semaforo");
 	}
 
+	/*Creamos el fichero del report*/
+
+
+
   	/*Creamos al proceso monitor*/
 	monitor_id=fork();
 	if(monitor_id<0){
 		printf("Error al crear el fork\n");
 		exit(EXIT_SUCCESS);
 	}else if(monitor_id == 0){
-		monitor(num_caballos,max_distancia,sem_id,id_zone,id_zone2);
+		monitor(num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
 		exit(EXIT_SUCCESS);
 	}
 
@@ -189,7 +201,6 @@ int main(int argc, char *argv[]) {
 	shmctl (id_zone, IPC_RMID, (struct shmid_ds *)NULL);
 
 	/*Eliminamos la memoria compartida de la cotizacion de los caballos*/
-	shmdt ((char *)cotizacion);
 	shmctl (id_zone2, IPC_RMID, (struct shmid_ds *)NULL);
 
 	/*Borramos los semaforos*/

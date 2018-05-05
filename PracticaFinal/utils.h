@@ -31,6 +31,7 @@
 #define ULTIMO 4
 #define MAXBUFFER 100
 #define MAXCHAR 20
+#define MAX 100
 
 #define KEY 1300
 #define KEY2 1400
