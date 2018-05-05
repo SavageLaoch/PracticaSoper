@@ -24,7 +24,7 @@ void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
   }
 
   /* Creamos el bucle de los apostadores */
-  for(i = 0; i < num_apostadores; i++){
+  for(i = 1; i <= num_apostadores; i++){
 
     /* Preparamos el mensaje */
     sprintf(nombre_apostador,"Apostador %d",i);

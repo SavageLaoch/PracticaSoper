@@ -22,7 +22,6 @@ typedef struct _Estructura{
 	int id_zone;
 	int sem_id;
 	int num_ventanilla;
-	FILE *f;
 }Estructura;
 
 void terminaryliberar(int sig){
@@ -34,18 +33,18 @@ void* ventanilla(void* estructura){
 	MemComp *mem;
 	Mensaje mensaje;
 	int i,tot;
+	FILE *f;
+	int apostador;
 
+	
 	e = (Estructura*)estructura;
 	mem = shmat (e->id_zone, (MemComp *)0, 0);
 
 	while(1){
 		/*Asumimos un mensaje*/
   		msgrcv(e->msqid,(struct msgbuf *) &mensaje,sizeof(Mensaje) - sizeof(long),0,0);
-  		printf("Soy la ventanilla %d\n",e->num_ventanilla);
-  		
   		/*Comrobamos el caballo*/
-  		/*printf("Recibo apuesta %f de Apostador %ld por el caballo %d \n",mensaje.cuantia, mensaje.id,  mensaje.num_caballo);
-  		*/
+  		apostador = mensaje.id - 1;
   		if (Down_Semaforo(e->sem_id, 1, SEM_UNDO)==ERROR){
 			printf("Error al bajar el semaforo");
 		}
@@ -53,17 +52,19 @@ void* ventanilla(void* estructura){
 		if (Down_Semaforo(e->sem_id, 2, SEM_UNDO)==ERROR){
 			printf("Error al bajar el semaforo");
 		}
-		fprintf(e->f,"/ %ld         / %d          / %d       / %f / %f /\n",mensaje.id,e->num_ventanilla,mensaje.num_caballo,mem->cotizacion[mensaje.num_caballo],mensaje.cuantia);
+		f=fopen("Report.txt","a");
+		fprintf(f,"/ %d         / %d          / %d       / %f / %f /\n",apostador,e->num_ventanilla,mensaje.num_caballo,mem->cotizacion[mensaje.num_caballo],mensaje.cuantia);
+		fclose(f);
 		if (Up_Semaforo(e->sem_id, 2, SEM_UNDO)==ERROR){
 			printf("Error al subir el semaforo");
 		}
 
   		/*Asignamos ganancias*/
-  		mem->ganancias[mensaje.id]=mensaje.cuantia * mem->cotizacion[mensaje.num_caballo];
+  		mem->ganancias[apostador]=mensaje.cuantia * mem->cotizacion[mensaje.num_caballo];
 
   		/*Actualizamos  el dinero apostado por cada apostador y su eleccion*/
-  		mem->apuesta[mensaje.id] = mensaje.cuantia;
-  		mem->eleccion[mensaje.id] = mensaje.num_caballo;
+  		mem->apuesta[apostador] = mensaje.cuantia;
+  		mem->eleccion[apostador] = mensaje.num_caballo;
 
   		/*Actualizamos el dinero apostado por nuestro caballo*/
   		mem->caballo[mensaje.num_caballo] += mensaje.cuantia;
@@ -93,8 +94,8 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	FILE *f;
 
 	f=fopen("Report.txt","w");
-	fprintf(f,"/ Apostador / Ventanilla / Caballo / Cotizacion / Cantidad /\n");
-
+	fprintf(f,"Listado de apuestas realizadas:\n/ Apostador / Ventanilla / Caballo / Cotizacion / Cantidad /\n");
+	fclose(f);
 
 	mem = shmat (id_zone, (char *)0, 0);
 	e = (Estructura*)malloc(sizeof(Estructura));
@@ -145,14 +146,11 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	e->id_zone = id_zone;
 	e->sem_id = sem_id;
 	e->num_ventanilla = 0;
-	e->f=f;
 	
 	for (i=0;i<num_ventanillas;i++){
 		pthread_create(&hilos[i], NULL, ventanilla,(void *) e);
 		e->num_ventanilla++;
 	}
-
-	e->num_ventanilla=44;
 	
 	/*printf("Gestor esperando a ser finalizado\n");*/
 
@@ -160,7 +158,5 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
       pthread_join(hilos[i],NULL);
     }*/
     pause();
-    printf("Gestor terminado\n");
-
 	return;
 }

@@ -41,7 +41,7 @@ void monitor_antes(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	mem = shmat (id_zone, (MemComp *)0, 0);
 
 	printf("-----CUENTA ATRAS-----\n");
-	for (i=20;i>0;i--){
+	for (i=10;i>0;i--){
 		printf("La carrera empieza en %d\n",i);
 		sleep(1);
 
@@ -99,14 +99,15 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	}
 }
 
-void monitor_despues(int num_apostadores,int num_caballos,int max_distancia,int sem_id, int id_zone,int id_zone2){
+void monitor_despues(int max_dinero,int num_apostadores,int num_caballos,int max_distancia,int sem_id, int id_zone,int id_zone2){
 	/*Falta implementar el resultado de las apuestas*/
 	char *posicion;
 	int i,j=0, ganador=0, k;
 	MemComp *mem;
 	int ganadores[MAX],ganadores_ord[MAX];
 	double ganancias[MAX], ganancias_ordcopy[MAX], *ganancias_ord;
-	
+	FILE *f;
+	double ben, rest;
 
 	/* Obtenemos la memoria compartida */
 	posicion = shmat (id_zone, (char *)0, 0);
@@ -115,14 +116,24 @@ void monitor_despues(int num_apostadores,int num_caballos,int max_distancia,int 
 
 	printf("\n-----FINAL DE LA CARRERA-----\n");
 
-	/*Calculamos las posiciones finales*/
+	/*Calculamos las posiciones finales y las imprimimos en el report*/
 	printf("\n--Posiciones finales:\n");
 	if (Down_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 			printf("Error al bajar el semaforo");
 	}
+	if (Down_Semaforo(sem_id, 2, SEM_UNDO)==ERROR){
+			printf("Error al bajar el semaforo");
+	}
+	f=fopen("Report.txt","a");
+	fprintf(f,"\nResultado de la carrera:\n");
 	for (i=0; i<num_caballos; i++){
 		if (posicion[i]>posicion[ganador]) ganador=i;
 		printf("Posicion final del caballo %d = %d\n",i,posicion[i]);
+		fprintf(f,"Posicion final del caballo %d = %d\n",i,posicion[i]);			
+	}
+	fclose(f);	
+	if (Up_Semaforo(sem_id, 2, SEM_UNDO)==ERROR){
+			printf("Error al subir el semaforo");
 	}
 	if (Up_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 			printf("Error al subir el semaforo");
@@ -167,21 +178,45 @@ void monitor_despues(int num_apostadores,int num_caballos,int max_distancia,int 
 	for (i=0;i<j && i<10;i++){
 		printf("Puesto numero %d = Apostador %d con %f euros\n",i+1,ganadores_ord[i],ganancias_ord[i]);
 	}
-	if(i<10){
+	if(i==0){
+		printf("No hay ganadores\n");
+	}else if(i<10){
 		printf("No hay mas ganadores\n");
 	}else {
 		printf("Estos han sido los 10 primeros ganadores\n");
 	}
+
+	/*Imprimimos en el report el resultado de las apuestas*/
+	if (Down_Semaforo(sem_id, 2, SEM_UNDO)==ERROR){
+			printf("Error al bajar el semaforo");
+	}
+	f=fopen("Report.txt","a");
+	fprintf(f,"\nResultado de las apuestas:\n/ Nombre / Apuesta / Beneficios / Dinero Restante /\n");
+	for(i=0;i<num_apostadores;i++){
+		if(mem->apuesta[i]==0) break;
+		ben = 0 - mem->apuesta[i];
+		rest = max_dinero - mem->apuesta[i];
+		if(mem->eleccion[i]==ganador){
+			ben = mem->ganancias[i];
+			rest = max_dinero + mem->ganancias[i];
+		}
+		fprintf(f,"Apostador %d / %f / %f / %f /\n",i,mem->apuesta[i],ben,rest);
+	}
+
+	if (Up_Semaforo(sem_id, 2, SEM_UNDO)==ERROR){
+		printf("Error al bajar el semaforo");
+	}
+
+
 }
 
-void monitor(int num_apostadores,int num_caballos, int max_distancia, int sem_id,int id_zone, int id_zone2){
+void monitor(int max_dinero,int num_apostadores,int num_caballos, int max_distancia, int sem_id,int id_zone, int id_zone2){
 
 	/* Establecemos la semilla */
 	srand(time(NULL));
 
 	monitor_antes(num_caballos,max_distancia,sem_id,id_zone2);
 	monitor_durante(num_caballos,max_distancia,sem_id,id_zone);
-	monitor_despues(num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
-	printf("Monitor termina\n");
+	monitor_despues(max_dinero,num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
 	return;
 }

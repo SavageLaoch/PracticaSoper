@@ -136,17 +136,13 @@ int main(int argc, char *argv[]) {
 		printf("Error al subir el semaforo");
 	}
 
-	/*Creamos el fichero del report*/
-
-
-
   	/*Creamos al proceso monitor*/
 	monitor_id=fork();
 	if(monitor_id<0){
 		printf("Error al crear el fork\n");
 		exit(EXIT_SUCCESS);
 	}else if(monitor_id == 0){
-		monitor(num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
+		monitor(max_dinero,num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
 		exit(EXIT_SUCCESS);
 	}
 
@@ -208,7 +204,5 @@ int main(int argc, char *argv[]) {
 		printf("Error al borrar los semaforos\n");
 	}
 	
-	printf("Proceso carrera termina y borra semaforo\n");
-
 	exit(EXIT_SUCCESS);
 }
