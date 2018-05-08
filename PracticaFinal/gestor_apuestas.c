@@ -160,5 +160,6 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
     free(e);
     free(hilos);
     shmdt ((MemComp *)mem);
-	exit(EXIT_SUCCESS);
+
+	return;
 }

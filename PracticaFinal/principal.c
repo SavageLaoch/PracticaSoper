@@ -43,24 +43,7 @@ int main(int argc, char *argv[]) {
 		printf("Error en el manejador\n");
 	}
 
-  	/* Creamos las pipes */
-	pipes = (int**) malloc(sizeof(int*)*num_caballos);
-	if(pipes==NULL){
-		printf("Error al reservar memoria");
-		exit(EXIT_FAILURE);
-	}
-	for (i=0;i<num_caballos;i++){
-		pipes[i]=(int*)malloc(sizeof(int)*2);
-		if (pipes[i]==NULL){
-			printf("Error al reservar memoria");
-			exit(EXIT_FAILURE);
-		}
-		pipe_status=pipe(pipes[i]);
-		if (pipe_status==-1){
-			printf("Error al crear la tuberia %d",i);
-			exit(EXIT_FAILURE);
-		}
-	}
+ 
 
   	/* Creamos la cola de mensajes entre carrera y caballo*/
 	clave = ftok (FILEKEY, KEY);
@@ -149,6 +132,7 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_SUCCESS);
 	}else if(monitor_id == 0){
 		monitor(max_dinero,num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
+		free(array);
 		exit(EXIT_SUCCESS);
 	}
 
@@ -169,6 +153,7 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_SUCCESS);
 	}else if(gestor_id == 0){
 		gestor_apuestas(num_ventanillas,num_caballos,num_apostadores,msqid2,id_zone2,sem_id);
+		free(array);
 		exit(EXIT_SUCCESS);
 	}
 
@@ -178,6 +163,25 @@ int main(int argc, char *argv[]) {
 	/*Matamos al proceso apostador y al gestor porque ya no puede haber mas apuestas*/
 	kill(apostador_id,SIGUSR1);
 	kill(gestor_id,SIGUSR1);
+
+	/* Creamos las pipes */
+	pipes = (int**) malloc(sizeof(int*)*num_caballos);
+	if(pipes==NULL){
+		printf("Error al reservar memoria");
+		exit(EXIT_FAILURE);
+	}
+	for (i=0;i<num_caballos;i++){
+		pipes[i]=(int*)malloc(sizeof(int)*2);
+		if (pipes[i]==NULL){
+			printf("Error al reservar memoria");
+			exit(EXIT_FAILURE);
+		}
+		pipe_status=pipe(pipes[i]);
+		if (pipe_status==-1){
+			printf("Error al crear la tuberia %d",i);
+			exit(EXIT_FAILURE);
+		}
+	}
 
 	/*Hacemos la carrera*/
 	carrera(num_caballos,max_distancia,num_apostadores,num_ventanillas,max_dinero,pipes,msqid,sem_id,id_zone);
@@ -189,7 +193,7 @@ int main(int argc, char *argv[]) {
 	for (i=0;i<num_caballos;i++){
 		free(pipes[i]);
 	}
-	free(pipes);
+	free(pipes);	
 	free(array);
 
 	/* Eliminamos la cola de mensajes entre carrera y caballo*/
