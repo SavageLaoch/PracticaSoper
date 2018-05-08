@@ -35,10 +35,15 @@ void* ventanilla(void* estructura){
 	int i,tot;
 	FILE *f;
 	int apostador;
+	int ventanilla;
 
 	
 	e = (Estructura*)estructura;
-	mem = shmat (e->id_zone, (MemComp *)0, 0);
+	mem = shmat (e->id_zone, (struct _MemComp *)0, 0);
+	ventanilla = e->num_ventanilla;
+	if (Up_Semaforo(e->sem_id, 3, SEM_UNDO)==ERROR){
+		printf("Error al subir el semaforo ventanilla\n");
+	}
 
 	while(1){
 		/*Asumimos un mensaje*/
@@ -53,7 +58,7 @@ void* ventanilla(void* estructura){
 			printf("Error al bajar el semaforo");
 		}
 		f=fopen("Report.txt","a");
-		fprintf(f,"/ %d         / %d          / %d       / %f / %f /\n",apostador,e->num_ventanilla,mensaje.num_caballo,mem->cotizacion[mensaje.num_caballo],mensaje.cuantia);
+		fprintf(f,"/ %d         / %d          / %d       / %f / %f /\n",apostador,ventanilla,mensaje.num_caballo,mem->cotizacion[mensaje.num_caballo],mensaje.cuantia);
 		fclose(f);
 		if (Up_Semaforo(e->sem_id, 2, SEM_UNDO)==ERROR){
 			printf("Error al subir el semaforo");
@@ -83,7 +88,7 @@ void* ventanilla(void* estructura){
 		}
   	}
 
-	return 0;
+	return NULL;
 }
 
 void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,int msqid,int id_zone,int sem_id){
@@ -97,7 +102,7 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	fprintf(f,"Listado de apuestas realizadas:\n/ Apostador / Ventanilla / Caballo / Cotizacion / Cantidad /\n");
 	fclose(f);
 
-	mem = shmat (id_zone, (char *)0, 0);
+	mem = shmat (id_zone, (struct _MemComp *)0, 0);
 	e = (Estructura*)malloc(sizeof(Estructura));
 	hilos = (pthread_t*)malloc(sizeof(pthread_t) * num_ventanillas);
 
@@ -123,11 +128,6 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	for(i = 0; i < num_apostadores;i++){
 		mem->ganancias[i] = 0;
 	}
-	
-	/* Inicializamos el dinero apostado por cada apostador */
-	/*for(i = 0; i < num_apostadores;i++){
-		mem->apuesta[i] = 0;
-	}*/
 	/* Inicializamos a que caballo ha apostado cada apostador */
 	for(i = 0; i < num_apostadores;i++){
 		mem->eleccion[i] = -1;
@@ -149,14 +149,16 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	
 	for (i=0;i<num_ventanillas;i++){
 		pthread_create(&hilos[i], NULL, ventanilla,(void *) e);
+		if (Down_Semaforo(sem_id, 3, SEM_UNDO)==ERROR){
+			printf("Error al bajar el semaforo ventanilla\n");
+		}
 		e->num_ventanilla++;
 	}
-	
-	/*printf("Gestor esperando a ser finalizado\n");*/
-
-	/*for (i = 0; i < num_ventanillas; i++){
-      pthread_join(hilos[i],NULL);
-    }*/
+	/*Esperamos a que el proceso principal nos mate*/
     pause();
-	return;
+
+    free(e);
+    free(hilos);
+    shmdt ((MemComp *)mem);
+	exit(EXIT_SUCCESS);
 }

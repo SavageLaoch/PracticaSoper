@@ -38,7 +38,7 @@ void monitor_antes(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	int i,j;
 	MemComp *mem;
 
-	mem = shmat (id_zone, (MemComp *)0, 0);
+	mem = shmat (id_zone, (struct _MemComp *)0, 0);
 
 	printf("-----CUENTA ATRAS-----\n");
 	for (i=10;i>0;i--){
@@ -58,6 +58,7 @@ void monitor_antes(int num_caballos,int max_distancia,int sem_id,int id_zone){
 	}
 	printf("\n----------GO----------\n");
 	kill(getppid(),SIGUSR1);
+	shmdt ((MemComp *)mem);
 }
 
 void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
@@ -91,6 +92,8 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 			if (Up_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
 				printf("Error al subir el semaforo");
 			}
+			shmdt ((char *)posicion);
+			free(antes);
 			return;
 		}
 		if (Up_Semaforo(sem_id, 0, SEM_UNDO)==ERROR){
@@ -100,7 +103,6 @@ void monitor_durante(int num_caballos,int max_distancia,int sem_id,int id_zone){
 }
 
 void monitor_despues(int max_dinero,int num_apostadores,int num_caballos,int max_distancia,int sem_id, int id_zone,int id_zone2){
-	/*Falta implementar el resultado de las apuestas*/
 	char *posicion;
 	int i,j=0, ganador=0, k;
 	MemComp *mem;
@@ -111,7 +113,7 @@ void monitor_despues(int max_dinero,int num_apostadores,int num_caballos,int max
 
 	/* Obtenemos la memoria compartida */
 	posicion = shmat (id_zone, (char *)0, 0);
-	mem = shmat (id_zone2, (MemComp *)0, 0);
+	mem = shmat (id_zone2, (struct _MemComp *)0, 0);
 
 
 	printf("\n-----FINAL DE LA CARRERA-----\n");
@@ -207,16 +209,18 @@ void monitor_despues(int max_dinero,int num_apostadores,int num_caballos,int max
 		printf("Error al bajar el semaforo");
 	}
 
+	fclose(f);
+	shmdt ((char *)posicion);
+	shmdt ((MemComp *)mem);
+
 
 }
 
 void monitor(int max_dinero,int num_apostadores,int num_caballos, int max_distancia, int sem_id,int id_zone, int id_zone2){
 
-	/* Establecemos la semilla */
-	srand(time(NULL));
-
 	monitor_antes(num_caballos,max_distancia,sem_id,id_zone2);
 	monitor_durante(num_caballos,max_distancia,sem_id,id_zone);
 	monitor_despues(max_dinero,num_apostadores,num_caballos,max_distancia,sem_id,id_zone,id_zone2);
+	printf("MONITOR TERMINA\n");
 	return;
 }

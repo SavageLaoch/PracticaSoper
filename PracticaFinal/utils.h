@@ -37,7 +37,7 @@
 #define KEY2 1400
 #define KEY3 1500
 #define KEY4 1600
-#define SEMKEY 75798
+#define KEY5 1700
 #define FILEKEY "/bin/cat"
 
 int aleat_num(int inf, int sup);

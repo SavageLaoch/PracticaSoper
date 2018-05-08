@@ -115,10 +115,13 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 
 	/* Mandamos la señal de acabado a los caballos */
 	for (i = 0; i < num_caballos;i ++){
-		kill(pid[i],SIGUSR2);
+		kill(pid[i],SIGUSR1);
 		wait(NULL);
 	}
 
+	/*Liberamos memoria*/
+	free(siguiente_tirada);
+	shmdt ((char *)posicion);
 	return;
 
 }

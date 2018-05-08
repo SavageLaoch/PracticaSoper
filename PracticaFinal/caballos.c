@@ -30,11 +30,8 @@ void caballo(int pipe[2],int msqid){
 	/*printf("Funcion de caballo para el caballo %d\n",getpid());*/
 
 	/* Creamos los manejadores de funciones */
-	if(signal(SIGUSR1,retorno) == SIG_ERR){
+	if(signal(SIGUSR1,terminar) == SIG_ERR){
 		printf("Error en la señal\n");
-	}
-	if (signal(SIGUSR2,terminar) == SIG_ERR){
-		printf("Error segundo manejador\n");
 	}
 
 	/* Establecemos la semilla */

@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 	int monitor_id, apostador_id, gestor_id;
 	int **pipes;
 	int pipe_status;
-	int clave, msqid, clave2, msqid2;
+	int clave, msqid, clave2, msqid2, semkey;
 	int key, id_zone, key2, id_zone2;
 	int sem_id,i;
 	unsigned short *array;
@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
  		fprintf (stderr, "Error with key \n");
  		exit(EXIT_FAILURE);
  	}
- 	id_zone = shmget (key, sizeof(char)*MAXBUFFER, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
+ 	id_zone = shmget (key, sizeof(int)*2*num_caballos, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
  	if (id_zone == -1) {
  		fprintf (stderr, "Error with id_zone \n");
  		exit(EXIT_FAILURE);
@@ -112,11 +112,17 @@ int main(int argc, char *argv[]) {
  	}
 
  	/*Creamos e inicializamos los semaforos*/
- 	array = (unsigned short *)malloc(sizeof(unsigned short)*3);
+ 	semkey = ftok(FILEKEY, KEY5);
+ 	if (semkey == -1) {
+ 		fprintf (stderr, "Error with key \n");
+ 		exit(EXIT_FAILURE);
+ 	}
+ 	array = (unsigned short *)malloc(sizeof(unsigned short)*4);
  	array[0]=1;
  	array[1]=1;
  	array[2]=1;
- 	if (Crear_Semaforo(SEMKEY, 3, &sem_id)==ERROR){
+ 	array[3]=0;
+ 	if (Crear_Semaforo(semkey, 4, &sem_id)==ERROR){
 		printf("Error al crear el semaforo\n");
 		exit(EXIT_FAILURE);
 	}	
@@ -176,8 +182,8 @@ int main(int argc, char *argv[]) {
 	/*Hacemos la carrera*/
 	carrera(num_caballos,max_distancia,num_apostadores,num_ventanillas,max_dinero,pipes,msqid,sem_id,id_zone);
 
-	/*Liberamos todo*/
-	
+	/*Esperamos al monitor*/
+	wait(NULL);	
 
 	/*Liberamos memoria*/
 	for (i=0;i<num_caballos;i++){
@@ -203,6 +209,7 @@ int main(int argc, char *argv[]) {
 	if (Borrar_Semaforo(sem_id)==ERROR) {
 		printf("Error al borrar los semaforos\n");
 	}
-	
+
+	printf("PROCESO PRINCIPAL ACABA\n");	
 	exit(EXIT_SUCCESS);
 }
