@@ -1,10 +1,25 @@
 #include "utils.h"
 
+/**
+ * @brief Caballos
+ *
+ * @file caballos.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
 	int tirada; /*Informacion a transmitir en el mensaje*/
 }Mensaje;
 
+/**
+ * @brief dado
+ *
+ * Genera un numero aleatorio teniendo en cuenta el modo.
+ *
+ * @param modo Modo de tirada
+ * @return int numero aleatorio
+ */
 int dado(int modo){
 	if (modo == GANADORA){
 		return aleat_num(1,7);
@@ -14,6 +29,14 @@ int dado(int modo){
 	return aleat_num(1,6);
 }
 
+/**
+ * @brief avanzar_caballo
+ *
+ * Devuelve una tirada segun la posicion actual del caballo
+ *
+ * @param posicion Posicion actual del caballo
+ * @return int Tirada del caballo
+ */
 int avanzar_caballo(int posicion){
 	if(posicion == PRIMERO){
 		return dado(GANADORA);
@@ -23,6 +46,12 @@ int avanzar_caballo(int posicion){
 	return dado(NORMAL);
 }
 
+/**
+ * @brief caballo
+ *
+ * Proceso caballo.
+ *
+ */
 void caballo(int pipe[2],int msqid){
 	char buffer[MAXBUFFER];
 	int posicion, tirada;

@@ -1,5 +1,12 @@
 #include "utils.h"
 
+/**
+ * @brief Apostador
+ *
+ * @file apostador.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 typedef struct _Mensaje{
   long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
   char nombre_apostador[MAXCHAR]; /*Nombre del apostador*/
@@ -7,6 +14,12 @@ typedef struct _Mensaje{
   double cuantia; /*Cuantia de la apuesta*/
 }Mensaje;
 
+/**
+ * @brief apostador
+ *
+ * Proceso apostador. Genera una apuesta cada segundo.
+ *
+ */
 void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
   Mensaje mensaje;
   char nombre_apostador[MAXCHAR];
@@ -22,6 +35,9 @@ void apostador(int num_apostadores,int num_caballos,int max_dinero,int msqid){
     puts("Error en la captura");
     exit (EXIT_FAILURE);
   }
+
+  syslog (LOG_NOTICE, "Soy el proceso apostador");
+  closelog();
 
   /* Creamos el bucle de los apostadores */
   for(i = 1; i <= num_apostadores; i++){

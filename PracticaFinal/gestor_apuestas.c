@@ -1,5 +1,12 @@
 #include "utils.h"
 
+/**
+ * @brief Gestor de apuestas
+ *
+ * @file gestor_apuestas.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
  	char nombre_apuesta[MAXCHAR]; /*Nombre del apostador*/
@@ -24,10 +31,13 @@ typedef struct _Estructura{
 	int num_ventanilla;
 }Estructura;
 
-void terminaryliberar(int sig){
-	exit(EXIT_SUCCESS);
-}
-
+/**
+ * @brief ventanilla
+ *
+ * Funcion que hacen los thread ventanilla
+ *
+ * @param estructura Estructura con la informacion que va a necesitar la ventanilla
+ */
 void* ventanilla(void* estructura){
 	Estructura *e;
 	MemComp *mem;
@@ -41,6 +51,8 @@ void* ventanilla(void* estructura){
 	e = (Estructura*)estructura;
 	mem = shmat (e->id_zone, (struct _MemComp *)0, 0);
 	ventanilla = e->num_ventanilla;
+	syslog (LOG_NOTICE, "Soy la ventanilla %d",ventanilla);
+	closelog();
 	if (Up_Semaforo(e->sem_id, 3, SEM_UNDO)==ERROR){
 		printf("Error al subir el semaforo ventanilla\n");
 	}
@@ -91,6 +103,12 @@ void* ventanilla(void* estructura){
 	return NULL;
 }
 
+/**
+ * @brief gestor_apuestas
+ *
+ * Proceso gestor de apuestas
+ *
+ */
 void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,int msqid,int id_zone,int sem_id){
 	int i;
 	Estructura *e;
@@ -112,6 +130,7 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 		exit (EXIT_FAILURE);
 	}
 
+	syslog (LOG_NOTICE, "Soy el gestor de apuestas");
 	
 	if (Down_Semaforo(sem_id, 1, SEM_UNDO)==ERROR){
 		printf("Error al bajar el semaforo");
@@ -147,6 +166,7 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	e->sem_id = sem_id;
 	e->num_ventanilla = 0;
 	
+	syslog (LOG_NOTICE, "Creo ventanillas");
 	for (i=0;i<num_ventanillas;i++){
 		pthread_create(&hilos[i], NULL, ventanilla,(void *) e);
 		if (Down_Semaforo(sem_id, 3, SEM_UNDO)==ERROR){
@@ -156,7 +176,8 @@ void gestor_apuestas(int num_ventanillas,int num_caballos,int num_apostadores,in
 	}
 	/*Esperamos a que el proceso principal nos mate*/
     pause();
-
+    syslog (LOG_NOTICE, "Proceso gestor termina");
+    closelog();
     free(e);
     free(hilos);
     shmdt ((MemComp *)mem);

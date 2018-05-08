@@ -1,10 +1,23 @@
 #include "utils.h"
 
+/**
+ * @brief Carrera
+ *
+ * @file carrera.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 typedef struct _Mensaje{
 	long id; /*Campo obligatorio a long que identifica el tipo de mensaje*/
 	int tirada; /*Informacion a transmitir en el mensaje*/
 }Mensaje;
 
+/**
+ * @brief carrera
+ *
+ * Funcion que lleva a cabo la carrera de caballos
+ *
+ */
 void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_ventanillas,int max_dinero,int **pipes,int msqid, int sem_id,int id_zone){
 	
 
@@ -16,7 +29,7 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 	int *siguiente_tirada;
 	int max,min;
 
-	char *posicion;
+	long *posicion;
 
 	Mensaje mensaje;
 
@@ -45,9 +58,9 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 			pid[i]=f;
 		}
 	}
-	sleep(1);
+	
 
-  	/* Creamos el proceso principal */
+  	/* Proceso principal */
 	while(!flag){		
 
     	/* Enviamos la siguiente tirada */
@@ -56,7 +69,6 @@ void carrera(int num_caballos,int max_distancia,int num_apostadores,int num_vent
 			sprintf(tirada,"%d",siguiente_tirada[i]);
 			close(pipes[i][0]);
 			write(pipes[i][1],tirada,strlen(tirada)+1);
-			/*kill(pid[i],SIGUSR1);*/
 		}
 
    		/* Leemos los mensajes */

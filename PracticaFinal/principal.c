@@ -1,5 +1,12 @@
 #include "utils.h"
 
+/**
+ * @brief Principal
+ *
+ * @file principal.c
+ * @author Miguel Angel Sanchez y Juan Velasco
+ */
+
 typedef struct _MemComp{
 	double cotizacion[MAX];
 	double apuesta[MAX];
@@ -8,6 +15,12 @@ typedef struct _MemComp{
 	double ganancias[MAX];
 }MemComp;
 
+/**
+ * @brief Main
+ *
+ * Main principal que genera todos los procesos
+ * 
+ */
 int main(int argc, char *argv[]) {
 	int num_caballos, max_distancia, num_apostadores, num_ventanillas, max_dinero;
 	int monitor_id, apostador_id, gestor_id;
@@ -19,8 +32,9 @@ int main(int argc, char *argv[]) {
 	unsigned short *array;
 	char *posicion;
 
-	/*Semilla para los numeros aleatorios*/
-	srand(time(NULL));
+	if(signal(SIGUSR1,retorno) == SIG_ERR){
+		printf("Error en la señal\n");
+	}
 
 	if (argc<6){
 		printf("Error en los parametros\n");
@@ -34,7 +48,30 @@ int main(int argc, char *argv[]) {
 	num_ventanillas = atoi(argv[4]);
 	max_dinero = atoi(argv[5]);
 
+	/*Comprobamos los parametros de entrada*/
+	if (num_caballos<1){
+		printf("No hay suficientes caballos\n");
+		exit(EXIT_FAILURE);
+	}
+	if (num_ventanillas<1){
+		printf("No hay suficientes ventanillas\n");
+		exit(EXIT_FAILURE);
+	}
+	if (max_distancia<0){
+		printf("La distancia no es valida\n");
+		exit(EXIT_FAILURE);
+	}
+	if (max_dinero<0){
+		printf("El maximo de dinero de los apostadores es negativo\n");
+		exit(EXIT_FAILURE);
+	}
 
+	/*syslog*/
+	setlogmask (LOG_UPTO (LOG_NOTICE));
+	openlog ("syslogproyecto", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
+	syslog (LOG_NOTICE, "Comienza el programa");
+
+	
 	/* Establecemos la semilla */
 	srand(time(NULL));
 
@@ -135,6 +172,7 @@ int main(int argc, char *argv[]) {
 		free(array);
 		exit(EXIT_SUCCESS);
 	}
+	syslog (LOG_NOTICE, "Proceso monitor creado");
 
 	/*Creamos al proceso apostador*/
 	apostador_id=fork();
@@ -145,6 +183,7 @@ int main(int argc, char *argv[]) {
 		apostador(num_apostadores,num_caballos,max_dinero,msqid2);
 		exit(EXIT_SUCCESS);
 	}
+	syslog (LOG_NOTICE, "Proceso apostador creado");
 
 	/*Creamos al proceso gestor de apuestas*/
 	gestor_id=fork();
@@ -156,6 +195,7 @@ int main(int argc, char *argv[]) {
 		free(array);
 		exit(EXIT_SUCCESS);
 	}
+	syslog (LOG_NOTICE, "Proceso gestor creado");
 
 	/*Esperamos a que empiece la carrera (la cuenta la lleva el monitor)*/
 	pause();
@@ -163,6 +203,7 @@ int main(int argc, char *argv[]) {
 	/*Matamos al proceso apostador y al gestor porque ya no puede haber mas apuestas*/
 	kill(apostador_id,SIGUSR1);
 	kill(gestor_id,SIGUSR1);
+	syslog (LOG_NOTICE, "Apostador y gestor terminados");
 
 	/* Creamos las pipes */
 	pipes = (int**) malloc(sizeof(int*)*num_caballos);
@@ -184,11 +225,13 @@ int main(int argc, char *argv[]) {
 	}
 
 	/*Hacemos la carrera*/
+	syslog (LOG_NOTICE, "Comienza la carrera");
 	carrera(num_caballos,max_distancia,num_apostadores,num_ventanillas,max_dinero,pipes,msqid,sem_id,id_zone);
 
 	/*Esperamos al monitor*/
-	wait(NULL);	
+	pause();
 
+	syslog (LOG_NOTICE, "Vamos a liberar la memoria");
 	/*Liberamos memoria*/
 	for (i=0;i<num_caballos;i++){
 		free(pipes[i]);
@@ -214,6 +257,9 @@ int main(int argc, char *argv[]) {
 		printf("Error al borrar los semaforos\n");
 	}
 
-	printf("PROCESO PRINCIPAL ACABA\n");	
+	/*Cierro el syslog*/
+	syslog (LOG_NOTICE, "Proceso principal termina");
+	closelog ();
+	
 	exit(EXIT_SUCCESS);
 }

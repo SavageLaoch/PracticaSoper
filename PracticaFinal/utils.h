@@ -23,6 +23,7 @@
 #include <time.h>
 #include <sys/wait.h>
 #include <pthread.h>
+#include <syslog.h>
 
 #define NORMAL 0
 #define REMONTADORA 1
@@ -32,6 +33,7 @@
 #define MAXBUFFER 100
 #define MAXCHAR 20
 #define MAX 100
+#define TIEMPO 30
 
 #define KEY 1300
 #define KEY2 1400
