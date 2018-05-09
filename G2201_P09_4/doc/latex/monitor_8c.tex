@@ -1,0 +1,140 @@
+\hypertarget{monitor_8c}{}\section{monitor.\+c File Reference}
+\label{monitor_8c}\index{monitor.\+c@{monitor.\+c}}
+
+
+Monitor.  
+
+
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\\*
+Include dependency graph for monitor.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__Mensaje}{\+\_\+\+Mensaje}
+\item 
+struct \hyperlink{struct__MemComp}{\+\_\+\+Mem\+Comp}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct__Mensaje}{\+\_\+\+Mensaje} {\bfseries Mensaje}\hypertarget{monitor_8c_ac9eb91a1db0d6e2db7dd497753db7c6b}{}\label{monitor_8c_ac9eb91a1db0d6e2db7dd497753db7c6b}
+
+\item 
+typedef struct \hyperlink{struct__MemComp}{\+\_\+\+Mem\+Comp} {\bfseries Mem\+Comp}\hypertarget{monitor_8c_a0eacaf40a6a20a80cb4947a8ca13fab7}{}\label{monitor_8c_a0eacaf40a6a20a80cb4947a8ca13fab7}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$ \hyperlink{monitor_8c_afde0a8bc630298adb96ab4fa7ff12814}{Bubble\+Sort} (double $\ast$tabla, int ip, int iu)
+\begin{DoxyCompactList}\small\item\em Bubble\+Sort. \end{DoxyCompactList}\item 
+void \hyperlink{monitor_8c_aa37d1db7160f06eb443ee4e108cc2d8b}{monitor\+\_\+antes} (int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone)
+\begin{DoxyCompactList}\small\item\em monitor\+\_\+antes \end{DoxyCompactList}\item 
+void \hyperlink{monitor_8c_ae2c7c9dbd5ea9a629fd0174a39ace169}{monitor\+\_\+durante} (int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone)
+\begin{DoxyCompactList}\small\item\em monitor\+\_\+durante \end{DoxyCompactList}\item 
+void \hyperlink{monitor_8c_a6a1066145b6564de24f12f499c747b36}{monitor\+\_\+despues} (int max\+\_\+dinero, int num\+\_\+apostadores, int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone, int id\+\_\+zone2)
+\begin{DoxyCompactList}\small\item\em monitor\+\_\+despues \end{DoxyCompactList}\item 
+void \hyperlink{monitor_8c_ac33ad7cfdcd6b75d1f881bf84b508b38}{monitor} (int max\+\_\+dinero, int num\+\_\+apostadores, int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone, int id\+\_\+zone2)
+\begin{DoxyCompactList}\small\item\em monitor \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Monitor. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{monitor.\+c@{monitor.\+c}!Bubble\+Sort@{Bubble\+Sort}}
+\index{Bubble\+Sort@{Bubble\+Sort}!monitor.\+c@{monitor.\+c}}
+\subsubsection[{\texorpdfstring{Bubble\+Sort(double $\ast$tabla, int ip, int iu)}{BubbleSort(double *tabla, int ip, int iu)}}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ Bubble\+Sort (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{tabla, }
+\item[{int}]{ip, }
+\item[{int}]{iu}
+\end{DoxyParamCaption}
+)}\hypertarget{monitor_8c_afde0a8bc630298adb96ab4fa7ff12814}{}\label{monitor_8c_afde0a8bc630298adb96ab4fa7ff12814}
+
+
+Bubble\+Sort. 
+
+Funcion que ordena una tabla de mayor a menor
+
+
+\begin{DoxyParams}{Parameters}
+{\em tabla} & Tabla a ordenar \\
+\hline
+{\em ip} & Primer elemento de la tabla \\
+\hline
+{\em iu} & Ultimo elemento de la tabla \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double$\ast$ Tabla ordenada 
+\end{DoxyReturn}
+\index{monitor.\+c@{monitor.\+c}!monitor@{monitor}}
+\index{monitor@{monitor}!monitor.\+c@{monitor.\+c}}
+\subsubsection[{\texorpdfstring{monitor(int max\+\_\+dinero, int num\+\_\+apostadores, int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone, int id\+\_\+zone2)}{monitor(int max_dinero, int num_apostadores, int num_caballos, int max_distancia, int sem_id, int id_zone, int id_zone2)}}]{\setlength{\rightskip}{0pt plus 5cm}void monitor (
+\begin{DoxyParamCaption}
+\item[{int}]{max\+\_\+dinero, }
+\item[{int}]{num\+\_\+apostadores, }
+\item[{int}]{num\+\_\+caballos, }
+\item[{int}]{max\+\_\+distancia, }
+\item[{int}]{sem\+\_\+id, }
+\item[{int}]{id\+\_\+zone, }
+\item[{int}]{id\+\_\+zone2}
+\end{DoxyParamCaption}
+)}\hypertarget{monitor_8c_ac33ad7cfdcd6b75d1f881bf84b508b38}{}\label{monitor_8c_ac33ad7cfdcd6b75d1f881bf84b508b38}
+
+
+monitor 
+
+Proceso monitor. \index{monitor.\+c@{monitor.\+c}!monitor\+\_\+antes@{monitor\+\_\+antes}}
+\index{monitor\+\_\+antes@{monitor\+\_\+antes}!monitor.\+c@{monitor.\+c}}
+\subsubsection[{\texorpdfstring{monitor\+\_\+antes(int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone)}{monitor_antes(int num_caballos, int max_distancia, int sem_id, int id_zone)}}]{\setlength{\rightskip}{0pt plus 5cm}void monitor\+\_\+antes (
+\begin{DoxyParamCaption}
+\item[{int}]{num\+\_\+caballos, }
+\item[{int}]{max\+\_\+distancia, }
+\item[{int}]{sem\+\_\+id, }
+\item[{int}]{id\+\_\+zone}
+\end{DoxyParamCaption}
+)}\hypertarget{monitor_8c_aa37d1db7160f06eb443ee4e108cc2d8b}{}\label{monitor_8c_aa37d1db7160f06eb443ee4e108cc2d8b}
+
+
+monitor\+\_\+antes 
+
+Funcion del monitor antes de la carrera \index{monitor.\+c@{monitor.\+c}!monitor\+\_\+despues@{monitor\+\_\+despues}}
+\index{monitor\+\_\+despues@{monitor\+\_\+despues}!monitor.\+c@{monitor.\+c}}
+\subsubsection[{\texorpdfstring{monitor\+\_\+despues(int max\+\_\+dinero, int num\+\_\+apostadores, int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone, int id\+\_\+zone2)}{monitor_despues(int max_dinero, int num_apostadores, int num_caballos, int max_distancia, int sem_id, int id_zone, int id_zone2)}}]{\setlength{\rightskip}{0pt plus 5cm}void monitor\+\_\+despues (
+\begin{DoxyParamCaption}
+\item[{int}]{max\+\_\+dinero, }
+\item[{int}]{num\+\_\+apostadores, }
+\item[{int}]{num\+\_\+caballos, }
+\item[{int}]{max\+\_\+distancia, }
+\item[{int}]{sem\+\_\+id, }
+\item[{int}]{id\+\_\+zone, }
+\item[{int}]{id\+\_\+zone2}
+\end{DoxyParamCaption}
+)}\hypertarget{monitor_8c_a6a1066145b6564de24f12f499c747b36}{}\label{monitor_8c_a6a1066145b6564de24f12f499c747b36}
+
+
+monitor\+\_\+despues 
+
+Funcion del monitor despues de la carrera \index{monitor.\+c@{monitor.\+c}!monitor\+\_\+durante@{monitor\+\_\+durante}}
+\index{monitor\+\_\+durante@{monitor\+\_\+durante}!monitor.\+c@{monitor.\+c}}
+\subsubsection[{\texorpdfstring{monitor\+\_\+durante(int num\+\_\+caballos, int max\+\_\+distancia, int sem\+\_\+id, int id\+\_\+zone)}{monitor_durante(int num_caballos, int max_distancia, int sem_id, int id_zone)}}]{\setlength{\rightskip}{0pt plus 5cm}void monitor\+\_\+durante (
+\begin{DoxyParamCaption}
+\item[{int}]{num\+\_\+caballos, }
+\item[{int}]{max\+\_\+distancia, }
+\item[{int}]{sem\+\_\+id, }
+\item[{int}]{id\+\_\+zone}
+\end{DoxyParamCaption}
+)}\hypertarget{monitor_8c_ae2c7c9dbd5ea9a629fd0174a39ace169}{}\label{monitor_8c_ae2c7c9dbd5ea9a629fd0174a39ace169}
+
+
+monitor\+\_\+durante 
+
+Funcion del monitor durante la carrera 

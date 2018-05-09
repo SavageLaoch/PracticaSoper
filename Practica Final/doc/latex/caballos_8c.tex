@@ -1,0 +1,95 @@
+\hypertarget{caballos_8c}{}\section{caballos.\+c File Reference}
+\label{caballos_8c}\index{caballos.\+c@{caballos.\+c}}
+
+
+Caballos.  
+
+
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\\*
+Include dependency graph for caballos.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__Mensaje}{\+\_\+\+Mensaje}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct__Mensaje}{\+\_\+\+Mensaje} {\bfseries Mensaje}\hypertarget{caballos_8c_ac9eb91a1db0d6e2db7dd497753db7c6b}{}\label{caballos_8c_ac9eb91a1db0d6e2db7dd497753db7c6b}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{caballos_8c_a62c7df3f163729d7c1310b2eb90212f5}{dado} (int modo)
+\begin{DoxyCompactList}\small\item\em dado \end{DoxyCompactList}\item 
+int \hyperlink{caballos_8c_ae08aca4dce76d2968072ac8845c8a54d}{avanzar\+\_\+caballo} (int posicion)
+\begin{DoxyCompactList}\small\item\em avanzar\+\_\+caballo \end{DoxyCompactList}\item 
+void \hyperlink{caballos_8c_aee3c421c21c50ae6923c56d630103bd2}{caballo} (int pipe\mbox{[}2\mbox{]}, int msqid)
+\begin{DoxyCompactList}\small\item\em caballo \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Caballos. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{caballos.\+c@{caballos.\+c}!avanzar\+\_\+caballo@{avanzar\+\_\+caballo}}
+\index{avanzar\+\_\+caballo@{avanzar\+\_\+caballo}!caballos.\+c@{caballos.\+c}}
+\subsubsection[{\texorpdfstring{avanzar\+\_\+caballo(int posicion)}{avanzar_caballo(int posicion)}}]{\setlength{\rightskip}{0pt plus 5cm}int avanzar\+\_\+caballo (
+\begin{DoxyParamCaption}
+\item[{int}]{posicion}
+\end{DoxyParamCaption}
+)}\hypertarget{caballos_8c_ae08aca4dce76d2968072ac8845c8a54d}{}\label{caballos_8c_ae08aca4dce76d2968072ac8845c8a54d}
+
+
+avanzar\+\_\+caballo 
+
+Devuelve una tirada segun la posicion actual del caballo
+
+
+\begin{DoxyParams}{Parameters}
+{\em posicion} & Posicion actual del caballo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Tirada del caballo 
+\end{DoxyReturn}
+\index{caballos.\+c@{caballos.\+c}!caballo@{caballo}}
+\index{caballo@{caballo}!caballos.\+c@{caballos.\+c}}
+\subsubsection[{\texorpdfstring{caballo(int pipe[2], int msqid)}{caballo(int pipe[2], int msqid)}}]{\setlength{\rightskip}{0pt plus 5cm}void caballo (
+\begin{DoxyParamCaption}
+\item[{int}]{pipe\mbox{[}2\mbox{]}, }
+\item[{int}]{msqid}
+\end{DoxyParamCaption}
+)}\hypertarget{caballos_8c_aee3c421c21c50ae6923c56d630103bd2}{}\label{caballos_8c_aee3c421c21c50ae6923c56d630103bd2}
+
+
+caballo 
+
+Proceso caballo. \index{caballos.\+c@{caballos.\+c}!dado@{dado}}
+\index{dado@{dado}!caballos.\+c@{caballos.\+c}}
+\subsubsection[{\texorpdfstring{dado(int modo)}{dado(int modo)}}]{\setlength{\rightskip}{0pt plus 5cm}int dado (
+\begin{DoxyParamCaption}
+\item[{int}]{modo}
+\end{DoxyParamCaption}
+)}\hypertarget{caballos_8c_a62c7df3f163729d7c1310b2eb90212f5}{}\label{caballos_8c_a62c7df3f163729d7c1310b2eb90212f5}
+
+
+dado 
+
+Genera un numero aleatorio teniendo en cuenta el modo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em modo} & Modo de tirada \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int numero aleatorio 
+\end{DoxyReturn}

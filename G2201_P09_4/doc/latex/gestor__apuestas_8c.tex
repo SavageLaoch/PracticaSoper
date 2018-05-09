@@ -1,0 +1,83 @@
+\hypertarget{gestor__apuestas_8c}{}\section{gestor\+\_\+apuestas.\+c File Reference}
+\label{gestor__apuestas_8c}\index{gestor\+\_\+apuestas.\+c@{gestor\+\_\+apuestas.\+c}}
+
+
+Gestor de apuestas.  
+
+
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\\*
+Include dependency graph for gestor\+\_\+apuestas.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__Mensaje}{\+\_\+\+Mensaje}
+\item 
+struct \hyperlink{struct__MemComp}{\+\_\+\+Mem\+Comp}
+\item 
+struct \hyperlink{struct__Estructura}{\+\_\+\+Estructura}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct__Mensaje}{\+\_\+\+Mensaje} {\bfseries Mensaje}\hypertarget{gestor__apuestas_8c_ac9eb91a1db0d6e2db7dd497753db7c6b}{}\label{gestor__apuestas_8c_ac9eb91a1db0d6e2db7dd497753db7c6b}
+
+\item 
+typedef struct \hyperlink{struct__MemComp}{\+\_\+\+Mem\+Comp} {\bfseries Mem\+Comp}\hypertarget{gestor__apuestas_8c_a0eacaf40a6a20a80cb4947a8ca13fab7}{}\label{gestor__apuestas_8c_a0eacaf40a6a20a80cb4947a8ca13fab7}
+
+\item 
+typedef struct \hyperlink{struct__Estructura}{\+\_\+\+Estructura} {\bfseries Estructura}\hypertarget{gestor__apuestas_8c_a1784ecaa6952782e8d25940829f26f2a}{}\label{gestor__apuestas_8c_a1784ecaa6952782e8d25940829f26f2a}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{gestor__apuestas_8c_a619cd77af45176fcd6d079acac529dfb}{ventanilla} (void $\ast$estructura)
+\begin{DoxyCompactList}\small\item\em ventanilla \end{DoxyCompactList}\item 
+void \hyperlink{gestor__apuestas_8c_a6a9b55a423bec0b3b99bbcbc76077a14}{gestor\+\_\+apuestas} (int num\+\_\+ventanillas, int num\+\_\+caballos, int num\+\_\+apostadores, int msqid, int id\+\_\+zone, int sem\+\_\+id)
+\begin{DoxyCompactList}\small\item\em gestor\+\_\+apuestas \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestor de apuestas. 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{gestor\+\_\+apuestas.\+c@{gestor\+\_\+apuestas.\+c}!gestor\+\_\+apuestas@{gestor\+\_\+apuestas}}
+\index{gestor\+\_\+apuestas@{gestor\+\_\+apuestas}!gestor\+\_\+apuestas.\+c@{gestor\+\_\+apuestas.\+c}}
+\subsubsection[{\texorpdfstring{gestor\+\_\+apuestas(int num\+\_\+ventanillas, int num\+\_\+caballos, int num\+\_\+apostadores, int msqid, int id\+\_\+zone, int sem\+\_\+id)}{gestor_apuestas(int num_ventanillas, int num_caballos, int num_apostadores, int msqid, int id_zone, int sem_id)}}]{\setlength{\rightskip}{0pt plus 5cm}void gestor\+\_\+apuestas (
+\begin{DoxyParamCaption}
+\item[{int}]{num\+\_\+ventanillas, }
+\item[{int}]{num\+\_\+caballos, }
+\item[{int}]{num\+\_\+apostadores, }
+\item[{int}]{msqid, }
+\item[{int}]{id\+\_\+zone, }
+\item[{int}]{sem\+\_\+id}
+\end{DoxyParamCaption}
+)}\hypertarget{gestor__apuestas_8c_a6a9b55a423bec0b3b99bbcbc76077a14}{}\label{gestor__apuestas_8c_a6a9b55a423bec0b3b99bbcbc76077a14}
+
+
+gestor\+\_\+apuestas 
+
+Proceso gestor de apuestas \index{gestor\+\_\+apuestas.\+c@{gestor\+\_\+apuestas.\+c}!ventanilla@{ventanilla}}
+\index{ventanilla@{ventanilla}!gestor\+\_\+apuestas.\+c@{gestor\+\_\+apuestas.\+c}}
+\subsubsection[{\texorpdfstring{ventanilla(void $\ast$estructura)}{ventanilla(void *estructura)}}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ ventanilla (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{estructura}
+\end{DoxyParamCaption}
+)}\hypertarget{gestor__apuestas_8c_a619cd77af45176fcd6d079acac529dfb}{}\label{gestor__apuestas_8c_a619cd77af45176fcd6d079acac529dfb}
+
+
+ventanilla 
+
+Funcion que hacen los thread ventanilla
+
+
+\begin{DoxyParams}{Parameters}
+{\em estructura} & Estructura con la informacion que va a necesitar la ventanilla \\
+\hline
+\end{DoxyParams}

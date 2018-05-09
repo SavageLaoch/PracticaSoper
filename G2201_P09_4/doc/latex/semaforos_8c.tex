@@ -1,0 +1,224 @@
+\hypertarget{semaforos_8c}{}\section{semaforos.\+c File Reference}
+\label{semaforos_8c}\index{semaforos.\+c@{semaforos.\+c}}
+
+
+\hyperlink{semaforos_8c}{semaforos.\+c} nuestra propia libreria de semaforos  
+
+
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\\*
+Include dependency graph for semaforos.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{unionsemun}{semun}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{semaforos_8c_a4af104b0ed37e6ae0289a1059bc6e990}{Inicializar\+\_\+\+Semaforo} (int semid, unsigned short $\ast$array)
+\begin{DoxyCompactList}\small\item\em Funcion Inicializar\+\_\+\+Semaforo. \end{DoxyCompactList}\item 
+int \hyperlink{semaforos_8c_a731339337960a681efa435a10f12c312}{Borrar\+\_\+\+Semaforo} (int semid)
+\begin{DoxyCompactList}\small\item\em Borrar\+\_\+\+Semaforo. \end{DoxyCompactList}\item 
+int \hyperlink{semaforos_8c_a16b16dd895b5f4cbe48f1ac8977e8b35}{Crear\+\_\+\+Semaforo} (key\+\_\+t key, int size, int $\ast$semid)
+\begin{DoxyCompactList}\small\item\em Crear\+\_\+\+Semaforo. \end{DoxyCompactList}\item 
+int \hyperlink{semaforos_8c_a883244cd3b83c42cda23687da1b63369}{Down\+\_\+\+Semaforo} (int id, int num\+\_\+sem, int undo)
+\begin{DoxyCompactList}\small\item\em Down\+\_\+\+Semaforo. \end{DoxyCompactList}\item 
+int \hyperlink{semaforos_8c_ab375ebfc38acbdced46e062a689d5fad}{Down\+Multiple\+\_\+\+Semaforo} (int id, int size, int undo, int $\ast$active)
+\begin{DoxyCompactList}\small\item\em Down\+Multiple\+\_\+\+Semaforo. \end{DoxyCompactList}\item 
+int \hyperlink{semaforos_8c_a2d5e735aecee4f493898b3d4ebab1a10}{Up\+\_\+\+Semaforo} (int id, int num\+\_\+sem, int undo)
+\begin{DoxyCompactList}\small\item\em Up\+\_\+\+Semaforo. \end{DoxyCompactList}\item 
+int \hyperlink{semaforos_8c_a943759695f018d64a94b8a2c49308092}{Up\+Multiple\+\_\+\+Semaforo} (int id, int size, int undo, int $\ast$active)
+\begin{DoxyCompactList}\small\item\em Up\+Multiple\+\_\+\+Semaforo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{unionsemun}{semun} {\bfseries arg}\hypertarget{semaforos_8c_a7c4d098a46a7276dc49238b0590c594a}{}\label{semaforos_8c_a7c4d098a46a7276dc49238b0590c594a}
+
+\item 
+int {\bfseries n\+\_\+sems}\hypertarget{semaforos_8c_a36dc46e7782d1e9f3553323d89c6dfd9}{}\label{semaforos_8c_a36dc46e7782d1e9f3553323d89c6dfd9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{semaforos_8c}{semaforos.\+c} nuestra propia libreria de semaforos 
+
+\begin{DoxyAuthor}{Author}
+Miguel Angel Sanchez y Juan Velasco 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{semaforos.\+c@{semaforos.\+c}!Borrar\+\_\+\+Semaforo@{Borrar\+\_\+\+Semaforo}}
+\index{Borrar\+\_\+\+Semaforo@{Borrar\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Borrar\+\_\+\+Semaforo(int semid)}{Borrar_Semaforo(int semid)}}]{\setlength{\rightskip}{0pt plus 5cm}int Borrar\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{int}]{semid}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_a731339337960a681efa435a10f12c312}{}\label{semaforos_8c_a731339337960a681efa435a10f12c312}
+
+
+Borrar\+\_\+\+Semaforo. 
+
+Borra un semaforo. 
+\begin{DoxyParams}{Parameters}
+{\em semid} & Id del semaforo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int\+: OK si todo fue correcto, E\+R\+R\+OR en caso de error. 
+\end{DoxyReturn}
+\index{semaforos.\+c@{semaforos.\+c}!Crear\+\_\+\+Semaforo@{Crear\+\_\+\+Semaforo}}
+\index{Crear\+\_\+\+Semaforo@{Crear\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Crear\+\_\+\+Semaforo(key\+\_\+t key, int size, int $\ast$semid)}{Crear_Semaforo(key_t key, int size, int *semid)}}]{\setlength{\rightskip}{0pt plus 5cm}int Crear\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{key\+\_\+t}]{key, }
+\item[{int}]{size, }
+\item[{int $\ast$}]{semid}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_a16b16dd895b5f4cbe48f1ac8977e8b35}{}\label{semaforos_8c_a16b16dd895b5f4cbe48f1ac8977e8b35}
+
+
+Crear\+\_\+\+Semaforo. 
+
+Crea un semaforo con la clave y el tamaño especificado. 
+\begin{DoxyParams}{Parameters}
+{\em key} & Clave del semaforo. \\
+\hline
+{\em size} & Tamaño del semaforo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$semid\+: Id del semaforo. 
+
+int\+: E\+R\+R\+OR en caso de error, 0 si ha creado el semaforo, 1 si ya estaba creado. 
+\end{DoxyReturn}
+\index{semaforos.\+c@{semaforos.\+c}!Down\+\_\+\+Semaforo@{Down\+\_\+\+Semaforo}}
+\index{Down\+\_\+\+Semaforo@{Down\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Down\+\_\+\+Semaforo(int id, int num\+\_\+sem, int undo)}{Down_Semaforo(int id, int num_sem, int undo)}}]{\setlength{\rightskip}{0pt plus 5cm}int Down\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{int}]{num\+\_\+sem, }
+\item[{int}]{undo}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_a883244cd3b83c42cda23687da1b63369}{}\label{semaforos_8c_a883244cd3b83c42cda23687da1b63369}
+
+
+Down\+\_\+\+Semaforo. 
+
+Baja el semaforo 
+\begin{DoxyParams}{Parameters}
+{\em semid} & Id del semaforo. \\
+\hline
+{\em num\+\_\+sem} & Numero de semaforo dentro del array. \\
+\hline
+{\em undo} & Flag necesaria \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int\+: OK si todo fue correcto, E\+R\+R\+OR en caso de error. 
+\end{DoxyReturn}
+\index{semaforos.\+c@{semaforos.\+c}!Down\+Multiple\+\_\+\+Semaforo@{Down\+Multiple\+\_\+\+Semaforo}}
+\index{Down\+Multiple\+\_\+\+Semaforo@{Down\+Multiple\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Down\+Multiple\+\_\+\+Semaforo(int id, int size, int undo, int $\ast$active)}{DownMultiple_Semaforo(int id, int size, int undo, int *active)}}]{\setlength{\rightskip}{0pt plus 5cm}int Down\+Multiple\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{int}]{size, }
+\item[{int}]{undo, }
+\item[{int $\ast$}]{active}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_ab375ebfc38acbdced46e062a689d5fad}{}\label{semaforos_8c_ab375ebfc38acbdced46e062a689d5fad}
+
+
+Down\+Multiple\+\_\+\+Semaforo. 
+
+Baja todos los semaforos que indica el array active. 
+\begin{DoxyParams}{Parameters}
+{\em semid} & Id del semaforo. \\
+\hline
+{\em size} & Numero de semaforos del array. \\
+\hline
+{\em undo} & Flag necesaria \\
+\hline
+{\em $\ast$active} & Semaforos que se bajan \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int\+: OK si todo fue correcto, E\+R\+R\+OR en caso de error. 
+\end{DoxyReturn}
+\index{semaforos.\+c@{semaforos.\+c}!Inicializar\+\_\+\+Semaforo@{Inicializar\+\_\+\+Semaforo}}
+\index{Inicializar\+\_\+\+Semaforo@{Inicializar\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Inicializar\+\_\+\+Semaforo(int semid, unsigned short $\ast$array)}{Inicializar_Semaforo(int semid, unsigned short *array)}}]{\setlength{\rightskip}{0pt plus 5cm}int Inicializar\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{int}]{semid, }
+\item[{unsigned short $\ast$}]{array}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_a4af104b0ed37e6ae0289a1059bc6e990}{}\label{semaforos_8c_a4af104b0ed37e6ae0289a1059bc6e990}
+
+
+Funcion Inicializar\+\_\+\+Semaforo. 
+
+Inicializa el semaforo. 
+\begin{DoxyParams}{Parameters}
+{\em semid} & Id del semaforo. \\
+\hline
+{\em $\ast$array} & Valores iniciales. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int\+: OK si todo fue correcto, E\+R\+R\+OR en caso de error. 
+\end{DoxyReturn}
+\index{semaforos.\+c@{semaforos.\+c}!Up\+\_\+\+Semaforo@{Up\+\_\+\+Semaforo}}
+\index{Up\+\_\+\+Semaforo@{Up\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Up\+\_\+\+Semaforo(int id, int num\+\_\+sem, int undo)}{Up_Semaforo(int id, int num_sem, int undo)}}]{\setlength{\rightskip}{0pt plus 5cm}int Up\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{int}]{num\+\_\+sem, }
+\item[{int}]{undo}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_a2d5e735aecee4f493898b3d4ebab1a10}{}\label{semaforos_8c_a2d5e735aecee4f493898b3d4ebab1a10}
+
+
+Up\+\_\+\+Semaforo. 
+
+Sube el semaforo indicado 
+\begin{DoxyParams}{Parameters}
+{\em semid} & Id del semaforo. \\
+\hline
+{\em num\+\_\+sem} & Numero de semaforo dentro del array. \\
+\hline
+{\em undo} & Flag necesaria \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int\+: OK si todo fue correcto, E\+R\+R\+OR en caso de error. 
+\end{DoxyReturn}
+\index{semaforos.\+c@{semaforos.\+c}!Up\+Multiple\+\_\+\+Semaforo@{Up\+Multiple\+\_\+\+Semaforo}}
+\index{Up\+Multiple\+\_\+\+Semaforo@{Up\+Multiple\+\_\+\+Semaforo}!semaforos.\+c@{semaforos.\+c}}
+\subsubsection[{\texorpdfstring{Up\+Multiple\+\_\+\+Semaforo(int id, int size, int undo, int $\ast$active)}{UpMultiple_Semaforo(int id, int size, int undo, int *active)}}]{\setlength{\rightskip}{0pt plus 5cm}int Up\+Multiple\+\_\+\+Semaforo (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{int}]{size, }
+\item[{int}]{undo, }
+\item[{int $\ast$}]{active}
+\end{DoxyParamCaption}
+)}\hypertarget{semaforos_8c_a943759695f018d64a94b8a2c49308092}{}\label{semaforos_8c_a943759695f018d64a94b8a2c49308092}
+
+
+Up\+Multiple\+\_\+\+Semaforo. 
+
+Sube todos los semaforos que indica el array active. 
+\begin{DoxyParams}{Parameters}
+{\em semid} & Id del semaforo. \\
+\hline
+{\em size} & Numero de semaforos del array. \\
+\hline
+{\em undo} & Flag necesaria \\
+\hline
+{\em $\ast$active} & Semaforos que se bajan \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int\+: OK si todo fue correcto, E\+R\+R\+OR en caso de error. 
+\end{DoxyReturn}
